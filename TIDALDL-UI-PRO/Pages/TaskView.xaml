@@ -1,0 +1,79 @@
+﻿<UserControl x:Class="TIDALDL_UI.Pages.TaskView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:aigsc="clr-namespace:AIGS.Control;assembly=AIGS"
+             xmlns:aigs="clr-namespace:AIGS.Common;assembly=AIGS"
+             xmlns:local="clr-namespace:TIDALDL_UI.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance local:TaskViewModel}">
+    
+    <Border Margin="3" Style="{StaticResource BorderRegion}" Background="{x:Null}" Padding="10">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <DockPanel HorizontalAlignment="Stretch">
+                <Image Source="{Binding Cover}" DockPanel.Dock="Left" Width="64" Margin="0"/>
+                <DockPanel Margin="8">
+                    <TextBlock Text="{Binding Title}" FontSize="15"  FontWeight="Bold" DockPanel.Dock="Top"/>
+                    <TextBlock Text="{Binding Desc}" DockPanel.Dock="Bottom" Padding="0,5,0,0"/>
+                </DockPanel>
+
+                <Button Margin="5" Command="{s:Action ChangeExpand}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" hc:IconElement.Geometry="{StaticResource UpDownGeometry}" Style="{StaticResource ButtonIcon}" Foreground="{DynamicResource PrimaryTextBrush}"/>
+                <Button Margin="1" Command="{s:Action OpenFolder}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5">
+                    <Path Fill="{DynamicResource PrimaryBrush}">
+                        <Path.Data>
+                            <PathGeometry Figures="M16.23,18L12,15.45L7.77,18L8.89,13.19L5.16,9.96L10.08,9.54L12,5L13.92,9.53L18.84,9.95L15.11,13.18L16.23,18M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
+                        </Path.Data>
+                    </Path>
+                </Button>
+                <Button Margin="1" Command="{s:Action Delete}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5">
+                    <Path Fill="{DynamicResource PrimaryBrush}" >
+                        <Path.Data>
+                            <PathGeometry Figures="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M17,7H14.5L13.5,6H10.5L9.5,7H7V9H17V7M9,18H15A1,1 0 0,0 16,17V10H8V17A1,1 0 0,0 9,18Z" />
+                        </Path.Data>
+                    </Path>
+                </Button>
+                <Button Margin="1" Command="{s:Action Retry}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5" Visibility="Hidden">
+                    <Path Fill="{DynamicResource PrimaryBrush}" >
+                        <Path.Data>
+                            <PathGeometry Figures="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2M18 11H13L14.81 9.19A3.94 3.94 0 0 0 12 8A4 4 0 1 0 15.86 13H17.91A6 6 0 1 1 12 6A5.91 5.91 0 0 1 16.22 7.78L18 6Z" />
+                        </Path.Data>
+                    </Path>
+                </Button>
+            </DockPanel>
+
+            <Grid Grid.Row="1" MaxHeight="{Binding MaxHeight}"> <!--MaxHeight="{Binding MaxHeight}"-->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <hc:Divider Margin="0" VerticalAlignment="Center"/>
+
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding ItemList}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel Margin="0" >
+                                <TextBlock Text="{Binding Progress.Errmsg}" Foreground="Red" VerticalAlignment="Center" Padding="2,0" DockPanel.Dock="Bottom" Margin="30,0,0,0"/>
+                                <TextBlock Text="{Binding Index}" Width="30" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                <TextBlock Text="{Binding Progress.StatusMsg}" Foreground="{Binding Progress.StatusColor}" VerticalAlignment="Center" Padding="5,0" FontStretch="Expanded" FontStyle="Italic" Width="80" DockPanel.Dock="Right"/>
+                                <ProgressBar Value="{Binding Progress.ValueInt}" Foreground="{DynamicResource PrimaryBrush}" Style="{StaticResource ProgressBarFlat}" Width="300" DockPanel.Dock="Right" Margin="2,5,2,2"/>
+                                <TextBlock Text="{Binding Own}" VerticalAlignment="Center" Padding="5,0" FontStretch="Expanded" FontStyle="Italic" MaxWidth="200" DockPanel.Dock="Right" Margin="0,0,5,0"/>
+                                <TextBlock Text="{Binding Codec}" VerticalAlignment="Center" Background="PaleVioletRed" DockPanel.Dock="Right" Margin="2,0"/>
+                                <TextBlock Text="{Binding Title}" FontWeight="Bold" VerticalAlignment="Center" Padding="2,0"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </Grid>
+        </Grid>
+    </Border>
+</UserControl>

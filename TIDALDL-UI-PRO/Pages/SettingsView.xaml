@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="TIDALDL_UI.Pages.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:s="https://github.com/canton7/Stylet"
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:aigsc="clr-namespace:AIGS.Control;assembly=AIGS"
+             xmlns:aigs="clr-namespace:AIGS.Common;assembly=AIGS"
+             xmlns:local="clr-namespace:TIDALDL_UI.Pages"
+             mc:Ignorable="d" 
+             d:DesignHeight="1000" d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance local:SettingsViewModel}">
+    <Grid Background="{DynamicResource RegionBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition />
+            <RowDefinition Height="65"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource BorderBrush}">
+            <TextBlock Text="SETTINGS" FontWeight="Bold" FontSize="15" VerticalAlignment="Bottom" Margin="15"></TextBlock>
+        </Border>
+
+        <DockPanel Grid.Row="2" >
+            <Button Content="OK" Command="{s:Action Confim}" Width="100" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,20,0"></Button>
+            <Button Content="Cancel" Command="{s:Action Cancel}" Width="100" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,20,0"></Button>
+            <Button Content="Logout" Command="{s:Action Logout}" Width="100" Style="{StaticResource ButtonDanger}" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="30,0,0,0"></Button>
+        </DockPanel>
+
+        <ScrollViewer Grid.Row="1" FontSize="13" Margin="30,0,0,0">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="15"/>
+
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="15"/>
+
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="15"/>
+
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Path:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <Button Grid.Column="1" Grid.ColumnSpan="2" Command="{s:Action SetOutputDir}" Content="{Binding OutputDir}" HorizontalAlignment="Left" Width="500" HorizontalContentAlignment="Left"></Button>
+
+                <TextBlock Grid.Row="1" Text="ThreadNum:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="limit 1~3" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
+                <hc:NumericUpDown Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Maximum="3" Minimum="1" Value="{Binding ThreadNum}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Row="2" Text="SearchNum:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="limit 10~50" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
+                <hc:NumericUpDown Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Maximum="50" Minimum="10" Value="{Binding SearchNum}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Row="4" Text="AddYear:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <ComboBox Grid.Row="4" Grid.Column="1" SelectedIndex="{Binding AddYearIndex}" Grid.ColumnSpan="2" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <ComboBoxItem>No</ComboBoxItem>
+                    <ComboBoxItem>Before</ComboBoxItem>
+                    <ComboBoxItem>After</ComboBoxItem>
+                </ComboBox>
+
+                <TextBlock Grid.Row="5" Text="Choose:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding ArtistBeforeTitle}" Content="Add artist-name before title, like 'adele - hello.flac'" HorizontalAlignment="Left"/>
+                <CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding AddAlbumIDBeforeFolder}" Content="Add album-id befor album-folder, like '[123] Only one'" HorizontalAlignment="Left"/>
+                <CheckBox Grid.Row="7" Grid.Column="1" IsChecked="{Binding IncludeEPSingle}"  Content="Search artist-album include single/ep" HorizontalAlignment="Left"/>
+                <CheckBox Grid.Row="8" Grid.Column="1" IsChecked="{Binding SaveCovers}" Content="Download cover" HorizontalAlignment="Left"/>
+
+                <TextBlock Grid.Row="10" Text="MaxLength:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="10" Grid.Column="1" Text="file name length limit 50~100" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
+                <hc:NumericUpDown Grid.Row="10" Grid.Column="1" Maximum="100" Minimum="50" Value="{Binding MaxFileName}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="11" Grid.Column="1" Text="album folder name length limit 50~100" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
+                <hc:NumericUpDown Grid.Row="11" Grid.Column="1" Maximum="100" Minimum="50" Value="{Binding MaxDirName}"  Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                <TextBlock Grid.Row="13" Text="Track:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <CheckBox Grid.Row="13" Grid.Column="1" IsChecked="{Binding OnlyM4a}" Content="Convert mp4 to m4a" HorizontalAlignment="Left"/>
+                <CheckBox Grid.Row="14" Grid.Column="1" IsChecked="{Binding UseTrackNumber}" Content="Add track number"  HorizontalAlignment="Left"/>
+                <CheckBox Grid.Row="15" Grid.Column="1" IsChecked="{Binding AddHyphen}" Content="Addhyphen between track-number and title" HorizontalAlignment="Left"/>
+                <CheckBox Grid.Row="16" Grid.Column="1" IsChecked="{Binding CheckExist}" Content="Skipping exist file when downloading" HorizontalAlignment="Left"/>
+                <CheckBox Grid.Row="17" Grid.Column="1" IsChecked="{Binding AddExplicitTag}" Content="Add [explicit] after track-title "  HorizontalAlignment="Left"/>
+
+                <TextBlock Grid.Row="19" Text="Theme:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <ComboBox Grid.Row="19" Grid.Column="1" SelectedIndex="{Binding ThemeIndex}" Grid.ColumnSpan="2" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center">
+                    <ComboBoxItem>Light</ComboBoxItem>
+                    <ComboBoxItem>Dark</ComboBoxItem>
+                </ComboBox>
+                <TextBlock Grid.Row="20" Text="AccessToekn:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <hc:TextBox Grid.Row="20" Text="{Binding AccessToken}" FontFamily="Microsoft Yahei Regular" FontWeight="Normal" VerticalAlignment="Center" TextWrapping="Wrap" Grid.ColumnSpan="2" Height="80" Margin="123,10,19.6,10" />
+            </Grid>
+        </ScrollViewer>
+
+        <!--Message page-->
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Top">
+            <StackPanel hc:Growl.Token="SettingsMsg"  VerticalAlignment="Top" Margin="0,10,10,10"/>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
