@@ -616,7 +616,7 @@ namespace Tidal
 
         public static string getCoverUrl(ref Playlist plist)
         {
-            //return string.Format("http://images.tidalhifi.com/im/im?w={1}&h={1}&uuid={0}&rows=2&cols=3&noph", plist.UUID, PLAYLIST_COVER_SIZE);
+            //string test = string.Format("http://images.tidalhifi.com/im/im?w={1}&h={1}&uuid={0}&rows=2&cols=3&noph", plist.UUID, PLAYLIST_COVER_SIZE);
             string sRet = string.Empty;
             if (!string.IsNullOrWhiteSpace(plist.SquareImage))
                 sRet = formatCoverUrl(plist.SquareImage, PLAYLIST_COVER_SIZE);
