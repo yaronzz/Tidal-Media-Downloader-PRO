@@ -42,7 +42,7 @@
 - Selectable video resolution and track quality
 
 ## 💽 User Interface
-![image-20200806012846462](https://i.loli.net/2020/08/06/qTfowFYmrxnVIQH.png)
+![image-20200806013705425](https://i.loli.net/2020/08/06/sPLowIlCGyOdpVN.png)
 
 ## ☕ Support
 
