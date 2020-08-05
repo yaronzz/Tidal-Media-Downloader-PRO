@@ -8,73 +8,79 @@ using AIGS.Common;
 using AIGS.Helper;
 using HandyControl.Controls;
 using Stylet;
-using Tidal;
 using TIDALDL_UI.Else;
 
 namespace TIDALDL_UI.Pages
 {
-    public class MainViewModel : Screen
+    public class MainViewModel : ModelBase
     {
-        public bool ShowViewSearch { get; set; } = true;
-        public bool ShowViewDownload { get; set; }
-        public bool ShowViewSettings { get; set; }
-
         private IWindowManager Manager;
         public LoginViewModel VMLogin { get; set; }
-        public SearchViewModel VMSearch { get; private set; }
-        public AboutViewModel VMAbout { get; private set; }
-        public SettingsViewModel VMSettings { get; private set; }
-        public DownloadViewModel VMDownload { get; private set; }
+        public SearchViewModel VMSearch { get; private set; } = new SearchViewModel();
+        public AboutViewModel VMAbout { get; private set; } = new AboutViewModel();
+        public SettingsViewModel VMSettings { get; private set; } = new SettingsViewModel();
+        public DownloadViewModel VMDownload { get; private set; } = new DownloadViewModel();
 
-        public MainViewModel(IWindowManager manager, SearchViewModel search, AboutViewModel about, SettingsViewModel settings, DownloadViewModel download)
+        public MainViewModel(IWindowManager manager)
         {
             Manager = manager;
-            VMSearch = search;
-            VMAbout = about;
-            VMSettings = settings;
-            VMDownload = download;
+        }
 
-            VMSearch.MainView = this;
-            VMSettings.MainView = this;
+        protected override void OnViewLoaded()
+        {
+            Global.VMMain = this;
+            Global.Settings = Settings.Read();
 
-            VMSettings.ChangeTheme(int.Parse(Config.ThemeIndex()));
+            //Show search
+            ShowPage("search");
+
+            //Settings change
+            Settings.Change(Global.Settings);
+
+            if(Global.Settings.Version != VMAbout.Version)
+            {
+                Global.Settings.Version = VMAbout.Version;
+                Global.Settings.Save();
+                ShowPage("about");
+            }
         }
 
         #region Show page
         public void ShowSearch() => ShowPage("search");
         public void ShowDownload() => ShowPage("download");
         public void ShowSettings() => ShowPage("settings");
-        public void ShowAbout() => Manager.ShowDialog(VMAbout);
+        public void ShowAbout() => ShowPage("about");
         private void ShowPage(string name)
         {
-            ShowViewSearch = false;
-            ShowViewDownload = false;
-            ShowViewSettings = false;
+            if (name == "about")
+            {
+                VMAbout.ViewVisibility = Visibility.Visible;
+                return;
+            }
+
+            VMSearch.ViewVisibility = Visibility.Hidden;
+            VMDownload.ViewVisibility = Visibility.Hidden;
+            VMSettings.ViewVisibility = Visibility.Hidden;
+            VMAbout.ViewVisibility = Visibility.Hidden;
+
+            
             if (name == "search")
-                ShowViewSearch = true;
-           
+                VMSearch.ViewVisibility = Visibility.Visible;
             if (name == "download")
-                ShowViewDownload = true;
+                VMDownload.ViewVisibility = Visibility.Visible;
             if (name == "settings")
-                ShowViewSettings = true;
+            {
+                VMSettings.Load();
+                VMSettings.ViewVisibility = Visibility.Visible;
+            }
         }
         #endregion
 
         #region Windows
-        public void WindowMove()
-        {
-            ((MainView)this.View).DragMove();
-        }
 
-        public void WindowMin()
-        {
-            ((MainView)this.View).WindowState = WindowState.Minimized;
-        }
-
-        public void WindowMax()
-        {
-            AIGS.Helper.ScreenShotHelper.MaxWindow((MainView)this.View);
-        }
+        public void WindowMove()=>((MainView)this.View).DragMove();
+        public void WindowMin()=>((MainView)this.View).WindowState = WindowState.Minimized;
+        public void WindowMax()=>AIGS.Helper.ScreenShotHelper.MaxWindow((MainView)this.View);
 
         public void WindowClose()
         {
@@ -84,8 +90,8 @@ namespace TIDALDL_UI.Pages
 
         public void Logout()
         {
-            TidalTool.logout();
             ThreadTool.Close();
+
             Manager.ShowWindow(VMLogin);
             RequestClose();
         }

@@ -16,7 +16,7 @@ namespace TIDALDL_UI.Else
         public static void SetThreadNum(int iNum)
         {
             if (Pool == null)
-                return;
+                Pool = new ThreadPoolManager(iNum);
             if (iNum < 1)
                 iNum = 1;
             Pool.SetPoolSize(iNum);
@@ -29,20 +29,14 @@ namespace TIDALDL_UI.Else
             return Pool.GetPoolSize();
         }
 
-        /// <summary>
-        /// Add Download
-        /// </summary>
         public static bool AddWork(ThreadPoolManager.EventFunc Func, object[] data = null)
         {
             if (Pool == null)
-                Pool = new ThreadPoolManager(int.Parse(Config.ThreadNum()));
+                Pool = new ThreadPoolManager(Settings.Read().ThreadNum);
             Pool.AddWork(Func, data);
             return true;
         }
 
-        /// <summary>
-        /// End
-        /// </summary>
         public static void Close()
         {
             if (Pool == null)

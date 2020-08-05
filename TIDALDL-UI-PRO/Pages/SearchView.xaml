@@ -8,17 +8,13 @@
              xmlns:aigsc="clr-namespace:AIGS.Control;assembly=AIGS"
              xmlns:aigs="clr-namespace:AIGS.Common;assembly=AIGS"
              xmlns:local="clr-namespace:TIDALDL_UI.Pages"
+             xmlns:else="clr-namespace:TIDALDL_UI.Else"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance local:SearchViewModel}">
 
-    <UserControl.Resources>
-        <aigs:UnBoolConverter x:Key="ConverterUnbool" />
-        <aigs:EmptyToVisibilityConverter x:Key="ConverterEmptyToVisibility" />
-    </UserControl.Resources>
-
     <!--Search view-->
-    <Grid  Grid.Row="1" Grid.Column="1" Background="{DynamicResource RegionBrush}">
+    <Grid  Grid.Row="1" Grid.Column="1" Background="{DynamicResource RegionBrush}" Visibility="{Binding ViewVisibility}">
         <Grid.RowDefinitions>
             <RowDefinition Height="79"/>
             <RowDefinition />
@@ -32,8 +28,30 @@
             <hc:SearchBar Command="{s:Action Search}" hc:InfoElement.Placeholder="Enter ID\Url\Title" Style="{StaticResource SearchBarPlus}" CommandParameter="{Binding Text,RelativeSource={RelativeSource Self}}"/>
         </DockPanel>
 
+        <!--covers-->
+        <Grid Grid.Row="1" Background="{DynamicResource RegionBrush}" >
+            <ListBox Margin="32" BorderThickness="0" Style="{StaticResource WrapPanelHorizontalListBox}" ItemsSource="{Binding CoverCards}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="data:CardModel">
+                        <hc:Card MaxWidth="240" BorderThickness="0" Effect="{StaticResource EffectShadow2}" Margin="8" >
+                            <Border CornerRadius="4,4,0,0" Style="{StaticResource BorderClip}">
+                                <StackPanel>
+                                    <Image Width="240" Height="240" Source="{Binding ImgUrl}" Stretch="Uniform"/>
+                                    <StackPanel Margin="10">
+                                        <TextBlock TextTrimming="CharacterEllipsis" Style="{StaticResource TextBlockSubTitleBold}" Text="{Binding Title}" HorizontalAlignment="Center"/>
+                                        <Button Content="{Binding SubTitle}" Command="{s:Action Search}" CommandParameter="{Binding Url}" HorizontalAlignment="Stretch" Margin="0,10,0,0"></Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                        </hc:Card>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
+
+
         <!--Search list-->
-        <Grid Grid.Row="1" Margin="10,5">
+        <Grid Grid.Row="1" Margin="10,5" Visibility="{Binding ShowList, Converter={StaticResource Boolean2VisibilityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="40"/>
@@ -42,29 +60,51 @@
                 <TabItem Header="ALBUM" FontWeight="Bold">
                     <DataGrid x:Name="ctrAlbumGrid" FontWeight="Normal" HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" CanUserSortColumns="False" ItemsSource="{Binding SearchResult.Albums}" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single">
                         <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="60" CanUserResize="False">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding CoverUrl}" Width="32" Height="32" Stretch="Uniform"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn IsReadOnly="True" Header="" Binding="{Binding FlagShort}"/>
                             <DataGridTextColumn IsReadOnly="True" Width="400" Header="TITLE" Binding="{Binding Title}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="ARTIST" Binding="{Binding Artist.Name}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="QUALITY" Binding="{Binding AudioQuality}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="EXPLICIT" Binding="{Binding Explicit}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="ARTIST" Binding="{Binding ArtistsName}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="TIME" Binding="{Binding DurationStr}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
                 <TabItem Header="TRACK" FontWeight="Bold">
                     <DataGrid x:Name="ctrTrackGrid" FontWeight="Normal" HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" CanUserSortColumns="False" ItemsSource="{Binding SearchResult.Tracks}" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single">
                         <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="60" CanUserResize="False">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding Album.CoverUrl}" Width="32" Height="32" Stretch="Uniform"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn IsReadOnly="True" Header="" Binding="{Binding FlagShort}"/>
                             <DataGridTextColumn IsReadOnly="True" Width="300" Header="TITLE" Binding="{Binding Title}" />
                             <DataGridTextColumn IsReadOnly="True" Header="ALBUM" Binding="{Binding Album.Title}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="ARTIST" Binding="{Binding Artist.Name}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="QUALITY" Binding="{Binding AudioQuality}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="EXPLICIT" Binding="{Binding Explicit}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="ARTIST" Binding="{Binding ArtistsName}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="TIME" Binding="{Binding DurationStr}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
                 <TabItem Header="VIDEO" FontWeight="Bold">
                     <DataGrid x:Name="ctrVideoGrid" FontWeight="Normal" HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" CanUserSortColumns="False" ItemsSource="{Binding SearchResult.Videos}" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single">
                         <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="60" CanUserResize="False">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding CoverUrl}" Width="32" Height="32" Stretch="Uniform"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn IsReadOnly="True" Header="" Binding="{Binding FlagShort}"/>
                             <DataGridTextColumn IsReadOnly="True" Width="400" Header="TITLE" Binding="{Binding Title}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="ARTIST" Binding="{Binding Artist.Name}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="ARTIST" Binding="{Binding ArtistsName}"/>
                             <DataGridTextColumn IsReadOnly="True" Header="TIME" Binding="{Binding DurationStr}"/>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -72,8 +112,14 @@
                 <TabItem Header="ARTIST" FontWeight="Bold">
                     <DataGrid x:Name="ctrArtistGrid" FontWeight="Normal" HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" CanUserSortColumns="False" ItemsSource="{Binding SearchResult.Artists}" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single">
                         <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="60" CanUserResize="False">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding CoverUrl}" Width="32" Height="32" Stretch="Uniform"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTextColumn IsReadOnly="True" Width="400" Header="NAME" Binding="{Binding Name}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="TYPE" Binding="{Binding Type}"/>
                             <DataGridTextColumn IsReadOnly="True" Header="POPULARITY" Binding="{Binding Popularity}"/>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -81,6 +127,13 @@
                 <TabItem Header="PLAYLIST" FontWeight="Bold">
                     <DataGrid x:Name="ctrPlaylistGrid" FontWeight="Normal" HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" CanUserSortColumns="False" ItemsSource="{Binding SearchResult.Playlists}" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single">
                         <DataGrid.Columns>
+                            <DataGridTemplateColumn Width="60" CanUserResize="False">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Image Source="{Binding CoverUrl}" Width="32" Height="32" Stretch="Uniform"/>
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
                             <DataGridTextColumn IsReadOnly="True" Width="400" Header="TITLE" Binding="{Binding Title}"/>
                             <DataGridTextColumn IsReadOnly="True" Header="TYPE" Binding="{Binding Type}"/>
                             <DataGridTextColumn IsReadOnly="True" Header="DURATION" Binding="{Binding DurationStr}"/>
@@ -93,15 +146,13 @@
                 <Button Command="{s:Action GetDetail}" Content="OK" DockPanel.Dock="Right" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Right" Margin="0,0,10,0" Padding="15,6" Width="88"></Button>
             </DockPanel>
 
-            <!--Cover flow-->
-            <StackPanel Grid.RowSpan="3" Background="{DynamicResource RegionBrush}" Visibility="{Binding Path=SearchResult, Converter={StaticResource ConverterEmptyToVisibility}}">
-                <hc:CoverFlow x:Name="ctrlCoverFlow1" Width="600" Height="400" Margin="100,30,100,0" VerticalAlignment="Top"/>
-                <Button Content="GET" Command="{s:Action SearchByCoverFlow}" CommandParameter="1" Width="200" Margin="0,-30,0,0"></Button>
-            </StackPanel>
+            <Grid Grid.RowSpan="3" Grid.ColumnSpan="3" Background="{DynamicResource RegionBrush}" Visibility="{Binding SearchResult, Converter={StaticResource ConverterEmptyToVisibility}}">
+                <TextBlock Text="Please Search First!" FontSize="50" Style="{StaticResource TextBlockLargeBold}"></TextBlock>
+            </Grid>
         </Grid>
 
         <!--Detail-->
-        <Grid Grid.Row="1" Margin="10,5" Background="{DynamicResource RegionBrush}" Visibility="{Binding ShowDetailView}">
+        <Grid Grid.Row="1" Margin="10,5" Background="{DynamicResource RegionBrush}" Visibility="{Binding ShowDetail, Converter={StaticResource Boolean2VisibilityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="190"/>
                 <RowDefinition />
@@ -109,19 +160,18 @@
             </Grid.RowDefinitions>
 
             <StackPanel Orientation="Horizontal">
-                <Image Source="{Binding Detail.Cover}" Width="180" Height="180" VerticalAlignment="Top" Margin="15,0,0,15" HorizontalAlignment="Left" ></Image>
+                <Image Source="{Binding Detail.CoverUrl}" Width="180" Height="180" VerticalAlignment="Top" Margin="15,0,0,15" HorizontalAlignment="Left" ></Image>
                 <StackPanel >
                     <TextBlock Text="{Binding Detail.Title}" FontSize="28" VerticalAlignment="Top" Height="45" FontWeight="ExtraBlack" Margin="15,0,0,0" />
                     <TextBlock Text="{Binding Detail.Intro}" FontSize="13" VerticalAlignment="Top" Height="25" Margin="15,0,0,0" />
                     <TextBlock Text="{Binding Detail.ReleaseDate}" FontSize="13" VerticalAlignment="Top" Height="25" Margin="15,0,0,0" />
-                    <TextBlock Text="{Binding Detail.FlagDetail}" Foreground="Red" FontStyle="Oblique" FontSize="13" VerticalAlignment="Top" Height="25" Width="auto" FontWeight="Bold" Margin="15,0,0,0"/>
-                    <TextBlock Text="{Binding Detail.Modes}" Foreground="Red" FontStyle="Oblique" FontSize="13" VerticalAlignment="Top" Height="25" Width="auto" FontWeight="Bold" Margin="15,0,0,0"/>
+                    <TextBlock Text="{Binding Detail.Flag}" Foreground="Red" FontStyle="Oblique" FontSize="13" VerticalAlignment="Top" Height="25" Width="auto" FontWeight="Bold" Margin="15,0,0,0"/>
                 </StackPanel>
             </StackPanel>
 
-            <DataGrid Grid.Row="1" HeadersVisibility="All" CanUserSortColumns="False" RowHeaderWidth="60" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single"  AutoGenerateColumns="False" ItemsSource="{Binding Detail.ItemList}" >
+            <DataGrid Grid.Row="1" HeadersVisibility="All" CanUserSortColumns="False" RowHeaderWidth="60" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single"  AutoGenerateColumns="False" ItemsSource="{Binding Detail.Items}" >
                 <DataGrid.Columns>
-                    <DataGridCheckBoxColumn Binding="{Binding Data.WaitDownload,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
+                    <DataGridCheckBoxColumn Binding="{Binding Check,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <DataGridCheckBoxColumn.Header>
                             <Border Background="Transparent" Padding="0" HorizontalAlignment="Center">
                                 <CheckBox IsChecked="{Binding AllCheck}" DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext}"  Click="{s:Action CheckChange}"/>
@@ -130,52 +180,31 @@
                     </DataGridCheckBoxColumn>
                     <DataGridTextColumn IsReadOnly="True" Binding="{Binding Flag}" Header=""/>
                     <DataGridTextColumn IsReadOnly="True" Binding="{Binding Title}" Header="TITLE"/>
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding AlbumTitle}" Header="ALBUM"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Album}" Header="ALBUM"/>
                     <DataGridTextColumn IsReadOnly="True" Binding="{Binding Type}" Header="TYPE"/>
                     <DataGridTextColumn IsReadOnly="True" Binding="{Binding Duration}" Header="TIME" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
-
+            
             <DockPanel Grid.Row="2">
-                <Path Fill="Gray" Width="18" Margin="10,0,10,0">
-                    <Path.Data>
-                        <PathGeometry Figures="M160 288h-16c-35.35 0-64 28.7-64 64.12v63.76c0 35.41 28.65 64.12 64 64.12h16c17.67 0 32-14.36 32-32.06V320.06c0-17.71-14.33-32.06-32-32.06zm208 0h-16c-17.67 0-32 14.35-32 32.06v127.88c0 17.7 14.33 32.06 32 32.06h16c35.35 0 64-28.71 64-64.12v-63.76c0-35.41-28.65-64.12-64-64.12zM256 32C112.91 32 4.57 151.13 0 288v112c0 8.84 7.16 16 16 16h16c8.84 0 16-7.16 16-16V288c0-114.67 93.33-207.8 208-207.82 114.67.02 208 93.15 208 207.82v112c0 8.84 7.16 16 16 16h16c8.84 0 16-7.16 16-16V288C507.43 151.13 399.09 32 256 32z" />
-                    </Path.Data>
-                </Path>
-                <ComboBox hc:DropDownElement.ConsistentWidth="False" ItemsSource="{Binding ComboxTrackQuality}" SelectedValuePath="Key" DisplayMemberPath="Value"
-                          SelectionChanged="{s:Action ChangeQuality}"
-                          SelectedIndex="{Binding SelectedIndexTrackQuality, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" />
-                <Path Fill="Gray" Width="18" Margin="10,0,10,0">
-                    <Path.Data>
-                        <PathGeometry Figures="M768 661.333c0 47.061-38.272 85.333-85.333 85.333h-512c-47.061 0-85.333-38.272-85.333-85.333v-426.667c0-47.061 38.272-85.333 85.333-85.333h512c47.061 0 85.333 38.272 85.333 85.333v142.208l170.667-142.208v426.667l-170.667-142.208v142.208z" />
-                    </Path.Data>
-                </Path>
-                <ComboBox hc:DropDownElement.ConsistentWidth="False" ItemsSource="{Binding ComboxVideoResolution}" SelectedValuePath="Key" DisplayMemberPath="Key"
-                          SelectionChanged="{s:Action ChangeResolution}"
-                          SelectedValue="{Binding SelectedValueVideoResolution, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center"/>
+                <Path Fill="Gray" Width="18" Margin="10,0,10,0" Data="{StaticResource LogoGeometry}"/>
+                <ComboBox Width="100" VerticalAlignment="Center" SelectedValue="{Binding QualityValue}" ItemsSource="{Binding ComboxTrackQuality}" SelectionChanged="{s:Action ChangeQuality}"/>
+                <Path Fill="Gray" Width="18" Margin="10,0,10,0" Data="{StaticResource VideoGeometry}"/>
+                <ComboBox Width="100" VerticalAlignment="Center" SelectedValue="{Binding ResolutionValue}" ItemsSource="{Binding ComboxVideoResolution}" SelectionChanged="{s:Action ChangeResolution}"/>
                 <Button Command="{s:Action Download}" Content="Download" DockPanel.Dock="Right" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Right" Margin="0,0,10,0" Padding="15,6"></Button>
             </DockPanel>
 
-            <!--Cover flow-->
-            <StackPanel Grid.RowSpan="3" Background="{DynamicResource RegionBrush}" Visibility="{Binding Path=Detail, Converter={StaticResource ConverterEmptyToVisibility}}">
-                <hc:CoverFlow x:Name="ctrlCoverFlow2" Width="600" Height="400" Margin="100,30,100,0" VerticalAlignment="Top"/>
-                <Button Content="GET" Command="{s:Action SearchByCoverFlow}" CommandParameter="2" Width="200" Margin="0,-30,0,0" ></Button>
-            </StackPanel>
+            <Grid Grid.RowSpan="3" Grid.ColumnSpan="3" Background="{DynamicResource RegionBrush}" Visibility="{Binding Detail, Converter={StaticResource ConverterEmptyToVisibility}}">
+                <TextBlock Text="Please Search First!" FontSize="50" Style="{StaticResource TextBlockLargeBold}"></TextBlock>
+            </Grid>
         </Grid>
 
-        <!--Message page-->
-        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <StackPanel hc:Growl.Token="SearchMsg" VerticalAlignment="Top" Margin="0,10,10,10"/>
-        </ScrollViewer>
-
         <!--Wait page-->
-        <Grid Grid.RowSpan="2" Background="Black" Opacity="0.6" Visibility="{Binding WaitPageEnable}"/>
-        <Border Grid.RowSpan="2" CornerRadius="10" Width="300" Height="100" Background="{DynamicResource RegionBrush}" Visibility="{Binding WaitPageEnable}">
+        <Grid Grid.RowSpan="2" Background="Black" Opacity="0.6" Visibility="{Binding ShowWait, Converter={StaticResource Boolean2VisibilityConverter}}"/>
+        <Border Grid.RowSpan="2" CornerRadius="10" Width="300" Height="100" Background="{DynamicResource RegionBrush}" Visibility="{Binding ShowWait, Converter={StaticResource Boolean2VisibilityConverter}}">
             <StackPanel VerticalAlignment="Center" Margin="16">
                 <hc:LoadingLine Margin="0" Foreground="BlueViolet" Style="{StaticResource LoadingLineLarge}"/>
             </StackPanel>
         </Border>
-
-        
     </Grid>
 </UserControl>

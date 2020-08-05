@@ -1,97 +1,107 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using AIGS.Common;
 using AIGS.Helper;
+using HandyControl.Controls;
 using HandyControl.Data;
 using Stylet;
-using Tidal;
 using TIDALDL_UI.Else;
+using TidalLib;
 using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace TIDALDL_UI.Pages
 {
-    public class TaskViewModel : Screen
+    public class TaskViewModel : ModelBase
     {
-        public BitmapImage Cover { get; set; }
         public string Title { get; set; }
+        public string Cover { get; set; }
         public string Desc { get; set; }
         public string BasePath { get; set; }
-        public int MaxHeight { get; set; } = 1000;
-        public ObservableCollection<object> ItemList { get; set; } = new ObservableCollection<object>();
+        public Settings Settings { get; set; }
+        public Visibility ShowItems { get; set; } = Visibility.Visible;
+
+        public ObservableCollection<object> Items { get; set; } = new ObservableCollection<object>();
         public DownloadViewModel VMParent { get; set; }
 
-
-        public TaskViewModel(object data, DownloadViewModel parent)
+        public TaskViewModel(Detail detail, DownloadViewModel parent)
         {
+            Title = detail.Title;
+            Cover = detail.CoverUrl;
+            Desc = detail.Intro;
             VMParent = parent;
-            if (data.GetType() == typeof(Album))
+            Settings = Settings.Read();
+
+            if (detail.Data.GetType() == typeof(Album))
+                SetAlbum(detail, (Album)detail.Data);
+            if (detail.Data.GetType() == typeof(Track))
+                SetTrack(detail, (Track)detail.Data);
+            if (detail.Data.GetType() == typeof(Video))
+                SetVideo(detail, (Video)detail.Data);
+            if (detail.Data.GetType() == typeof(Artist))
+                SetArtist(detail, (Artist)detail.Data);
+        }
+
+        public void SetAlbum(Detail detail, Album album)
+        {
+            BasePath = Tools.GetAlbumPath(album, Settings);
+
+            if(Settings.SaveCovers)
+                NetHelper.DownloadFile(album.CoverUrl, BasePath + "/Cover.jpg");
+
+            foreach (var item in detail.Items)
             {
-                Album album = (Album)data;
-                Title = album.Title;
-                BasePath = TidalTool.getAlbumFolder(Config.OutputDir(), album, Config.AddYear());
-                Desc = string.Format("by {0}-{1} Tracks-{2} Videos-{3}", album.Artist.Name, TimeHelper.ConverIntToString(album.Duration), album.NumberOfTracks, album.NumberOfVideos);
-                Cover = AIGS.Common.Convert.ConverByteArrayToBitmapImage(album.CoverData);
-
-                if (Config.SaveCovers())
-                {
-                    string CoverPath = TidalTool.getAlbumCoverPath(Config.OutputDir(), album, Config.AddYear());
-                    FileHelper.Write(album.CoverData, true, CoverPath);
-                }
-
-                for (int i = 0; album.Tracks != null && i < album.Tracks.Count; i++)
-                    if(album.Tracks[i].WaitDownload)
-                        ItemList.Add(new TrackTask(album.Tracks[i], ItemList.Count + 1, RecieveDownloadOver, album));
-                for (int i = 0; album.Videos != null && i < album.Videos.Count; i++)
-                    if(album.Videos[i].WaitDownload)
-                        ItemList.Add(new VideoTask(album.Videos[i], ItemList.Count + 1, RecieveDownloadOver, album));
+                if (item.Check == false)
+                    continue;
+                if(item.Data.GetType() == typeof(Track))
+                    Items.Add(new TrackTask((Track)item.Data, Items.Count + 1, Settings, RecieveDownloadOver, album));
+                else
+                    Items.Add(new VideoTask((Video)item.Data, Items.Count + 1, Settings, RecieveDownloadOver, album));
             }
-            else if (data.GetType() == typeof(Video))
-            {
-                Video video = (Video)data;
-                Title = video.Title;
-                BasePath = TidalTool.getVideoFolder(Config.OutputDir());
-                Desc = string.Format("by {0}-{1}", video.Artist.Name, TimeHelper.ConverIntToString(video.Duration));
-                Cover = AIGS.Common.Convert.ConverByteArrayToBitmapImage(video.CoverData);
+        }
 
-                if(video.WaitDownload)
-                    ItemList.Add(new VideoTask(video, 1, RecieveDownloadOver));
+        public void SetTrack(Detail detail, Track track)
+        {
+            BasePath = Tools.GetAlbumPath(track.Album, Settings);
+            Items.Add(new TrackTask((Track)detail.Data, Items.Count + 1, Settings, RecieveDownloadOver, track.Album));
+        }
+
+        public void SetVideo(Detail detail, Video video)
+        {
+            BasePath = Tools.GetVideoPath(Settings, video, null);
+            BasePath = Path.GetDirectoryName(BasePath);
+            Items.Add(new VideoTask((Video)detail.Data, Items.Count + 1, Settings, RecieveDownloadOver, video.Album));
+        }
+
+        public void SetArtist(Detail detail, Artist artist)
+        {
+            BasePath = Tools.GetArtistPath(artist, Settings);
+            foreach (var item in detail.Items)
+            {
+                Album album = (Album)item.Data;
+                foreach (var track in album.Tracks)
+                    Items.Add(new TrackTask(track, Items.Count + 1, Settings, RecieveDownloadOver, album));
+                foreach (var video in album.Videos)
+                    Items.Add(new VideoTask(video, Items.Count + 1, Settings, RecieveDownloadOver, album));
             }
-            else if (data.GetType() == typeof(Artist))
-            {
-                Artist artist = (Artist)data;
-                Title = artist.Name;
-                BasePath = TidalTool.getArtistFolder(Config.OutputDir(), artist);
-                Desc = string.Format("by {0} Albums-{1}", artist.Name, artist.Albums.Count);
-                Cover = AIGS.Common.Convert.ConverByteArrayToBitmapImage(artist.CoverData);
+        }
 
-                foreach (var item in artist.Albums)
-                {
-                    if (!item.WaitDownload)
-                        continue;
-                    for (int i = 0; item.Tracks != null && i < item.Tracks.Count; i++)
-                        ItemList.Add(new TrackTask(item.Tracks[i], ItemList.Count + 1, RecieveDownloadOver, item));
-                    for (int i = 0; item.Videos != null && i < item.Videos.Count; i++)
-                        ItemList.Add(new VideoTask(item.Videos[i], ItemList.Count + 1, RecieveDownloadOver, item));
-                }
-            }
-            else if (data.GetType() == typeof(Playlist))
-            {
-                Playlist plist = (Playlist)data;
-                Title = plist.Title;
-                BasePath = TidalTool.getPlaylistFolder(Config.OutputDir(), plist);
-                Desc = string.Format("{0} Tracks-{1} Videos-{2}", TimeHelper.ConverIntToString(plist.Duration), plist.NumberOfTracks, plist.NumberOfVideos);
-                Cover = AIGS.Common.Convert.ConverByteArrayToBitmapImage(plist.CoverData);
+        public void SetPlaylist(Detail detail, Playlist playlist)
+        {
+            BasePath = Tools.GetPlaylistPath(playlist, Settings);
 
-                for (int i = 0; plist.Tracks != null && i < plist.Tracks.Count; i++)
-                    if(plist.Tracks[i].WaitDownload)
-                        ItemList.Add(new TrackTask(plist.Tracks[i], ItemList.Count + 1, RecieveDownloadOver, null, plist));
-                for(int i = 0; plist.Videos != null && i < plist.Videos.Count; i++)
-                    if(plist.Videos[i].WaitDownload)
-                        ItemList.Add(new VideoTask(plist.Videos[i], ItemList.Count + 1, RecieveDownloadOver, null, plist));
+            foreach (var item in detail.Items)
+            {
+                if (item.Check == false)
+                    continue;
+                if (item.Data.GetType() == typeof(Track))
+                    Items.Add(new TrackTask((Track)item.Data, Items.Count + 1, Settings, RecieveDownloadOver, null, playlist));
+                else
+                    Items.Add(new VideoTask((Video)item.Data, Items.Count + 1, Settings, RecieveDownloadOver, null, playlist));
             }
         }
 
@@ -102,7 +112,7 @@ namespace TIDALDL_UI.Pages
                 bool bError = false;
                 bool bAllOver = true;
                 ProgressHelper.STATUS Status = ProgressHelper.STATUS.RUNNING;
-                foreach (var item in ItemList)
+                foreach (var item in Items)
                 {
                     if (item.GetType() == typeof(TrackTask))
                         Status = ((TrackTask)item).Progress.GetStatus();
@@ -131,10 +141,10 @@ namespace TIDALDL_UI.Pages
         #region Button
         public void ChangeExpand()
         {
-            if (MaxHeight <= 0)
-                MaxHeight = 1000;
+            if (ShowItems == Visibility.Collapsed)
+                ShowItems = Visibility.Visible;
             else
-                MaxHeight = 0;
+                ShowItems = Visibility.Collapsed;
         }
 
         public void Delete()
@@ -142,7 +152,7 @@ namespace TIDALDL_UI.Pages
             if (MessageBox.Show("Remove task?", "Info", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
                 return;
 
-            foreach (var item in ItemList)
+            foreach (var item in Items)
             {
                 if (item.GetType() == typeof(TrackTask))
                     ((TrackTask)item).Cancel();
@@ -154,10 +164,21 @@ namespace TIDALDL_UI.Pages
 
         public void Retry()
         {
-
+            
         }
 
-        public void OpenFolder() => Process.Start(BasePath);
+        public void OpenFolder()
+        {
+            string path = Path.GetFullPath(BasePath);
+            try
+            {
+                Process.Start(path);
+            }
+            catch
+            {
+                Growl.Error("Open folder failed!" + path, Global.TOKEN_MAIN);
+            }
+        }
         #endregion
     }
 

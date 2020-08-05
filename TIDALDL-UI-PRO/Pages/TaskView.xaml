@@ -50,7 +50,7 @@
                 </Button>
             </DockPanel>
 
-            <Grid Grid.Row="1" MaxHeight="{Binding MaxHeight}"> <!--MaxHeight="{Binding MaxHeight}"-->
+            <Grid Grid.Row="1" Visibility="{Binding ShowItems}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
                     <RowDefinition />
@@ -58,7 +58,7 @@
 
                 <hc:Divider Margin="0" VerticalAlignment="Center"/>
 
-                <ItemsControl Grid.Row="1" ItemsSource="{Binding ItemList}" >
+                <ItemsControl Grid.Row="1" ItemsSource="{Binding Items}" >
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <DockPanel Margin="0" >

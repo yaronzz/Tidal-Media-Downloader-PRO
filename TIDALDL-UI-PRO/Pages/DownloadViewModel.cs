@@ -6,12 +6,11 @@ using System.Windows.Media.Imaging;
 using AIGS.Common;
 using AIGS.Helper;
 using Stylet;
-using Tidal;
 using TIDALDL_UI.Else;
 
 namespace TIDALDL_UI.Pages
 {
-    public class DownloadViewModel : Screen
+    public class DownloadViewModel : ModelBase
     {
         public BindableCollection<TaskViewModel> DownloadList { get; set; }
         public BindableCollection<TaskViewModel> CompleteList { get; set; }
@@ -34,9 +33,9 @@ namespace TIDALDL_UI.Pages
             ErrorList = new BindableCollection<TaskViewModel>();
         }
 
-        public void AddTask(object data)
+        public void AddTask(Detail detail)
         {
-            DownloadList.Insert(0, new TaskViewModel(data, this));
+            DownloadList.Insert(0, new TaskViewModel(detail, this));
             SelectPage("download");
         }
 

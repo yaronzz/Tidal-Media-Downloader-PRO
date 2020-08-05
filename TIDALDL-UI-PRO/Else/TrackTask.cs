@@ -8,57 +8,41 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tidal;
+using TidalLib;
+
 namespace TIDALDL_UI.Else
 {
     public class TrackTask : Screen
     {
-        public int Index { get; set; }
-        public string Title { get; set; }
-
-        public string Own { get; set; }
+        public int    Index { get; set; }
         public string Codec { get; set; }
-        public string Errmsg { get; set; }
+        public string Title { get; set; }
+        public string Own   { get; set; }
         public ProgressHelper Progress { get; set; }
 
-        Track TidalTrack;
-        Album TidalAlbum;
-        Playlist TidalPlaylist;
-        public int AddYear;
-        public bool CheckExist;
-        public bool ArtistBeforeTitle;
-        public bool AddExplict;
-        public bool OnlyM4a;
-        public bool AddHyphen;
-        public bool UseTrackNumber;
-        eSoundQuality Quality;
-        public string FilePath { get; set; }
-        public string OutputDir { get; set; }
+        Track TidalTrack { get; set; }
+        Album TidalAlbum { get; set; }
+        Playlist TidalPlaylist { get; set; }
+        StreamUrl Stream { get; set; }
+        Settings Settings { get; set; }
 
         public delegate void TELL_PARENT_OVER();
         public TELL_PARENT_OVER TellParentOver;
 
-
-        public TrackTask(Track data, int index, TELL_PARENT_OVER tellparent, Album album = null, Playlist playlist = null)
+        public TrackTask(Track track, int index, Settings settings, TELL_PARENT_OVER tellparent, Album album = null, Playlist playlist = null)
         {
             Index = index;
-            Title = data.Title;
-            Own = album == null ? null : album.Title;
+            Settings = settings;
+            TidalTrack = track;
+            TidalAlbum = album;
+            TidalPlaylist = playlist;
+
+            Title = track.Title;
+            Own = track.Album.Title;
+
             Progress = new ProgressHelper(false);
             TellParentOver = tellparent;
 
-            TidalTrack = data;
-            TidalAlbum = album;
-            TidalPlaylist = playlist;
-            Quality = TidalTool.getQuality(Config.Quality());
-            OnlyM4a = Config.OnlyM4a();
-            AddHyphen = Config.AddHyphen();
-            UseTrackNumber = Config.UseTrackNumber();
-            CheckExist = Config.CheckExist();
-            ArtistBeforeTitle = Config.ArtistBeforeTitle();
-            AddExplict = Config.AddExplicitTag();
-            AddYear    = Config.AddYear();
-            OutputDir  = Config.OutputDir();
             Start();
         }
 
@@ -94,94 +78,56 @@ namespace TIDALDL_UI.Else
         #endregion
 
 
-
         public void Download()
         {
-            string Errlabel = "";
+            LoginKey key = Tools.GetKey();
 
             //GetStream
             Progress.StatusMsg = "GetStream...";
-            StreamUrl TidalStream = TidalTool.getStreamUrl(TidalTrack.ID.ToString(), Quality, out Errlabel);
-            if (Errlabel.IsNotBlank() || TidalStream == null)
+            (Progress.Errmsg, Stream) = Client.GetTrackStreamUrl(key, TidalTrack.ID, Settings.AudioQuality).Result;
+            if (Progress.Errmsg.IsNotBlank() || Stream == null)
                 goto ERR_RETURN;
-            if (TidalStream.Codec != "ac4" && TidalStream.Codec != "mha1")
-            {
-                if (Quality >= eSoundQuality.LOSSLESS)
-                {
-                    if (TidalStream.Url.Contains(".m4a") || TidalStream.Url.Contains(".mp4"))
-                    {
-                        StreamUrl TidalStream2 = TidalTool.getStreamUrl2(TidalTrack.ID.ToString(), Quality, out Errlabel);
-                        if (Errlabel.IsBlank() && TidalStream2 != null)
-                            TidalStream = TidalStream2;
-                        Errlabel = "";
-                    }
-                }
-            }
-            Codec = TidalStream.Codec;
+
+            Codec = Stream.Codec;
             Progress.StatusMsg = "GetStream success...";
 
             //Get path 
-            FilePath = TidalTool.getTrackPath(OutputDir, TidalAlbum, TidalTrack, TidalStream.Url,
-                AddHyphen, TidalPlaylist, artistBeforeTitle: ArtistBeforeTitle, addexplicit: AddExplict,
-                addYear: AddYear, useTrackNumber: UseTrackNumber);
+            string path = Tools.GetTrackPath(Settings, TidalTrack, Stream, TidalAlbum, TidalPlaylist);
 
-
-            //Check if song is downloaded already
-            string CheckName = OnlyM4a ? FilePath.Replace(".mp4", ".m4a") : FilePath;
-            if (CheckExist && System.IO.File.Exists(CheckName))
+            //Check if song downloaded already
+            string checkpath = Settings.OnlyM4a ? path.Replace(".mp4", ".m4a") : path;
+            if (Settings.CheckExist && System.IO.File.Exists(checkpath))
             {
                 Progress.UpdateInt(100, 100);
                 Progress.SetStatus(ProgressHelper.STATUS.COMPLETE);
                 goto CALL_RETURN;
             }
 
-            //Get contributors
-            Progress.StatusMsg = "GetContributors...";
-            ObservableCollection<Contributor> pContributors = TidalTool.getTrackContributors(TidalTrack.ID.ToString(), out Errlabel);
-
             //Download
             Progress.StatusMsg = "Start...";
-            for (int i = 0; i < 100 && Progress.GetStatus() != ProgressHelper.STATUS.CANCLE; i++)
+            for (int i = 0; i < 50 && Progress.GetStatus() != ProgressHelper.STATUS.CANCLE; i++)
             {
-                if ((bool)DownloadFileHepler.Start(TidalStream.Url, FilePath, Timeout: 5 * 1000, UpdateFunc: UpdateDownloadNotify, ErrFunc: ErrDownloadNotify, Proxy: TidalTool.PROXY))
+                if ((bool)DownloadFileHepler.Start(Stream.Url, path, Timeout: 5 * 1000, UpdateFunc: UpdateDownloadNotify, ErrFunc: ErrDownloadNotify, Proxy: key.Proxy))
                 {
                     //Decrypt
-                    if (!TidalTool.DecryptTrackFile(TidalStream, FilePath))
+                    if (!Tools.DecryptTrackFile(Stream, path))
                     {
-                        Errlabel = "Decrypt failed!";
+                        Progress.Errmsg = "Decrypt failed!";
                         goto ERR_RETURN;
                     }
 
-                    if (OnlyM4a && Path.GetExtension(FilePath).ToLower().IndexOf("mp4") >= 0)
+                    if (Settings.OnlyM4a)
                     {
-                        if (TidalStream.Codec != "ac4" && TidalStream.Codec != "mha1")
-                        {
-                            string sNewName;
-                            if (!Config.IsFFmpegExist())
-                            {
-                                Errlabel = "Convert mp4 to m4a failed!(FFmpeg is not exist!)";
-                                goto ERR_RETURN;
-                            }
-                            if (!TidalTool.ConvertMp4ToM4a(FilePath, out sNewName))
-                            {
-                                Errlabel = "Convert mp4 to m4a failed!(No reason, Please feedback!)";
-                                goto ERR_RETURN;
-                            }
-                            else
-                                FilePath = sNewName;
-                        }
+                        (Progress.Errmsg, path) = Tools.ConvertMp4ToM4a(path, Stream);
+                        if(Progress.Errmsg.IsNotBlank())
+                            goto ERR_RETURN;
                     }
 
                     //SetMetaData 
-                    if (TidalAlbum == null && TidalTrack.Album != null)
+                    Progress.Errmsg = Tools.SetMetaData(path, TidalAlbum, TidalTrack);
+                    if (Progress.Errmsg.IsNotBlank())
                     {
-                        string sErrcode = null;
-                        TidalAlbum = TidalTool.getAlbum(TidalTrack.Album.ID.ToString(), out sErrcode);
-                    }
-                    string sLabel = TidalTool.SetMetaData(FilePath, TidalAlbum, TidalTrack, TidalTool.getAlbumCoverPath(OutputDir, TidalAlbum, AddYear), pContributors);
-                    if (sLabel.IsNotBlank())
-                    {
-                        Errlabel = "Set metadata failed!" + sLabel;
+                        Progress.Errmsg = "Set metadata failed!" + Progress.Errmsg;
                         goto ERR_RETURN;
                     }
 
@@ -189,13 +135,12 @@ namespace TIDALDL_UI.Else
                     goto CALL_RETURN;
                 }
             }
-            Errlabel = "Download failed!";
+            Progress.Errmsg = "Download failed!";
 
         ERR_RETURN:
             if (Progress.GetStatus() == ProgressHelper.STATUS.CANCLE)
                 goto CALL_RETURN;
             Progress.SetStatus(ProgressHelper.STATUS.ERROR);
-            Progress.Errmsg = Errlabel;
 
         CALL_RETURN:
             TellParentOver();

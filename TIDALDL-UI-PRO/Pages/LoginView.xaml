@@ -7,6 +7,7 @@
         xmlns:s="https://github.com/canton7/Stylet"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:aigsc="clr-namespace:AIGS.Control;assembly=AIGS"
+        xmlns:else="clr-namespace:TIDALDL_UI.Else"
         mc:Ignorable="d"
         ShowNonClientArea="False"
         WindowStartupLocation="CenterScreen"
@@ -22,18 +23,15 @@
 
         <!--Image-->
         <Grid Background="Black" Grid.RowSpan="2">
-            <Image Source="pack://application:,,,/resource/tidal.jpg" Margin="5" />
+            <!--<Image Source="pack://application:,,,/resource/tidal.jpg" Margin="5" />-->
+            <Path Width="150" Fill="White" Data="{StaticResource LogoGeometry}"></Path>
         </Grid>
 
         <!--Close button-->
-        <Button Command="{s:Action WindowClose}" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource ButtonCustom}" hc:BackgroundSwitchElement.MouseHoverBackground="Red" hc:BackgroundSwitchElement.MouseDownBackground="PaleVioletRed" Padding="5" Grid.Column="1">
-            <Path Fill="Gray" Width="15">
-                <Path.Data>
-                    <PathGeometry Figures="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" />
-                </Path.Data>
-            </Path>
+        <Button Command="{s:Action WindowClose}" Height="32" Width="32" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MyButtonClose}" hc:BackgroundSwitchElement.MouseHoverBackground="Red" hc:BackgroundSwitchElement.MouseDownBackground="PaleVioletRed" Padding="0" Grid.Column="1">
+            <Path Fill="LightGray" Width="12" Data="{StaticResource CloseGeometry}"></Path>
         </Button>
-            
+
         <!--Err label-->
         <TextBlock Grid.Column="1" Text="{Binding Errlabel,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Red" VerticalAlignment="Bottom" Margin="10,0,0,4" Grid.ColumnSpan="2"></TextBlock>
 
@@ -69,16 +67,16 @@
                             </Path.Data>
                         </Path>
 
-                        <hc:TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Username, UpdateSourceTrigger=PropertyChanged}" FontFamily="Microsoft Yahei Regular" hc:InfoElement.Placeholder="Account" FontWeight="Normal" />
-                        <PasswordBox Grid.Column="1" Grid.Row="2" FontFamily="Microsoft Yahei Regular" aigsc:PasswordBoxHelper.Attach="True" aigsc:PasswordBoxHelper.Password="{Binding Path=Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontWeight="Normal" />
+                        <hc:TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Settings.Username, UpdateSourceTrigger=PropertyChanged}" FontFamily="Microsoft Yahei Regular" hc:InfoElement.Placeholder="Account" FontWeight="Normal" />
+                        <PasswordBox Grid.Column="1" Grid.Row="2" FontFamily="Microsoft Yahei Regular" aigsc:PasswordBoxHelper.Attach="True" aigsc:PasswordBoxHelper.Password="{Binding Path=Settings.Password,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" FontWeight="Normal" />
                     </Grid>
-                    <StackPanel Grid.Row="2" Margin="10,0,6,0" Orientation="Horizontal">
-                        <CheckBox IsChecked="{Binding Remember,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Focusable="False" Content="RememberMe" FontWeight="Normal"/>
-                        <CheckBox IsChecked="{Binding AutoLogin,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Focusable="False" Margin="16 0 0 0" Content="AutomaticLogin" FontWeight="Normal"/>
+                    <StackPanel Grid.Row="2" Margin="30,0,6,0" Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding Settings.Remember,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Focusable="False" Content="RememberMe" FontWeight="Normal"/>
+                        <CheckBox IsChecked="{Binding Settings.AutoLogin,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Focusable="False" Margin="16 0 0 0" Content="AutomaticLogin" FontWeight="Normal"/>
                     </StackPanel>
 
                     <Button Grid.Row="3" IsDefault="True" Command="{s:Action Login}" IsEnabled="{Binding BtnLoginEnable}" CommandParameter="{Binding ElementName=PasswordBox}" Style="{StaticResource ButtonPrimary}"
-                            Content="Login" Width="255" Grid.RowSpan="2" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,15,0,0"/>
+                            Content="Login" Grid.RowSpan="2" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,15,0,0"/>
                 </Grid>
             </TabItem>
             <TabItem Header="PROXY" FontWeight="Bold">
@@ -102,21 +100,18 @@
                     <TextBlock Grid.Row="3" Text="Username" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
                     <TextBlock Grid.Row="4" Text="Password" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
 
-                    <ToggleButton Grid.Column="2" IsChecked="{Binding ProxyEnable,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Left"/>
-                    <hc:TextBox Grid.Row="1" Grid.Column="2" Text="{Binding ProxyHost}" Height="30" FontWeight="Normal"/>
-                    <hc:TextBox Grid.Row="2" Grid.Column="2" Text="{Binding ProxyPort}" Height="30" FontWeight="Normal"/>
-                    <hc:TextBox Grid.Row="3" Grid.Column="2" Text="{Binding ProxyUser}" Height="30" FontWeight="Normal"/>
-                    <hc:TextBox Grid.Row="4" Grid.Column="2" Text="{Binding ProxyPwd}"  Height="30" FontWeight="Normal"/>
+                    <ToggleButton Grid.Column="2" IsChecked="{Binding Settings.ProxyEnable,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Left"/>
+                    <hc:TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Settings.ProxyHost}" Height="30" FontWeight="Normal"/>
+                    <hc:TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Settings.ProxyPort}" Height="30" FontWeight="Normal"/>
+                    <hc:TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Settings.ProxyUser}" Height="30" FontWeight="Normal"/>
+                    <hc:TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Settings.ProxyPwd}"  Height="30" FontWeight="Normal"/>
                 </Grid>
             </TabItem>
         </TabControl>
-
-        <Grid Margin="30,30,29.6,65" Grid.Column="1" Background="{DynamicResource RegionBrush}" Visibility="{Binding ShowKeyView}">
-            <StackPanel VerticalAlignment="Center">
-                <TextBlock Background="Black" Foreground="White" Text="TIDAL-GUI-PRO" FontWeight="Bold" FontSize="20" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="10,0"></TextBlock>
-                <TextBox Text="{Binding Key}" hc:InfoElement.Title="Please enter your KEY:" Style="{StaticResource TextBoxExtend}" Margin="0,32,0,0" />
-                <Button Command="{s:Action CheckKey}" Content="OK" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Stretch" Margin="0,20,0,0" ></Button>
-            </StackPanel>            
-        </Grid>
+        
+        <!--Message page-->
+        <ScrollViewer Grid.ColumnSpan="3" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom">
+            <StackPanel hc:Growl.Token="{x:Static else:Global.TOKEN_LOGIN}" VerticalAlignment="Top" Margin="0,10,10,10"/>
+        </ScrollViewer>
     </Grid>
 </hc:BlurWindow>

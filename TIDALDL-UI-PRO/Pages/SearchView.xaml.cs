@@ -23,20 +23,6 @@ namespace TIDALDL_UI.Pages
         public SearchView()
         {
             InitializeComponent();
-
-            IEnumerable<object> contentList = new[]
-            {
-                new Uri(@"pack://application:,,,/resource/cover/2.jpg"),
-                new Uri(@"pack://application:,,,/resource/cover/3.jpg"),
-                new Uri(@"pack://application:,,,/resource/cover/1.jpg"),
-                new Uri(@"pack://application:,,,/resource/cover/4.jpg"),
-                new Uri(@"pack://application:,,,/resource/cover/5.jpg"),
-                new Uri(@"pack://application:,,,/resource/cover/6.jpg"),
-            };
-            ctrlCoverFlow1.AddRange(contentList);
-            ctrlCoverFlow2.AddRange(contentList);
-            ctrlCoverFlow1.JumpTo(2);
-            ctrlCoverFlow2.JumpTo(2);
         }
     }
 }

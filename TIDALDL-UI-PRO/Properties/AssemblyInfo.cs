@@ -10,9 +10,9 @@ using System.Windows;
 [assembly: AssemblyTitle("TIDALDL-UI")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Yaronzz")]
 [assembly: AssemblyProduct("TIDALDL-UI")]
-[assembly: AssemblyCopyright("Copyright ©  2020")]
+[assembly: AssemblyCopyright("Copyright © Yaronzz 2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

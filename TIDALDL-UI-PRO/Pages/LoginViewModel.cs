@@ -6,118 +6,69 @@ using AIGS.Common;
 using HandyControl.Tools;
 using AIGS.Helper;
 using Stylet;
-using Tidal;
 using TIDALDL_UI.Else;
+using HandyControl.Controls;
+using TidalLib;
 
 namespace TIDALDL_UI.Pages
 {
-    public class LoginViewModel : Screen
+    public class LoginViewModel : ModelBase
     {
-        public string Errlabel { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public bool Remember { get; set; }
-        public bool AutoLogin { get; set; }
         public bool BtnLoginEnable { get; set; } = true;
-
-        //Key
-        public Visibility ShowKeyView { get; set; } = Visibility.Visible;
-        public string Key { get; set; }
-        public string[] KeyArray { get; set; }
-
-        /// <summary>
-        /// Proxy
-        /// </summary>
-        public bool ProxyEnable { get; set; } = Config.ProxyEnable();
-        public string ProxyHost { get; set; } = Config.ProxyHost();
-        public int ProxyPort { get; set; } = Config.ProxyPort();
-        public string ProxyUser { get; set; } = Config.ProxyUser();
-        public string ProxyPwd { get; set; } = Config.ProxyPwd();
-
-        /// <summary>
-        /// View
-        /// </summary>
+        public UserSettings Settings { get; set; } = UserSettings.Read();
         private IWindowManager Manager;
         private MainViewModel VMMain;
 
         public LoginViewModel(IWindowManager manager, MainViewModel vmmain)
         {
             Manager = manager;
-            VMMain = vmmain;
-            Key = Config.Key();
-            Remember = Config.Remember();
-            AutoLogin = Config.AutoLogin();
-            Username = Config.Username();
-            Password = Config.Password();
-            HandyControl.Tools.ConfigHelper.Instance.SetLang("en");
-            
-            //Check key
-            updateKey();
-            CheckKey();
+            VMMain  = vmmain;
+            VMMain.VMLogin = this;
 
             //If AutoLogin
-            if (AutoLogin && Username.IsNotBlank() && Password.IsNotBlank())
+            if (Settings.AutoLogin && Settings.Username.IsNotBlank() && Settings.Password.IsNotBlank())
                 Login();
             return;
         }
 
-        public void CheckKey()
-        {
-            Errlabel = "";
-            if (Key.IsBlank())
-                return;
-            foreach (var item in KeyArray)
-            {
-                if(Key.Trim().ToLower() == item.Trim().ToLower())
-                {
-                    ShowKeyView = Visibility.Hidden;
-                    Config.Key(Key);
-                    return;
-                }
-            }
-            Errlabel = "Key is err : " + Key;
-        }
-
         public async void Login()
         {
-            if (ShowKeyView == Visibility.Visible)
-                return;
-
-            Errlabel = "";
-            if (Username.IsBlank() || Password.IsBlank())
-            {
-                Errlabel = "Username or password is err!";
-                return;
-            }
             BtnLoginEnable = false;
 
+            if (Settings.Username.IsBlank() || Settings.Password.IsBlank())
+            {
+                Growl.Error("Username or password is err!", Global.TOKEN_LOGIN);
+                goto RETURN_POINT;
+            }
+
             //Proxy
-            TidalTool.PROXY = ProxyEnable ? new HttpHelper.ProxyInfo(ProxyHost, ProxyPort, ProxyUser, ProxyPwd) : null;
-            Config.ProxyEnable(ProxyEnable.ToString());
-            Config.ProxyHost(ProxyHost);
-            Config.ProxyPort(ProxyPort.ToString());
-            Config.ProxyUser(ProxyUser);
-            Config.ProxyPwd(ProxyPwd);
+            HttpHelper.ProxyInfo PROXY = Settings.ProxyEnable ? new HttpHelper.ProxyInfo(Settings.ProxyHost, Settings.ProxyPort, Settings.ProxyUser, Settings.ProxyPwd) : null;
 
             //Login
-            bool bRet = await Task.Run(() => { return TidalTool.login(Username, Password); });
-            if (!bRet)
+            (string msg, LoginKey key) = await Client.Login(Settings.Username, Settings.Password, null, PROXY);
+            (string msg2, LoginKey key2) = await Client.Login(Settings.Accesstoken, PROXY);
+            (string msg3, LoginKey key3) = await Client.Login(Settings.Username, Settings.Password, "_DSTon1kC8pABnTw", PROXY);
+            if (msg.IsNotBlank() || key == null)
             {
-                Errlabel = "Login Err! " + TidalTool.loginErrlabel;
-                BtnLoginEnable = true;
-                return;
+                Growl.Error("Login Err! " + msg, Global.TOKEN_LOGIN);
+                goto RETURN_POINT;
             }
+            
+            if (!Settings.Remember)
+                Settings.Password = null;
+            Settings.Userid      = key.UserID;
+            Settings.Sessionid1  = key.SessionID;
+            Settings.Accesstoken = Settings.Accesstoken;
+            Settings.Save();
+            Global.CommonKey = key;
+            Global.VideoKey = key3;
+            Global.AccessKey = key2;
 
-            if (Remember)
-            {
-                Config.Username(Username);
-                Config.Password(Password);
-            }
-            BtnLoginEnable = true;
-
-            VMMain.VMLogin = this;
             Manager.ShowWindow(VMMain);
             RequestClose();
+
+        RETURN_POINT:
+            BtnLoginEnable = true;
             return;
         }
 
@@ -130,30 +81,6 @@ namespace TIDALDL_UI.Pages
         {
             ThreadTool.Close();
             RequestClose();
-        }
-
-
-        private void updateKey()
-        {
-            string sUrl = "https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3QvcyFBc3h5VUd1Q0w4SGFncUpKck5xOEpNemFUanh5YlE/ZT1Ualk2MzQ=";
-            try
-            {
-                string sErrmsg;
-                string sReturn = (string)HttpHelper.GetOrPost(sUrl, out sErrmsg, IsErrResponse: true, Timeout: 10 * 1000);
-                if (sReturn.IsNotBlank())
-                {
-                    KeyArray = sReturn.Split("\r\n");
-                    Config.KeyArray(sReturn);
-                    return;
-                }
-            }
-            catch { }
-            
-            string sRet = Config.KeyArray();
-            if (sRet != null)
-                KeyArray = sRet.Split("\r\n");
-            else
-                KeyArray = null;
         }
     }
 

@@ -1,0 +1,93 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+    <!--Button-->
+    <sys:String x:Key="strOK">OK</sys:String>
+    <sys:String x:Key="strCancel">Cancel</sys:String>
+    <sys:String x:Key="strDelete">Delete</sys:String>
+    <sys:String x:Key="strRefresh">Refresh</sys:String>
+    <sys:String x:Key="strLogout">Logout</sys:String>
+    <sys:String x:Key="strLogin">Login</sys:String>
+    <sys:String x:Key="strToLocal">ToLocal</sys:String>
+    <sys:String x:Key="strUpload">Upload</sys:String>
+    <sys:String x:Key="strImport">Import</sys:String>
+    <sys:String x:Key="strSave">Save</sys:String>
+    <sys:String x:Key="strAbout">About</sys:String>
+    <sys:String x:Key="strSettings">Settings</sys:String>
+    <sys:String x:Key="strFeedback">Feedback</sys:String>
+    <sys:String x:Key="strGroup">Group</sys:String>
+    <sys:String x:Key="strDonation">Donation</sys:String>
+    <sys:String x:Key="strWechat">Wechat</sys:String>
+    <sys:String x:Key="strAlipay">Alipay</sys:String>
+    <sys:String x:Key="strQQMusic">QQ Music</sys:String>
+    <sys:String x:Key="strCloudMusic">Cloud Music</sys:String>
+    <sys:String x:Key="strSpotify">Spotify</sys:String>
+    <sys:String x:Key="strTidal">Tidal</sys:String>
+    
+    <!--Tip-->
+    <sys:String x:Key="strPlatform">Platform</sys:String>
+    <sys:String x:Key="strPlaylist">Playlist</sys:String>
+    <sys:String x:Key="strTrackNum">TrackNum</sys:String>
+    <sys:String x:Key="strVERSION">VERSION</sys:String>
+    <sys:String x:Key="strSETTINGS">SETTINGS</sys:String>
+    <sys:String x:Key="strUsername">Username</sys:String>
+    <sys:String x:Key="strPassword">Password</sys:String>
+    
+    <sys:String x:Key="strWAIT">WAIT</sys:String>
+    <sys:String x:Key="strSUCCESS">SUCCESS</sys:String>
+    <sys:String x:Key="strUPDATE">UPDATE</sys:String>
+    <sys:String x:Key="strERROR">ERROR</sys:String>
+    <sys:String x:Key="strUPLOADLIST">UPLOAD LIST</sys:String>
+
+    <!--Message-->
+    <sys:String x:Key="strmsgWait">Wait!</sys:String>
+    <sys:String x:Key="strmsgSuccess">Success!</sys:String>
+    <sys:String x:Key="strmsgCancel">Cancel!</sys:String>
+    <sys:String x:Key="strmsgExist">Exist!</sys:String>
+    <sys:String x:Key="strmsgCantFind">Can't find!</sys:String>
+    <sys:String x:Key="strmsgAddToPlaylistFailed">Add to playlist failed!</sys:String>
+    <sys:String x:Key="strmsgGetUserPlaylistsFailed">Get user playlists failed!</sys:String>
+    <sys:String x:Key="strmsgCreatPlaylistFailed">Creat playlist failed!</sys:String>
+
+    <sys:String x:Key="strmsgNoPlatform">No platforms!</sys:String>
+    <sys:String x:Key="strmsgSaveSuccess">Save success!</sys:String>
+    <sys:String x:Key="strmsgSaveFailed">Save failed!</sys:String>
+    <sys:String x:Key="strmsgLogout">Logout?</sys:String>
+    <sys:String x:Key="strmsgeReadhPlaylistsFailed">Read playlists failed!</sys:String>
+    <sys:String x:Key="strmsgeRefreshPlaylistsSuccess">Refresh playlists success!</sys:String>
+    <sys:String x:Key="strmsgeRefreshPlaylistsFailed">Refresh playlists failed!</sys:String>
+    <sys:String x:Key="strmsgDeleteTrackFailed">Delete track failed!</sys:String>
+    <sys:String x:Key="strmsgDeletePlaylistFailed">Delete playlist failed!</sys:String>
+    <sys:String x:Key="strmsgDeleteAllPlaylists">Delete all playlists?</sys:String>
+    <sys:String x:Key="strmsgDeleteThisPlaylist">Delete this playlist?</sys:String>
+    <sys:String x:Key="strmsgSelectAPlatformToUpload">Please select a platform to upload.</sys:String>
+    <sys:String x:Key="strmsgPleaseselectTracks">Please select tracks!</sys:String>
+    <sys:String x:Key="strmsgMoreToLocalSuccess">To local success! Updata {0} tracks.</sys:String>
+    <sys:String x:Key="strmsgOneToLocalSuccess">"{0}" to local success! Updata {1} tracks.</sys:String>
+    <sys:String x:Key="strmsgUsernamePasswordError">Username or password is error!</sys:String>
+    <sys:String x:Key="strmsgLoginFailed">Login failed!</sys:String>
+
+    <sys:String x:Key="strmsgEnterUrl">Enter playlist url.</sys:String>
+    <sys:String x:Key="strmsgPleaseEnterTheLink">Please enter the playlist link!</sys:String>
+    <sys:String x:Key="strmsgPleaseLoginByFirst">Please login by {0} first!</sys:String>
+    <sys:String x:Key="strmsgUrlIsWrong">Url is wrong!</sys:String>
+    <sys:String x:Key="strmsgGetPlaylistFailed">Get playlist failed!</sys:String>
+
+    <!--Playlist Column-->
+    <sys:String x:Key="strTITLE">TITLE</sys:String>
+    <sys:String x:Key="strARTISTS">ARTISTS</sys:String>
+    <sys:String x:Key="strALBUM">ALBUM</sys:String>
+    <sys:String x:Key="strDURATION">DURATION</sys:String>
+    <sys:String x:Key="strACT">ACT</sys:String>
+    
+    <!--Settings-->
+    <sys:String x:Key="strTheme">Theme</sys:String>
+    <sys:String x:Key="strLanguage">Language</sys:String>
+    <sys:String x:Key="strSearchMatch">Search | Match</sys:String>
+    <sys:String x:Key="strCompareAlbumTitle">Compare album title</sys:String>
+    <sys:String x:Key="strCompareTrackLive">Compare track-live</sys:String>
+    <sys:String x:Key="strCachePath">Cache path</sys:String>
+    <sys:String x:Key="strPlatformEnable">Platform enable</sys:String>
+
+</ResourceDictionary>
