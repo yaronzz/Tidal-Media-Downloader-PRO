@@ -82,7 +82,13 @@ namespace TIDALDL_UI.Pages
             BasePath = Tools.GetArtistPath(artist, Settings);
             foreach (var item in detail.Items)
             {
+                if (item.Check == false)
+                    continue;
                 Album album = (Album)item.Data;
+
+                if (Settings.SaveCovers)
+                    NetHelper.DownloadFile(album.CoverUrl, Tools.GetAlbumPath(album, Settings) + "/Cover.jpg");
+
                 foreach (var track in album.Tracks)
                     Items.Add(new TrackTask(track, Items.Count + 1, Settings, RecieveDownloadOver, album));
                 foreach (var video in album.Videos)

@@ -24,5 +24,6 @@ namespace TIDALDL_UI.Pages
         {
             InitializeComponent();
         }
+
     }
 }

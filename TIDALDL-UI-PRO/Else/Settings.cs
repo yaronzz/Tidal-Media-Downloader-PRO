@@ -87,7 +87,7 @@ namespace TIDALDL_UI.Else
         public Language.Type LanguageType { get; set; } = Language.Type.Default;
 
         [JsonProperty("OutputDir")]
-        public string OutputDir { get; set; } = "./";
+        public string OutputDir { get; set; } = "./download/";
 
         [JsonProperty("ThreadNum")]
         public int ThreadNum { get; set; } = 1;

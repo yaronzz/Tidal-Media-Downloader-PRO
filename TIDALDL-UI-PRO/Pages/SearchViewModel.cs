@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using TIDALDL_UI.Else;
 using TidalLib;
 
@@ -29,7 +30,6 @@ namespace TIDALDL_UI.Pages
         public ObservableCollection<CoverCard> CoverCards { get; set; }
 
         //detail parameter
-        public bool   AllCheck { get; set; }
         public Detail Detail { get; set; }
 
         //quality and resolution
@@ -226,12 +226,12 @@ namespace TIDALDL_UI.Pages
                 ShowDetail = true;
         }
 
-        public void CheckChange()
+        public void CheckChange(object sender, RoutedEventArgs e)
         {
             if (Detail == null || Detail.Items == null)
                 return;
             foreach (var item in Detail.Items)
-                item.Check = AllCheck;
+                item.Check = (bool)((CheckBox)sender).IsChecked;
         }
 
         #endregion

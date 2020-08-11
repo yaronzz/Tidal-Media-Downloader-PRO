@@ -75,6 +75,6 @@
                 <Path Fill="LightGray" Width="12" Data="{StaticResource WindowMinGeometry}"></Path>
             </Button>
         </StackPanel>
+
     </Grid>
 </hc:BlurWindow>
-   

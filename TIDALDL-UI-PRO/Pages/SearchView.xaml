@@ -70,6 +70,7 @@
                             <DataGridTextColumn IsReadOnly="True" Header="" Binding="{Binding FlagShort}"/>
                             <DataGridTextColumn IsReadOnly="True" Width="400" Header="TITLE" Binding="{Binding Title}"/>
                             <DataGridTextColumn IsReadOnly="True" Header="ARTIST" Binding="{Binding ArtistsName}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="DATE" Binding="{Binding ReleaseDate}"/>
                             <DataGridTextColumn IsReadOnly="True" Header="TIME" Binding="{Binding DurationStr}"/>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -174,7 +175,7 @@
                     <DataGridCheckBoxColumn Binding="{Binding Check,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                         <DataGridCheckBoxColumn.Header>
                             <Border Background="Transparent" Padding="0" HorizontalAlignment="Center">
-                                <CheckBox IsChecked="{Binding AllCheck}" DataContext="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext}"  Click="{s:Action CheckChange}"/>
+                                <CheckBox Click="{s:Action CheckChange}"/>
                             </Border>
                         </DataGridCheckBoxColumn.Header>
                     </DataGridCheckBoxColumn>

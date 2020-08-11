@@ -98,7 +98,7 @@
 
                 <TextBlock Grid.Row="19" Text="Theme:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <ComboBox Grid.Row="19" Grid.Column="1" ItemsSource="{Binding ComboxTheme}" SelectedValue="{Binding Settings.ThemeType}" Grid.ColumnSpan="2" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="20" Text="AccessToekn:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="20" Text="AccessToken:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <hc:TextBox Grid.Row="20" Text="{Binding AccessToken}" FontFamily="Microsoft Yahei Regular" FontWeight="Normal" VerticalAlignment="Center" TextWrapping="Wrap" Grid.ColumnSpan="2" Height="80" Margin="123,10,19.6,10" />
             </Grid>
         </ScrollViewer>

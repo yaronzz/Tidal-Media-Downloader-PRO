@@ -31,6 +31,7 @@
 | tidal-dl (cli) | Windows \ Linux \ Macos \ Android | ```pip3 install tidal-dl --upgrade```<br />[Detailed Description](https://yaronzz.top/post/tidal_dl_installation/#Install) |
 
 ## 📡 Telegram
+
 - [Group](https://t.me/tidal_group) : Feed back
 - [Channel](https://t.me/Tidal_Media_Downloader) : Notify the new version 
 

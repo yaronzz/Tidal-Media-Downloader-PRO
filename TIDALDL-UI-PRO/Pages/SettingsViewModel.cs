@@ -42,6 +42,8 @@ namespace TIDALDL_UI.Pages
                 (string msg, LoginKey key) = await Client.Login(AccessToken);
                 if (msg.IsNotBlank() || key == null)
                     Growl.Warning("Accesstoken is not valid! " + msg, Global.TOKEN_MAIN);
+                else if(key.UserID != Global.CommonKey.UserID)
+                    Growl.Warning("User mismatch! Please use your own accesstoken.", Global.TOKEN_MAIN);
                 else
                 {
                     UserSettings user = UserSettings.Read();
