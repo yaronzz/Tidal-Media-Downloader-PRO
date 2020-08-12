@@ -310,10 +310,10 @@ namespace TIDALDL_UI.Pages
             {
                 Items.Add(new Item()
                 {
-                    Title = album.Tracks[i].Title,
+                    Title = album.Tracks[i].DisplayTitle,
                     Type = "Track",
                     Flag = album.Tracks[i].FlagShort,
-                    Duration = TimeHelper.ConverIntToString(album.Duration),
+                    Duration = album.Tracks[i].DurationStr,
                     Album = album.Tracks[i].Album.Title,
                     Data = album.Tracks[i]
                 });
@@ -361,10 +361,10 @@ namespace TIDALDL_UI.Pages
             Flag = track.Flag;
             Items.Add(new Item()
             {
-                Title = track.Title,
+                Title = track.DisplayTitle,
                 Type = "Track",
                 Flag = track.Flag,
-                Duration = TimeHelper.ConverIntToString(track.Duration),
+                Duration = track.DurationStr,
                 Album = track.Album == null ? null : track.Album.Title,
                 Data = track
             });
@@ -385,7 +385,7 @@ namespace TIDALDL_UI.Pages
                     Title = playlist.Tracks[i].Title,
                     Type = "Track",
                     Flag = playlist.Tracks[i].FlagShort,
-                    Duration = TimeHelper.ConverIntToString(playlist.Duration),
+                    Duration = playlist.Tracks[i].DurationStr,
                     Album = playlist.Tracks[i].Album.Title,
                     Data = playlist.Tracks[i]
                 });
@@ -397,7 +397,7 @@ namespace TIDALDL_UI.Pages
                     Title = playlist.Videos[i].Title,
                     Type = "Video",
                     Flag = playlist.Videos[i].FlagShort,
-                    Duration = TimeHelper.ConverIntToString(playlist.Videos[i].Duration),
+                    Duration = playlist.Videos[i].DurationStr,
                     Album = playlist.Videos[i].Album == null ? null : playlist.Videos[i].Album.Title,
                     Data = playlist.Videos[i]
                 });
