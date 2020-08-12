@@ -252,7 +252,7 @@ namespace TIDALDL_UI.Else
 
                 //Cover
                 var pictures = new Picture[1];
-                pictures[0] = new Picture(NetHelper.DownloadData(TidalAlbum.CoverUrl));
+                pictures[0] = new Picture(NetHelper.DownloadData(TidalAlbum.CoverHighUrl));
                 tfile.Tag.Pictures = pictures;
                 tfile.Save();
                 return null;

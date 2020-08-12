@@ -51,7 +51,7 @@ namespace TIDALDL_UI.Pages
             BasePath = Tools.GetAlbumPath(album, Settings);
 
             if(Settings.SaveCovers)
-                NetHelper.DownloadFile(album.CoverUrl, BasePath + "/Cover.jpg");
+                NetHelper.DownloadFile(album.CoverHighUrl, BasePath + "/Cover.jpg");
 
             foreach (var item in detail.Items)
             {
@@ -87,7 +87,7 @@ namespace TIDALDL_UI.Pages
                 Album album = (Album)item.Data;
 
                 if (Settings.SaveCovers)
-                    NetHelper.DownloadFile(album.CoverUrl, Tools.GetAlbumPath(album, Settings) + "/Cover.jpg");
+                    NetHelper.DownloadFile(album.CoverHighUrl, Tools.GetAlbumPath(album, Settings) + "/Cover.jpg");
 
                 foreach (var track in album.Tracks)
                     Items.Add(new TrackTask(track, Items.Count + 1, Settings, RecieveDownloadOver, album));
@@ -155,17 +155,20 @@ namespace TIDALDL_UI.Pages
 
         public void Delete()
         {
-            if (MessageBox.Show("Remove task?", "Info", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
-                return;
+            //if (MessageBox.Show("Remove task?", "Info", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
+            //    return;
 
-            foreach (var item in Items)
+            Dialog.Show(new MessageView(MessageBoxImage.Information, "Remove task?", true, (x) =>
             {
-                if (item.GetType() == typeof(TrackTask))
-                    ((TrackTask)item).Cancel();
-                else if (item.GetType() == typeof(VideoTask))
-                    ((VideoTask)item).Cancel();
-            }
-            VMParent.DeleteTask(this);
+                foreach (var item in Items)
+                {
+                    if (item.GetType() == typeof(TrackTask))
+                        ((TrackTask)item).Cancel();
+                    else if (item.GetType() == typeof(VideoTask))
+                        ((VideoTask)item).Cancel();
+                }
+                VMParent.DeleteTask(this);
+            }));
         }
 
         public void Retry()
