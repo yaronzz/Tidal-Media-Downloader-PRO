@@ -128,9 +128,15 @@ namespace TIDALDL_UI.Else
             //base path
             string basepath = null;
             if (playlist == null)
+            {
                 basepath = GetAlbumPath(album, settings);
+                if (album.NumberOfVolumes > 1)
+                    basepath += $"CD{track.VolumeNumber}/";
+            }
             else
                 basepath = GetPlaylistPath(playlist, settings);
+
+            
 
             string path = $"{basepath}{number}{artist}{title}{sexplicit}{extension}";
             return path;

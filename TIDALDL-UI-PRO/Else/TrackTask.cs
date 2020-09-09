@@ -124,6 +124,8 @@ namespace TIDALDL_UI.Else
                     }
 
                     //SetMetaData 
+                    if (TidalAlbum == null)
+                        (Progress.Errmsg, TidalAlbum) = Client.GetAlbum(key, TidalTrack.Album.ID, false).Result;
                     Progress.Errmsg = Tools.SetMetaData(path, TidalAlbum, TidalTrack);
                     if (Progress.Errmsg.IsNotBlank())
                     {

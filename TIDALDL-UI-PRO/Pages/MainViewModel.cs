@@ -26,7 +26,7 @@ namespace TIDALDL_UI.Pages
             Manager = manager;
         }
 
-        protected override void OnViewLoaded()
+        protected override async void OnViewLoaded()
         {
             Global.VMMain = this;
             Global.Settings = Settings.Read();
@@ -37,12 +37,20 @@ namespace TIDALDL_UI.Pages
             //Settings change
             Settings.Change(Global.Settings);
 
+            //Show about
             if(Global.Settings.Version != VMAbout.Version)
             {
                 Global.Settings.Version = VMAbout.Version;
                 Global.Settings.Save();
                 ShowPage("about");
             }
+
+            //Update new version
+            string version = await GithubHelper.getLastReleaseVersionAsync(Global.NAME_GITHUB_AUTHOR, Global.NAME_GITHUB_PROJECT);
+            //if(version != null && version != VMAbout.Version)
+            //{
+            //    ShowPage("about");
+            //}
         }
 
         #region Show page

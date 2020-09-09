@@ -63,12 +63,13 @@ namespace TIDALDL_UI.Else
         public bool Save()
         {
             string data = JsonHelper.ConverObjectToString<UserSettings>(this, true);
-            return FileHelper.Write(data, true, Global.PATH_USERSETTINGS);
+            return FileHelper.Write(EncryptHelper.Encode(data, Global.KEY_BASE), true, Global.PATH_USERSETTINGS);
         }
 
         public static UserSettings Read()
         {
-            string data = FileHelper.Read(Global.PATH_USERSETTINGS);
+            string buf = FileHelper.Read(Global.PATH_USERSETTINGS);
+            string data = EncryptHelper.Decode(buf, Global.KEY_BASE);
             UserSettings ret = JsonHelper.ConverStringToObject<UserSettings>(data);
             if (ret == null)
                 return new UserSettings();

@@ -44,6 +44,8 @@ namespace TIDALDL_UI.Pages
                 SetVideo(detail, (Video)detail.Data);
             if (detail.Data.GetType() == typeof(Artist))
                 SetArtist(detail, (Artist)detail.Data);
+            if (detail.Data.GetType() == typeof(Playlist))
+                SetPlaylist(detail, (Playlist)detail.Data);
         }
 
         public void SetAlbum(Detail detail, Album album)

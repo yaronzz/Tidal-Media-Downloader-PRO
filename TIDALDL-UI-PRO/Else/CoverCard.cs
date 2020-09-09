@@ -23,7 +23,7 @@ namespace TIDALDL_UI.Else
         {
             try
             {
-                Result result = await HttpHelper.GetOrPostAsync("https://cdn.jsdelivr.net/gh/yaronzz/CDN/app/tidal/todaycards.json");
+                Result result = await HttpHelper.GetOrPostAsync("https://cdn.jsdelivr.net/gh/yaronzz/CDN@latest/app/tidal/todaycards.json");
                 if(result.sData.IsNotBlank())
                 {
                     ObservableCollection<CoverCard> pList = JsonHelper.ConverStringToObject<ObservableCollection<CoverCard>>(result.sData);

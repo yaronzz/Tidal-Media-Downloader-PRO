@@ -44,13 +44,21 @@ namespace TIDALDL_UI.Pages
             //Proxy
             HttpHelper.ProxyInfo PROXY = Settings.ProxyEnable ? new HttpHelper.ProxyInfo(Settings.ProxyHost, Settings.ProxyPort, Settings.ProxyUser, Settings.ProxyPwd) : null;
 
+            //token
+            (string token1, string token2) = await GetToken();
+
             //Login
-            (string msg, LoginKey key) = await Client.Login(Settings.Username, Settings.Password, null, PROXY);
+            (string msg, LoginKey key)   = await Client.Login(Settings.Username, Settings.Password, token1, PROXY);
             (string msg2, LoginKey key2) = await Client.Login(Settings.Accesstoken, PROXY);
-            (string msg3, LoginKey key3) = await Client.Login(Settings.Username, Settings.Password, "_DSTon1kC8pABnTw", PROXY);
+            (string msg3, LoginKey key3) = await Client.Login(Settings.Username, Settings.Password, token2, PROXY);
             if (msg.IsNotBlank() || key == null)
             {
                 Growl.Error("Login Err! " + msg, Global.TOKEN_LOGIN);
+                goto RETURN_POINT;
+            }
+            if( key2 != null && key.UserID != key2.UserID)
+            {
+                Growl.Error("User mismatch! Please use your own accesstoken.", Global.TOKEN_LOGIN);
                 goto RETURN_POINT;
             }
             
@@ -81,6 +89,23 @@ namespace TIDALDL_UI.Pages
         {
             ThreadTool.Close();
             RequestClose();
+        }
+
+
+        public async Task<(string, string)> GetToken()
+        {
+            try
+            {
+                HttpHelper.Result result = await HttpHelper.GetOrPostAsync("https://cdn.jsdelivr.net/gh/yaronzz/CDN@latest/app/tidal/token.json");
+                if (result.sData.IsNotBlank())
+                {
+                    string token = JsonHelper.GetValue(result.sData, "token");
+                    string token2 = JsonHelper.GetValue(result.sData, "token2");
+                    return (token, token2);
+                }
+            }
+            catch { }
+            return Client.GetDefaultToken();
         }
     }
 
