@@ -11,7 +11,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="1000" d:DesignWidth="800"
              d:DataContext="{d:DesignInstance local:SettingsViewModel}">
-    
+
     <Grid Background="{DynamicResource RegionBrush}" Visibility="{Binding ViewVisibility}">
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
@@ -99,8 +99,13 @@
                 <TextBlock Grid.Row="19" Text="Theme:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <ComboBox Grid.Row="19" Grid.Column="1" ItemsSource="{Binding ComboxTheme}" SelectedValue="{Binding Settings.ThemeType}" Grid.ColumnSpan="2" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="20" Text="AccessToken:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
-                <hc:TextBox Grid.Row="20" Text="{Binding AccessToken}" FontFamily="Microsoft Yahei Regular" FontWeight="Normal" VerticalAlignment="Center" TextWrapping="Wrap" Grid.ColumnSpan="2" Height="80" Margin="123,10,19.6,10" />
+
+                <DockPanel Grid.Row="20" Grid.ColumnSpan="2" >
+                    <Button Content="Try Get" Command="{s:Action GetAccessToken}" Width="100" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Center" DockPanel.Dock="Right" Margin="0,10,10,10" Height="80" ></Button>
+                    <hc:TextBox Text="{Binding AccessToken}" FontFamily="Microsoft Yahei Regular" FontWeight="Normal" VerticalAlignment="Center" TextWrapping="Wrap" Height="80" Width="auto" Margin="123,10,10,10" />
+                </DockPanel>
             </Grid>
+
         </ScrollViewer>
 
 

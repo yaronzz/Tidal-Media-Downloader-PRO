@@ -1,5 +1,6 @@
 - [ ] Auto update
 - [ ] Multi-language
+- [x] Auto get the accessToken from tidal-desktop
 
 #### v1.2.0.3
 - [x] Show track-title contains version [#9](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/9)

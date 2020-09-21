@@ -18,6 +18,7 @@ namespace TIDALDL_UI.Pages
     {
         public Settings Settings { get; set; }
         public string AccessToken { get; set; } 
+        public string UserID { get; set; }
 
         public List<ePositionYear> ComboxAddYear { get; set; } = AIGS.Common.Convert.ConverEnumToList<ePositionYear>();
         public List<Else.Theme.Type> ComboxTheme { get; set; } = AIGS.Common.Convert.ConverEnumToList<Else.Theme.Type>();
@@ -25,7 +26,10 @@ namespace TIDALDL_UI.Pages
         public void Load()
         {
             Settings = Settings.Read();
-            AccessToken = UserSettings.Read().Accesstoken;
+
+            UserSettings user = UserSettings.Read();
+            AccessToken = user.Accesstoken;
+            UserID = user.Userid;
         }
 
         public void SetOutputDir()
@@ -65,6 +69,20 @@ namespace TIDALDL_UI.Pages
         public void Logout()
         {
             Global.VMMain.Logout();
+        }
+
+        public void GetAccessToken()
+        {
+            
+            (string msg, LoginKey key) = TidalLib.Client.GetAccessTokenFromTidalDesktop(UserID);
+            if (msg.IsNotBlank())
+            {
+                Growl.Warning(msg, Global.TOKEN_MAIN);
+                return;
+            }
+
+            Growl.Success("Get accesstoken success!", Global.TOKEN_MAIN);
+            AccessToken = key.AccessToken;
         }
     }
 }
