@@ -28,25 +28,16 @@
 
                 <Button Margin="5" Command="{s:Action ChangeExpand}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" hc:IconElement.Geometry="{StaticResource UpDownGeometry}" Style="{StaticResource ButtonIcon}" Foreground="{DynamicResource PrimaryTextBrush}"/>
                 <Button Margin="1" Command="{s:Action OpenFolder}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5">
-                    <Path Fill="{DynamicResource PrimaryBrush}">
-                        <Path.Data>
-                            <PathGeometry Figures="M16.23,18L12,15.45L7.77,18L8.89,13.19L5.16,9.96L10.08,9.54L12,5L13.92,9.53L18.84,9.95L15.11,13.18L16.23,18M12,2C6.47,2 2,6.5 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2Z" />
-                        </Path.Data>
-                    </Path>
+                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource OpenFolderGeometry}"/>
                 </Button>
                 <Button Margin="1" Command="{s:Action Delete}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5">
-                    <Path Fill="{DynamicResource PrimaryBrush}" >
-                        <Path.Data>
-                            <PathGeometry Figures="M12,2C17.53,2 22,6.47 22,12C22,17.53 17.53,22 12,22C6.47,22 2,17.53 2,12C2,6.47 6.47,2 12,2M17,7H14.5L13.5,6H10.5L9.5,7H7V9H17V7M9,18H15A1,1 0 0,0 16,17V10H8V17A1,1 0 0,0 9,18Z" />
-                        </Path.Data>
-                    </Path>
+                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource RemoveGeometry}"/>
                 </Button>
-                <Button Margin="1" Command="{s:Action Retry}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5" Visibility="Hidden">
-                    <Path Fill="{DynamicResource PrimaryBrush}" >
-                        <Path.Data>
-                            <PathGeometry Figures="M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2M18 11H13L14.81 9.19A3.94 3.94 0 0 0 12 8A4 4 0 1 0 15.86 13H17.91A6 6 0 1 1 12 6A5.91 5.91 0 0 1 16.22 7.78L18 6Z" />
-                        </Path.Data>
-                    </Path>
+                <Button Margin="1" Command="{s:Action RetryOrCancel}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5" Visibility="{Binding IsCancel, Converter={StaticResource ConverterUnBoolToVisibility}}">
+                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource CancelGeometry}"/>
+                </Button>
+                <Button Margin="1" Command="{s:Action RetryOrCancel}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5" Visibility="{Binding IsCancel, Converter={StaticResource ConverterBoolToVisibility}}">
+                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource RetryGeometry}"/>
                 </Button>
             </DockPanel>
 

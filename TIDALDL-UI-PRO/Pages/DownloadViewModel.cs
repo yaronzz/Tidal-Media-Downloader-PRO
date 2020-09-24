@@ -61,6 +61,18 @@ namespace TIDALDL_UI.Pages
             ErrorList.Insert(0, from);
         }
 
+        public void TaskDownload(TaskViewModel from)
+        {
+            if (DownloadList.Contains(from) == false)
+            {
+                if (ErrorList.Contains(from))
+                    ErrorList.Remove(from);
+                if (CompleteList.Contains(from))
+                    CompleteList.Remove(from);
+                DownloadList.Insert(0, from);
+            }
+        }
+
         #region select page
         private void SelectPage(string name)
         {

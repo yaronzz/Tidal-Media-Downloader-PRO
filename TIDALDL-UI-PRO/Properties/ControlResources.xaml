@@ -10,6 +10,8 @@
     <aigs:StringNotEmptyToBoolConverter x:Key="ConverterStringNotEmpty" />
     <aigs:NotEmptyToBoolConverter x:Key="ConverterNotEmptyToBool" />
     <aigs:EmptyToVisibilityConverter x:Key="ConverterEmptyToVisibility" />
+    <aigs:BoolToVisibilityConverter x:Key="ConverterBoolToVisibility" />
+    <aigs:UnBoolToVisibilityConverter x:Key="ConverterUnBoolToVisibility" />
     
     <Style x:Key="MyListBoxItemTransparent" BasedOn="{StaticResource ListBoxItemBaseStyle}" TargetType="ListBoxItem">
         <Setter Property="Visibility" Value="{Binding IsVisible,Converter={StaticResource Boolean2VisibilityConverter}}"/>

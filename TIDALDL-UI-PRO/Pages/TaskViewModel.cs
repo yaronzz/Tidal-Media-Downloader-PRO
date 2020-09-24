@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using AIGS.Common;
 using AIGS.Helper;
@@ -24,6 +25,7 @@ namespace TIDALDL_UI.Pages
         public string BasePath { get; set; }
         public Settings Settings { get; set; }
         public Visibility ShowItems { get; set; } = Visibility.Visible;
+        public bool IsCancel { get; set; } = false;
 
         public ObservableCollection<object> Items { get; set; } = new ObservableCollection<object>();
         public DownloadViewModel VMParent { get; set; }
@@ -132,8 +134,14 @@ namespace TIDALDL_UI.Pages
                         bAllOver = false;
                         break;
                     }
-                    else if (Status == ProgressHelper.STATUS.ERROR || Status == ProgressHelper.STATUS.CANCLE)
+                    else if (Status == ProgressHelper.STATUS.ERROR)
                         bError = true;
+                    else if (Status == ProgressHelper.STATUS.CANCLE)
+                    {
+                        bAllOver = false;
+                        bError = false;
+                        break;
+                    }
                 }
 
                 if (bAllOver)
@@ -173,9 +181,30 @@ namespace TIDALDL_UI.Pages
             }));
         }
 
-        public void Retry()
+        public void RetryOrCancel()
         {
-            
+            if (!IsCancel)
+            {
+                foreach (var item in Items)
+                {
+                    if (item.GetType() == typeof(TrackTask))
+                        ((TrackTask)item).Cancel();
+                    else if (item.GetType() == typeof(VideoTask))
+                        ((VideoTask)item).Cancel();
+                }
+                IsCancel = true;
+            }
+            else
+            {
+                foreach (var item in Items)
+                {
+                    if (item.GetType() == typeof(TrackTask))
+                        ((TrackTask)item).Restart();
+                    else if (item.GetType() == typeof(VideoTask))
+                        ((VideoTask)item).Restart();
+                }
+                IsCancel = false;
+            }
         }
 
         public void OpenFolder()
