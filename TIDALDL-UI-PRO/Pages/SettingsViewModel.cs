@@ -56,6 +56,13 @@ namespace TIDALDL_UI.Pages
                     Global.AccessKey = key;
                 }
             }
+            else
+            {
+                UserSettings user = UserSettings.Read();
+                user.Accesstoken = null;
+                user.Save();
+                Global.AccessKey = null;
+            }
 
             Settings.Change(Settings, Global.Settings);
 

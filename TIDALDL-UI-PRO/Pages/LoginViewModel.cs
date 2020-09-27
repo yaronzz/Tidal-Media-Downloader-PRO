@@ -47,19 +47,36 @@ namespace TIDALDL_UI.Pages
             //token
             (string token1, string token2) = await GetToken();
 
-            //Login
+            //Login (lossless key \ video key)
             (string msg, LoginKey key)   = await Client.Login(Settings.Username, Settings.Password, token1, PROXY);
-            (string msg2, LoginKey key2) = await Client.Login(Settings.Accesstoken, PROXY);
             (string msg3, LoginKey key3) = await Client.Login(Settings.Username, Settings.Password, token2, PROXY);
             if (msg.IsNotBlank() || key == null)
             {
                 Growl.Error("Login Err! " + msg, Global.TOKEN_LOGIN);
                 goto RETURN_POINT;
             }
-            if( key2 != null && key.UserID != key2.UserID)
+
+            //Auto get accesstoken(master key)
+            string printSuccess = null;
+            string printWarning = null;
+            (string msg2, LoginKey key2) = Client.GetAccessTokenFromTidalDesktop(key.UserID);
+            if (key2 != null && msg2.IsBlank() && key2.AccessToken != Settings.Accesstoken)
             {
-                Growl.Error("User mismatch! Please use your own accesstoken.", Global.TOKEN_LOGIN);
-                goto RETURN_POINT;
+                (msg2, key2) = await Client.Login(key2.AccessToken, PROXY);
+                if (msg2.IsBlank() && key2 != null)
+                {
+                    printSuccess = "Auto get accesstoken success!";
+                    Settings.Accesstoken = key2.AccessToken;
+                }
+            }
+            else
+                key2 = null;
+
+            if (key2 == null && Settings.Accesstoken.IsNotBlank())
+            {
+                (msg2, key2) = await Client.Login(Settings.Accesstoken, PROXY);
+                if (msg2.IsNotBlank() || key2 == null)
+                    printWarning = "Accesstoken is not valid! " + msg;
             }
             
             if (!Settings.Remember)
@@ -73,6 +90,11 @@ namespace TIDALDL_UI.Pages
             Global.AccessKey = key2;
 
             Manager.ShowWindow(VMMain);
+            if (printSuccess.IsNotBlank())
+                Growl.Success(printSuccess, Global.TOKEN_MAIN);
+            else if (printWarning.IsNotBlank())
+                Growl.Warning(printWarning, Global.TOKEN_MAIN);
+
             RequestClose();
 
         RETURN_POINT:

@@ -1,5 +1,7 @@
 - [ ] Auto update
 - [ ] Multi-language
+
+#### v1.2.0.4
 - [x] Auto get the accessToken from tidal-desktop
 - [x] Allow to cancel and retry download-task
 
