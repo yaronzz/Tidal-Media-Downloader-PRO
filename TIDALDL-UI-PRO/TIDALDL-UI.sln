@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TIDALDL-UI", "TIDALDL-UI.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TidalLib", "..\..\TidalLib\TidalLib\TidalLib.csproj", "{61B3A016-AD7E-421B-B632-877E15BFAA90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIGS", "..\..\..\OneDrive\code\AIGS\AIGS.csproj", "{E0F1B398-B4D4-4536-9135-BE2EB077BBB2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIGS", "..\..\AIGS\AIGS.csproj", "{E0F1B398-B4D4-4536-9135-BE2EB077BBB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

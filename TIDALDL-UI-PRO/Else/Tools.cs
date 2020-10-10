@@ -92,7 +92,7 @@ namespace TIDALDL_UI.Else
             return path;
         }
 
-        // number - artist - title(Explicit).flac
+        // number - artist - title(version)(Explicit).flac
         public static string GetTrackPath(Settings settings, Track track, StreamUrl stream, Album album, Playlist playlist = null)
         {
             //hyphen
@@ -119,6 +119,11 @@ namespace TIDALDL_UI.Else
             if(settings.AddExplicitTag && track.Explicit)
                 sexplicit = "(Explicit)";
 
+            //get version
+            string version = "";
+            if (track.Version.IsNotBlank())
+                version = "(" + track.Version + ")";
+
             //get title
             string title = FormatPath(track.Title, settings, false);
 
@@ -136,9 +141,7 @@ namespace TIDALDL_UI.Else
             else
                 basepath = GetPlaylistPath(playlist, settings);
 
-            
-
-            string path = $"{basepath}{number}{artist}{title}{sexplicit}{extension}";
+            string path = $"{basepath}{number}{artist}{title}{version}{sexplicit}{extension}";
             return path;
         }
 
