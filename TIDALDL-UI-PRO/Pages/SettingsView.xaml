@@ -38,8 +38,8 @@
                     <RowDefinition Height="15"/>
 
                     <RowDefinition Height="45"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="45"/>
+                    <RowDefinition Height="15"/>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="15"/>
@@ -49,10 +49,10 @@
                     <RowDefinition Height="15"/>
 
                     <RowDefinition Height="35"/>
+                    <RowDefinition Height="0"/>
+                    <RowDefinition Height="0"/>
                     <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
-                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="0"/>
                     <RowDefinition Height="15"/>
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="100"/>
@@ -74,12 +74,17 @@
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="limit 10~50" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
                 <hc:NumericUpDown Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Maximum="50" Minimum="10" Value="{Binding Settings.SearchNum}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                <TextBlock Grid.Row="4" Text="AddYear:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
-                <ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding ComboxAddYear}" SelectedValue="{Binding Settings.AddYear}" Grid.ColumnSpan="2" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="4" Text="AlbumFolderFormat:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Settings.AlbumFolderFormat}" hc:InfoElement.Placeholder="eg:  {Flag} {AlbumTitle} [{AlbumID}] [{AlbumYear}]  -->> [ME] Happy End [103578093] [2016]" Margin="0,6,10,6"/>
+                <!--<TextBlock Grid.Row="4" Text="AddYear:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />-->
+                <!--<ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding ComboxAddYear}" SelectedValue="{Binding Settings.AddYear}" Grid.ColumnSpan="2" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>-->
 
-                <TextBlock Grid.Row="5" Text="Choose:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
-                <CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding Settings.ArtistBeforeTitle}" Content="Add artist-name before title, like 'adele - hello.flac'" HorizontalAlignment="Left"/>
-                <CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding Settings.AddAlbumIDBeforeFolder}" Content="Add album-id befor album-folder, like '[123] Only one'" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="5" Text="TrackFileFormat:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Settings.TrackFileFormat}" hc:InfoElement.Placeholder="eg:  {TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}  -->> 01 - Back Number - Happy End(Explicit)" Margin="0,6,10,6"/>
+
+                <TextBlock Grid.Row="7" Text="Choose:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <!--<CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding Settings.ArtistBeforeTitle}" Content="Add artist-name before title, like 'adele - hello.flac'" HorizontalAlignment="Left"/>-->
+                <!--<CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding Settings.AddAlbumIDBeforeFolder}" Content="Add album-id befor album-folder, like '[123] Only one'" HorizontalAlignment="Left"/>-->
                 <CheckBox Grid.Row="7" Grid.Column="1" IsChecked="{Binding Settings.IncludeEP}"  Content="Search artist-album include single/ep" HorizontalAlignment="Left"/>
                 <CheckBox Grid.Row="8" Grid.Column="1" IsChecked="{Binding Settings.SaveCovers}" Content="Download cover" HorizontalAlignment="Left"/>
 
@@ -91,18 +96,18 @@
 
                 <TextBlock Grid.Row="13" Text="Track:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <CheckBox Grid.Row="13" Grid.Column="1" IsChecked="{Binding Settings.OnlyM4a}" Content="Convert mp4 to m4a" HorizontalAlignment="Left"/>
-                <CheckBox Grid.Row="14" Grid.Column="1" IsChecked="{Binding Settings.UseTrackNumber}" Content="Add track number"  HorizontalAlignment="Left"/>
-                <CheckBox Grid.Row="15" Grid.Column="1" IsChecked="{Binding Settings.AddHyphen}" Content="Addhyphen between track-number and title" HorizontalAlignment="Left"/>
+                <!--<CheckBox Grid.Row="14" Grid.Column="1" IsChecked="{Binding Settings.UseTrackNumber}" Content="Add track number"  HorizontalAlignment="Left"/>-->
+                <!--<CheckBox Grid.Row="15" Grid.Column="1" IsChecked="{Binding Settings.AddHyphen}" Content="Addhyphen between track-number and title" HorizontalAlignment="Left"/>-->
                 <CheckBox Grid.Row="16" Grid.Column="1" IsChecked="{Binding Settings.CheckExist}" Content="Skipping exist file when downloading" HorizontalAlignment="Left"/>
-                <CheckBox Grid.Row="17" Grid.Column="1" IsChecked="{Binding Settings.AddExplicitTag}" Content="Add [explicit] after track-title "  HorizontalAlignment="Left"/>
+                <!--<CheckBox Grid.Row="17" Grid.Column="1" IsChecked="{Binding Settings.AddExplicitTag}" Content="Add [explicit] after track-title "  HorizontalAlignment="Left"/>-->
 
                 <TextBlock Grid.Row="19" Text="Theme:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <ComboBox Grid.Row="19" Grid.Column="1" ItemsSource="{Binding ComboxTheme}" SelectedValue="{Binding Settings.ThemeType}" Grid.ColumnSpan="2" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="20" Text="AccessToken:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
 
-                <DockPanel Grid.Row="20" Grid.ColumnSpan="2" >
+                <DockPanel Grid.Row="20" Grid.Column="1" >
                     <Button Content="Try Get" Command="{s:Action GetAccessToken}" Width="100" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Center" DockPanel.Dock="Right" Margin="0,10,10,10" Height="80" ></Button>
-                    <hc:TextBox Text="{Binding AccessToken}" FontFamily="Microsoft Yahei Regular" FontWeight="Normal" VerticalAlignment="Center" TextWrapping="Wrap" Height="80" Width="auto" Margin="123,10,10,10" />
+                    <hc:TextBox Text="{Binding AccessToken}" FontFamily="Microsoft Yahei Regular" FontWeight="Normal" VerticalAlignment="Center" TextWrapping="Wrap" Height="80" Width="auto" Margin="0,10,10,10" />
                 </DockPanel>
             </Grid>
 

@@ -55,7 +55,31 @@ namespace TIDALDL_UI.Else
             return basepath;
         }
 
+        //[{Flag}] [{AlbumID}] [{AlbumYear}] {AlbumTitle}
         public static string GetAlbumPath(Album album, Settings settings)
+        {
+            // outputdir/Album/artist/ 
+            string basepath = $"{settings.OutputDir}/Album/{FormatPath(album.Artists[0].Name, settings)}";
+
+            // album folder pre: [ME][ID]
+            string flag = Client.GetFlag(album, eType.ALBUM, true, "");
+            if (settings.AudioQuality != eAudioQuality.Master)
+                flag = flag.Replace("M", "");
+            if (flag.IsNotBlank())
+                flag = $"[{flag}]";
+
+            string name = settings.AlbumFolderFormat;
+            if (name.IsBlank())
+                name = "[{Flag}] [{AlbumID}] [{AlbumYear}] {AlbumTitle}";
+            name = name.Replace("{AlbumID}", album.ID);
+            name = name.Replace("{AlbumYear}", album.ReleaseDate.Substring(0, 4));
+            name = name.Replace("{AlbumTitle}", FormatPath(album.Title, settings));
+            name = name.Replace("{Flag}", flag);
+            name = name.Trim();
+            return $"{basepath}/{name}/";
+
+        }
+        public static string GetAlbumPath2(Album album, Settings settings)
         {
             // outputdir/Album/artist/ 
             string basepath = $"{settings.OutputDir}/Album/{FormatPath(album.Artists[0].Name, settings)}";
@@ -92,8 +116,54 @@ namespace TIDALDL_UI.Else
             return path;
         }
 
-        // number - artist - title(version)(Explicit).flac
+        // "{TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}";
         public static string GetTrackPath(Settings settings, Track track, StreamUrl stream, Album album, Playlist playlist = null)
+        {
+            string number = track.TrackNumber.ToString().PadLeft(2, '0');
+            if (playlist != null)
+                number = (playlist.Tracks.IndexOf(track) + 1).ToString().PadLeft(2, '0');
+
+            string artist = FormatPath(track.Artists[0].Name, settings, false);
+
+            //get explicit
+            string sexplicit = "";
+            if (settings.AddExplicitTag && track.Explicit)
+                sexplicit = "(Explicit)";
+
+            //get version
+            string version = "";
+            if (track.Version.IsNotBlank())
+                version = "(" + track.Version + ")";
+
+            //get title
+            string title = FormatPath(track.Title, settings, false);
+
+            //get extension
+            string extension = getExtension(stream.Url);
+
+            //base path
+            string basepath = null;
+            if (playlist == null)
+            {
+                basepath = GetAlbumPath(album, settings);
+                if (album.NumberOfVolumes > 1)
+                    basepath += $"CD{track.VolumeNumber}/";
+            }
+            else
+                basepath = GetPlaylistPath(playlist, settings);
+
+            string name = settings.TrackFileFormat;
+            if (name.IsBlank())
+                name = "{TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}";
+            name = name.Replace("{TrackNumber}", number);
+            name = name.Replace("{ArtistName}", artist);
+            name = name.Replace("{TrackTitle}", title + version);
+            name = name.Replace("{ExplicitFlag}", sexplicit);
+            return $"{basepath}{name}{extension}";
+        }
+
+        // number - artist - title(version)(Explicit).flac
+        public static string GetTrackPath2(Settings settings, Track track, StreamUrl stream, Album album, Playlist playlist = null)
         {
             //hyphen
             string hyphen = " ";

@@ -147,6 +147,12 @@ namespace TIDALDL_UI.Else
         [JsonProperty("AddYear")]
         public ePositionYear AddYear { get; set; } = ePositionYear.None;
 
+        [JsonProperty("AlbumFolderFormat")]
+        public string AlbumFolderFormat { get; set; } = "{Flag} {AlbumTitle} [{AlbumID}] [{AlbumYear}]";
+
+        [JsonProperty("TrackFileFormat")]
+        public string TrackFileFormat { get; set; } = "{TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}";
+
 
         public static void Change(Settings newItem, Settings oldItem = null)
         {
