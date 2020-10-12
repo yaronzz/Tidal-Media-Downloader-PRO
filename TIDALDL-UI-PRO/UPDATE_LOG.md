@@ -1,6 +1,7 @@
 - [ ] Auto update
 - [ ] Multi-language
 
+#### v1.2.0.5
 - [x] Fix: download video(get stream) [#30](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/30)
 - [x] Fix: album path end with "..." [#27](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/27)
 - [x] Settings: Album folder format¡¢Track file format [#33](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/33)
