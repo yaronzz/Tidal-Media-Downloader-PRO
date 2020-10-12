@@ -136,7 +136,7 @@ namespace TIDALDL_UI.Else
                 version = "(" + track.Version + ")";
 
             //get title
-            string title = FormatPath(track.Title, settings, false);
+            string title = FormatPath(track.Title + version, settings, false);
 
             //get extension
             string extension = getExtension(stream.Url);
@@ -157,7 +157,7 @@ namespace TIDALDL_UI.Else
                 name = "{TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}";
             name = name.Replace("{TrackNumber}", number);
             name = name.Replace("{ArtistName}", artist);
-            name = name.Replace("{TrackTitle}", title + version);
+            name = name.Replace("{TrackTitle}", title);
             name = name.Replace("{ExplicitFlag}", sexplicit);
             return $"{basepath}{name}{extension}";
         }

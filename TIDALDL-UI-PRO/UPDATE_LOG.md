@@ -1,6 +1,8 @@
 - [ ] Auto update
 - [ ] Multi-language
 
+- [x] Fix: replace track "title(version)" illegal characters 
+
 #### v1.2.0.5
 - [x] Fix: download video(get stream) [#30](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/30)
 - [x] Fix: album path end with "..." [#27](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/27)
