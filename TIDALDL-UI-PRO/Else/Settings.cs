@@ -148,10 +148,14 @@ namespace TIDALDL_UI.Else
         public ePositionYear AddYear { get; set; } = ePositionYear.None;
 
         [JsonProperty("AlbumFolderFormat")]
-        public string AlbumFolderFormat { get; set; } = "{Flag} {AlbumTitle} [{AlbumID}] [{AlbumYear}]";
+        
+        public string AlbumFolderFormat { get; set; } = "{ArtistName}/{Flag} {AlbumTitle} [{AlbumID}] [{AlbumYear}]";
 
         [JsonProperty("TrackFileFormat")]
         public string TrackFileFormat { get; set; } = "{TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}";
+
+        [JsonProperty("VideoFileFormat")]
+        public string VideoFileFormat { get; set; } = "{ArtistName}/{TrackNumber} - {VideoTitle}{ExplicitFlag}";
 
 
         public static void Change(Settings newItem, Settings oldItem = null)

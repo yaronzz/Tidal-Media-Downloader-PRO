@@ -1,7 +1,11 @@
 - [ ] Auto update
 - [ ] Multi-language
 
-- [x] Fix: replace track "title(version)" illegal characters 
+#### v1.2.0.6
+- [x] Fix: replace track "title (version)" illegal characters 
+- [x] Default AlbumFolderFormat: {ArtistName}/{Flag} [{AlbumID}] [{AlbumYear}] {AlbumTitle}
+- [x] Settings: Video file format [#48](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/48)
+- [x] Delete file if download err. [#40](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/40)
 
 #### v1.2.0.5
 - [x] Fix: download video(get stream) [#30](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/30)

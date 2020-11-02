@@ -55,11 +55,12 @@ namespace TIDALDL_UI.Else
             return basepath;
         }
 
-        //[{Flag}] [{AlbumID}] [{AlbumYear}] {AlbumTitle}
+        //{ArtistName}/{Flag} [{AlbumID}] [{AlbumYear}] {AlbumTitle}
         public static string GetAlbumPath(Album album, Settings settings)
         {
-            // outputdir/Album/artist/ 
-            string basepath = $"{settings.OutputDir}/Album/{FormatPath(album.Artists[0].Name, settings)}";
+            // outputdir/Album/
+            string basepath = $"{settings.OutputDir}/Album/";
+            // string basepath = $"{settings.OutputDir}/Album/{FormatPath(album.Artists[0].Name, settings)}";
 
             // album folder pre: [ME][ID]
             string flag = Client.GetFlag(album, eType.ALBUM, true, "");
@@ -67,10 +68,13 @@ namespace TIDALDL_UI.Else
                 flag = flag.Replace("M", "");
             if (flag.IsNotBlank())
                 flag = $"[{flag}]";
+            
+            string artist = FormatPath(album.Artists[0].Name, settings);
 
             string name = settings.AlbumFolderFormat;
             if (name.IsBlank())
-                name = "[{Flag}] [{AlbumID}] [{AlbumYear}] {AlbumTitle}";
+                name = "{ArtistName}/{Flag} [{AlbumID}] [{AlbumYear}] {AlbumTitle}";
+            name = name.Replace("{ArtistName}", artist);
             name = name.Replace("{AlbumID}", album.ID);
             name = name.Replace("{AlbumYear}", album.ReleaseDate.Substring(0, 4));
             name = name.Replace("{AlbumTitle}", FormatPath(album.Title, settings));
@@ -127,13 +131,13 @@ namespace TIDALDL_UI.Else
 
             //get explicit
             string sexplicit = "";
-            if (settings.AddExplicitTag && track.Explicit)
+            if (track.Explicit)
                 sexplicit = "(Explicit)";
 
             //get version
             string version = "";
             if (track.Version.IsNotBlank())
-                version = "(" + track.Version + ")";
+                version = " (" + track.Version + ")";
 
             //get title
             string title = FormatPath(track.Title + version, settings, false);
@@ -159,6 +163,10 @@ namespace TIDALDL_UI.Else
             name = name.Replace("{ArtistName}", artist);
             name = name.Replace("{TrackTitle}", title);
             name = name.Replace("{ExplicitFlag}", sexplicit);
+
+            name = name.Replace("{AlbumID}", album.ID);
+            name = name.Replace("{AlbumYear}", album.ReleaseDate.Substring(0, 4));
+            name = name.Replace("{AlbumTitle}", FormatPath(album.Title, settings));
             return $"{basepath}{name}{extension}";
         }
 
@@ -215,8 +223,47 @@ namespace TIDALDL_UI.Else
             return path;
         }
 
-        // number - artist - title(Explicit).mp4
+        // {ArtistName}/{TrackNumber} - {VideoTitle}.mp4
         public static string GetVideoPath(Settings settings, Video video, Album album, Playlist playlist = null, string ext = ".mp4")
+        {
+            //get number
+            string number = video.TrackNumber.ToString().PadLeft(2, '0');
+            if (playlist != null)
+                number = (playlist.Videos.IndexOf(video) + 1).ToString().PadLeft(2, '0');
+
+            //get artist
+            string artist = FormatPath(video.Artists[0].Name, settings, false);
+
+            //get explicit
+            string sexplicit = "";
+            if (video.Explicit)
+                sexplicit = "(Explicit)";
+
+            //get title
+            string title = FormatPath(video.Title, settings, false);
+
+            //base path
+            string basepath = null;
+            if (album != null)
+                basepath = GetAlbumPath(album, settings);
+            else if (playlist != null)
+                basepath = GetPlaylistPath(playlist, settings);
+            else
+                basepath = $"{settings.OutputDir}/Video/";
+
+            string name = settings.VideoFileFormat;
+            if (name.IsBlank())
+                name = "{ArtistName}/{TrackNumber} - {VideoTitle}";
+            name = name.Replace("{TrackNumber}", number);
+            name = name.Replace("{ArtistName}", artist);
+            name = name.Replace("{VideoTitle}", title);
+            name = name.Replace("{ExplicitFlag}", sexplicit);
+
+            return $"{basepath}{name}{ext}";
+        }
+
+        // number - artist - title(Explicit).mp4
+        public static string GetVideoPath2(Settings settings, Video video, Album album, Playlist playlist = null, string ext = ".mp4")
         {
             //hyphen
             string hyphen = " ";

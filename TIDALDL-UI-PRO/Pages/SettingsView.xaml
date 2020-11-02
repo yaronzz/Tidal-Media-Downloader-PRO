@@ -39,7 +39,8 @@
 
                     <RowDefinition Height="45"/>
                     <RowDefinition Height="45"/>
-                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="45"/>
+                    
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="15"/>
@@ -81,6 +82,9 @@
 
                 <TextBlock Grid.Row="5" Text="TrackFileFormat:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Settings.TrackFileFormat}" hc:InfoElement.Placeholder="eg:  {TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}  -->> 01 - Back Number - Happy End(Explicit)" Margin="0,6,10,6"/>
+
+                <TextBlock Grid.Row="6" Text="VideoFileFormat:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Settings.VideoFileFormat}" hc:InfoElement.Placeholder="eg:  {ArtistName}/{TrackNumber} - {VideoTitle}  -->> Back Number\\01 - Happy End" Margin="0,6,10,6"/>
 
                 <TextBlock Grid.Row="7" Text="Choose:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <!--<CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding Settings.ArtistBeforeTitle}" Content="Add artist-name before title, like 'adele - hello.flac'" HorizontalAlignment="Left"/>-->

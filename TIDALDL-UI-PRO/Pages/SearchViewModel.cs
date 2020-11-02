@@ -306,7 +306,7 @@ namespace TIDALDL_UI.Pages
             ReleaseDate = $"Release date {album.ReleaseDate}";
             Flag = album.Flag;
 
-            for (int i = 0; i < album.NumberOfTracks; i++)
+            for (int i = 0; i < album.NumberOfTracks && i < album.Tracks.Count; i++)
             {
                 Items.Add(new Item()
                 {

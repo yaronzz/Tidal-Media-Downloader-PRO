@@ -138,6 +138,7 @@ namespace TIDALDL_UI.Else
                 }
             }
             Progress.Errmsg = "Download failed!";
+            System.IO.File.Delete(path);
 
         ERR_RETURN:
             if (Progress.GetStatus() == ProgressHelper.STATUS.CANCLE)
