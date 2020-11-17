@@ -38,6 +38,8 @@ namespace TIDALDL_UI.Else
 
         [JsonProperty("Accesstoken")]
         public string Accesstoken { get; set; } = null;
+        [JsonProperty("Refreshtoken")]
+        public string Refreshtoken { get; set; } = null;
 
         [JsonProperty("Remember")]
         public bool Remember { get; set; } = true;

@@ -35,7 +35,17 @@
         <!--Err label-->
         <TextBlock Grid.Column="1" Text="{Binding Errlabel,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Red" VerticalAlignment="Bottom" Margin="10,0,0,4" Grid.ColumnSpan="2"></TextBlock>
 
-        <TabControl Margin="30,62,29.6,65" Grid.Column="1" VerticalAlignment="Center" Height="225">
+        <Grid Margin="30,62,29.6,65" Grid.Column="1" VerticalAlignment="Center" Height="225">
+            <StackPanel VerticalAlignment="Center">
+                <DockPanel>
+                    <TextBlock Text="DeviceCode:" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" Padding="10"/>
+                    <hc:TextBox Text="{Binding DeviceCode.UserCode}" Height="30" FontWeight="Normal"/>
+                </DockPanel>
+                <Button Content="Login" IsDefault="True" Command="{s:Action Login}" IsEnabled="{Binding BtnLoginEnable}"  Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Stretch" Margin="0,20,0,0"/>
+            </StackPanel>
+        </Grid>
+        
+        <!--<TabControl Margin="30,62,29.6,65" Grid.Column="1" VerticalAlignment="Center" Height="225">
             <TabItem Header="LOGIN" FontWeight="ExtraBold">
                 <Grid Margin="0 16 0 0" >
                     <Grid.RowDefinitions>
@@ -96,22 +106,25 @@
 
                     <TextBlock Text="HttpProxy" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
                     <TextBlock Grid.Row="1" Text="Host" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
-                    <TextBlock Grid.Row="2" Text="Port" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
-                    <TextBlock Grid.Row="3" Text="Username" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
-                    <TextBlock Grid.Row="4" Text="Password" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
+                    <TextBlock Grid.Row="1" Text=":" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal" Grid.Column="2" Margin="0,10,79,3" Width="8" Height="23" TextAlignment="Center"/>
+                    <TextBlock Grid.Row="2" Text="Username" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
+                    <TextBlock Grid.Row="3" Text="Password" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
 
                     <ToggleButton Grid.Column="2" IsChecked="{Binding Settings.ProxyEnable,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Left"/>
-                    <hc:TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Settings.ProxyHost}" Height="30" FontWeight="Normal"/>
-                    <hc:TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Settings.ProxyPort}" Height="30" FontWeight="Normal"/>
-                    <hc:TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Settings.ProxyUser}" Height="30" FontWeight="Normal"/>
-                    <hc:TextBox Grid.Row="4" Grid.Column="2" Text="{Binding Settings.ProxyPwd}"  Height="30" FontWeight="Normal"/>
+                    <hc:TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Settings.ProxyHost}" Height="30" FontWeight="Normal" Margin="0,3,87,3"/>
+                    <hc:TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Settings.ProxyPort}" Height="30" FontWeight="Normal" Margin="141,3,0,3"/>
+                    <hc:TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Settings.ProxyUser}" Height="30" FontWeight="Normal"/>
+                    <hc:TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Settings.ProxyPwd}"  Height="30" FontWeight="Normal"/>
+
+                    <Button Grid.Row="4" Grid.ColumnSpan="3" Command="{s:Action SaveProxy}" Content="Save" Style="{StaticResource ButtonPrimary}" Margin="22,3,20,2" Width="242"/>
+
                 </Grid>
             </TabItem>
-        </TabControl>
-        
+        </TabControl>-->
+
         <!--Message page-->
         <ScrollViewer Grid.ColumnSpan="3" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom">
-            <StackPanel hc:Growl.Token="{x:Static else:Global.TOKEN_LOGIN}" VerticalAlignment="Top" Margin="0,10,10,10"/>
+            <StackPanel hc:Growl.Token="{x:Static else:Global.TOKEN_LOGIN}" VerticalAlignment="Top" Margin="0,15,0,0"/>
         </ScrollViewer>
     </Grid>
 </hc:BlurWindow>

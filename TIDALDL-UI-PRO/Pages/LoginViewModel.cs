@@ -15,6 +15,7 @@ namespace TIDALDL_UI.Pages
     public class LoginViewModel : ModelBase
     {
         public bool BtnLoginEnable { get; set; } = true;
+        public TidalDeviceCode DeviceCode { get; set; }
         public UserSettings Settings { get; set; } = UserSettings.Read();
         private IWindowManager Manager;
         private MainViewModel VMMain;
@@ -26,12 +27,114 @@ namespace TIDALDL_UI.Pages
             VMMain.VMLogin = this;
 
             //If AutoLogin
-            if (Settings.AutoLogin && Settings.Username.IsNotBlank() && Settings.Password.IsNotBlank())
-                Login();
+            //if (Settings.AutoLogin && Settings.Username.IsNotBlank() && Settings.Password.IsNotBlank())
+            //    Login();
+            return;
+        }
+
+        protected override async void OnViewLoaded()
+        {
+            BtnLoginEnable = false;
+
+            //Proxy
+            HttpHelper.ProxyInfo PROXY = Settings.ProxyEnable ? new HttpHelper.ProxyInfo(Settings.ProxyHost, Settings.ProxyPort, Settings.ProxyUser, Settings.ProxyPwd) : null;
+
+            //Auto login by accessToken
+            string msg;
+            LoginKey key;
+            if (Settings.Accesstoken.IsNotBlank())
+            {
+                (msg, key) = await Client.Login(Settings.Accesstoken, PROXY);
+                if (msg.IsBlank())
+                    goto LOGIN_SUCCESS;
+                if (Settings.Refreshtoken.IsNotBlank())
+                {
+                    (msg, key) = await Client.RefreshAccessToken(Settings.Refreshtoken, PROXY);
+                    if (msg.IsBlank())
+                    {
+                        Settings.Userid = key.UserID;
+                        Settings.Accesstoken = key.AccessToken;
+                        Settings.Save();
+                        Global.AccessKey = key;
+                        goto LOGIN_SUCCESS;
+                    }
+                }
+            }
+
+            //get device code
+            (string msg1, TidalDeviceCode code) = await Client.GetDeviceCode(PROXY);
+            if (msg1.IsNotBlank())
+                Growl.Error("Get device code failed!", Global.TOKEN_LOGIN);
+            else
+                DeviceCode = code;
+            goto RETURN_POINT;
+
+        LOGIN_SUCCESS:
+            Global.AccessKey = key;
+            Global.CommonKey = key;
+            Global.VideoKey = key;
+            Manager.ShowWindow(VMMain);
+            RequestClose();
+
+        RETURN_POINT:
+            BtnLoginEnable = true;
             return;
         }
 
         public async void Login()
+        {
+            BtnLoginEnable = false;
+
+            //Proxy
+            HttpHelper.ProxyInfo PROXY = Settings.ProxyEnable ? new HttpHelper.ProxyInfo(Settings.ProxyHost, Settings.ProxyPort, Settings.ProxyUser, Settings.ProxyPwd) : null;
+
+            if (DeviceCode == null)
+            {
+                //get device code
+                (string msg1, TidalDeviceCode code) = await Client.GetDeviceCode(PROXY);
+                if (msg1.IsNotBlank())
+                {
+                    Growl.Error("Get device code failed!", Global.TOKEN_LOGIN);
+                    goto RETURN_POINT;
+                }
+                else
+                    DeviceCode = code;
+            }
+
+            NetHelper.OpenWeb("https://" + DeviceCode.VerificationUri);
+
+            (string msg, LoginKey key) = await Client.CheckAuthStatus(DeviceCode, PROXY);
+            if (msg.IsNotBlank())
+            {
+                Growl.Error(msg, Global.TOKEN_LOGIN);
+                goto RETURN_POINT;
+            }
+
+            Settings.Userid = key.UserID;
+            Settings.Countrycode = key.CountryCode;
+            Settings.Accesstoken = key.AccessToken;
+            Settings.Refreshtoken = key.RefreshToken;
+            Settings.Save();
+            Global.AccessKey = key;
+            Global.CommonKey = key;
+            Global.VideoKey = key;
+            Manager.ShowWindow(VMMain);
+            RequestClose();
+
+        RETURN_POINT:
+            BtnLoginEnable = true;
+            return;
+
+        }
+
+        public void SaveProxy()
+        {
+            //Proxy
+            HttpHelper.ProxyInfo PROXY = Settings.ProxyEnable ? new HttpHelper.ProxyInfo(Settings.ProxyHost, Settings.ProxyPort, Settings.ProxyUser, Settings.ProxyPwd) : null;
+            Settings.Save();
+        }
+
+        public async void Login2()
         {
             BtnLoginEnable = false;
 
