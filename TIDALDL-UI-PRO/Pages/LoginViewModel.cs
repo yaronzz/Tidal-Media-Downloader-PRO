@@ -15,6 +15,7 @@ namespace TIDALDL_UI.Pages
     public class LoginViewModel : ModelBase
     {
         public bool BtnLoginEnable { get; set; } = true;
+        public bool HaveInit { get; set; } = false;
         public TidalDeviceCode DeviceCode { get; set; }
         public UserSettings Settings { get; set; } = UserSettings.Read();
         private IWindowManager Manager;
@@ -34,6 +35,10 @@ namespace TIDALDL_UI.Pages
 
         protected override async void OnViewLoaded()
         {
+            if (HaveInit)
+                return;
+            HaveInit = true;
+
             BtnLoginEnable = false;
 
             //Proxy
