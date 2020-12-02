@@ -18,6 +18,11 @@ namespace TIDALDL_UI.Else
         public string Title { get; set; }
         public string Own   { get; set; }
         public ProgressHelper Progress { get; set; }
+        System.DateTime StartTime { get; set; }
+        public string CurSizeString { get; set; }
+        public string TotalSizeString { get; set; }
+        public long CountIncreSize { get; set; } = 0;
+        public string DownloadSpeedString { get; set; }
 
         Video     TidalVideo { get; set; }
         Album     TidalAlbum { get; set; }
@@ -93,11 +98,12 @@ namespace TIDALDL_UI.Else
             string path = Tools.GetVideoPath(Settings, TidalVideo, TidalAlbum, TidalPlaylist, ".mp4");
 
             //Download
+            string errmsg = "";
             Progress.StatusMsg = "Start...";
             string[] tsurls = M3u8Helper.GetTsUrls(Stream.M3u8Url);
-            if (!(bool)M3u8Helper.Download(tsurls, path, ProgressNotify, Proxy: key.Proxy))
+            if (!(bool)M3u8Helper.Download(tsurls, path, UpdateDownloadNotify, ref errmsg, Proxy: key.Proxy))
             {
-                Progress.Errmsg = "Download failed!";
+                Progress.Errmsg = "Download failed!" + errmsg;
                 goto ERR_RETURN;
             }
 
@@ -119,12 +125,27 @@ namespace TIDALDL_UI.Else
             TellParentOver();
         }
 
-        public bool ProgressNotify(long lCurSize, long lAllSize)
+        public bool UpdateDownloadNotify(long lTotalSize, long lAlreadyDownloadSize, long lIncreSize, object data)
         {
-            Progress.UpdateInt(lCurSize, lAllSize);
+            Progress.UpdateInt(lAlreadyDownloadSize, lTotalSize);
             if (Progress.GetStatus() != ProgressHelper.STATUS.RUNNING)
                 return false;
+
+            CountIncreSize += lIncreSize;
+            long consumeTime = TimeHelper.CalcConsumeTime(StartTime);
+
+            if (consumeTime >= 1000)
+            {
+                DownloadSpeedString = AIGS.Common.Convert.ConverStorageUintToString(CountIncreSize, AIGS.Common.Convert.UnitType.BYTE) + "/S";
+                CountIncreSize = 0;
+                StartTime = TimeHelper.GetCurrentTime();
+            }
+
+            CurSizeString = AIGS.Common.Convert.ConverStorageUintToString(lAlreadyDownloadSize, AIGS.Common.Convert.UnitType.BYTE);
+            if (TotalSizeString.IsBlank())
+                TotalSizeString = AIGS.Common.Convert.ConverStorageUintToString(lTotalSize, AIGS.Common.Convert.UnitType.BYTE);
             return true;
         }
+
     }
 }

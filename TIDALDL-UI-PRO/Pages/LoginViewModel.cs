@@ -9,6 +9,7 @@ using Stylet;
 using TIDALDL_UI.Else;
 using HandyControl.Controls;
 using TidalLib;
+using System.Windows.Forms;
 
 namespace TIDALDL_UI.Pages
 {
@@ -26,10 +27,6 @@ namespace TIDALDL_UI.Pages
             Manager = manager;
             VMMain  = vmmain;
             VMMain.VMLogin = this;
-
-            //If AutoLogin
-            //if (Settings.AutoLogin && Settings.Username.IsNotBlank() && Settings.Password.IsNotBlank())
-            //    Login();
             return;
         }
 
@@ -100,36 +97,15 @@ namespace TIDALDL_UI.Pages
                 if (msg1.IsNotBlank())
                 {
                     Growl.Error("Get device code failed!", Global.TOKEN_LOGIN);
-                    goto RETURN_POINT;
+                    BtnLoginEnable = true;
+                    return;
                 }
                 else
                     DeviceCode = code;
             }
 
-            NetHelper.OpenWeb("https://" + DeviceCode.VerificationUri);
-
-            (string msg, LoginKey key) = await Client.CheckAuthStatus(DeviceCode, PROXY);
-            if (msg.IsNotBlank())
-            {
-                Growl.Error(msg, Global.TOKEN_LOGIN);
-                goto RETURN_POINT;
-            }
-
-            Settings.Userid = key.UserID;
-            Settings.Countrycode = key.CountryCode;
-            Settings.Accesstoken = key.AccessToken;
-            Settings.Refreshtoken = key.RefreshToken;
-            Settings.Save();
-            Global.AccessKey = key;
-            Global.CommonKey = key;
-            Global.VideoKey = key;
-            Manager.ShowWindow(VMMain);
-            RequestClose();
-
-        RETURN_POINT:
-            BtnLoginEnable = true;
+            ThreadHelper.Start(CheckAuthThreadFunc);
             return;
-
         }
 
         public void SaveProxy()
@@ -237,6 +213,39 @@ namespace TIDALDL_UI.Pages
             catch { }
             return Client.GetDefaultToken();
         }
+
+        public void CheckAuthThreadFunc(object[] datas)
+        {
+            NetHelper.OpenWeb("https://" + DeviceCode.VerificationUri);
+
+            //Proxy
+            HttpHelper.ProxyInfo PROXY = Settings.ProxyEnable ? new HttpHelper.ProxyInfo(Settings.ProxyHost, Settings.ProxyPort, Settings.ProxyUser, Settings.ProxyPwd) : null;
+
+            (string msg, LoginKey key) = Client.CheckAuthStatus(DeviceCode, PROXY).Result;
+            if (msg.IsNotBlank())
+            {
+                Growl.Error(msg, Global.TOKEN_LOGIN);
+                goto RETURN_POINT;
+            }
+
+            Settings.Userid = key.UserID;
+            Settings.Countrycode = key.CountryCode;
+            Settings.Accesstoken = key.AccessToken;
+            Settings.Refreshtoken = key.RefreshToken;
+            Settings.Save();
+            Global.AccessKey = key;
+            Global.CommonKey = key;
+            Global.VideoKey = key;
+
+            this.View.Dispatcher.Invoke(new Action(() => {
+                Manager.ShowWindow(VMMain);
+                RequestClose();
+            }));
+
+        RETURN_POINT:
+            BtnLoginEnable = true;
+        }
+
     }
 
 

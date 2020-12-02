@@ -44,6 +44,11 @@
                             <TextBlock Text="{Binding Version}" Foreground="BlueViolet" FontSize="14" FontFamily="Global Monospace" VerticalAlignment="Center" TextWrapping="Wrap" />
                             <TextBlock Text="{Binding Type}" Foreground="BlueViolet" FontSize="14" FontFamily="Global Monospace" VerticalAlignment="Center" TextWrapping="Wrap" />
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                            <TextBlock Text="{DynamicResource strLASTVERSION}" Foreground="Gray" FontSize="14" FontFamily="Global Monospace" VerticalAlignment="Center" TextWrapping="Wrap" Margin="0,0,5,0" />
+                            <TextBlock Text="{Binding LastVersion}" Foreground="BlueViolet" FontSize="14" FontFamily="Global Monospace" VerticalAlignment="Center" TextWrapping="Wrap" />
+                            <TextBlock Text="{Binding Type}" Foreground="BlueViolet" FontSize="14" FontFamily="Global Monospace" VerticalAlignment="Center" TextWrapping="Wrap" />
+                        </StackPanel>
                         <DockPanel DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Margin="0,20,0,20">
                             <Button Content="{DynamicResource strFeedback}" Command="{s:Action Feedback}" hc:IconElement.Geometry="{StaticResource GithubGeometry}" DockPanel.Dock="Left" Margin="0,0,10,0" Padding="15,6" HorizontalAlignment="Left" ></Button>
                             <Button Content="{DynamicResource strGroup}" Command="{s:Action Telegram}" hc:IconElement.Geometry="{StaticResource TelegramGeometry}" DockPanel.Dock="Left" Margin="0,0,10,0" Padding="15,6" HorizontalAlignment="Left" ></Button>

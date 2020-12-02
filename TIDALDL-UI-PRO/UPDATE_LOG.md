@@ -1,6 +1,16 @@
 - [ ] Auto update
 - [ ] Multi-language
 
+#### v1.2.1.1
+- [x] Fix: download video
+- [x] Show download speed
+- [x] Login page: show proxy settings
+
+#### v1.2.1.0
+- [x] Use new-login-method
+- [x] Fix: decrypt failed
+- [x] Fix: long path problem
+
 #### v1.2.0.6
 - [x] Fix: replace track "title (version)" illegal characters 
 - [x] Default AlbumFolderFormat: {ArtistName}/{Flag} [{AlbumID}] [{AlbumYear}] {AlbumTitle}

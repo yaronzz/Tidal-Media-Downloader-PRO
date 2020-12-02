@@ -318,7 +318,7 @@ namespace TIDALDL_UI.Pages
                     Data = album.Tracks[i]
                 });
             }
-            for (int i = 0; i < album.NumberOfVideos; i++)
+            for (int i = 0; i < album.Videos.Count; i++)
             {
                 Items.Add(new Item()
                 {
@@ -378,7 +378,7 @@ namespace TIDALDL_UI.Pages
             CoverUrl = playlist.CoverUrl;
             ReleaseDate = $"Description {playlist.Description}";
 
-            for (int i = 0; i < playlist.NumberOfTracks; i++)
+            for (int i = 0; i < playlist.Tracks.Count; i++)
             {
                 Items.Add(new Item()
                 {
@@ -390,7 +390,7 @@ namespace TIDALDL_UI.Pages
                     Data = playlist.Tracks[i]
                 });
             }
-            for (int i = 0; i < playlist.NumberOfVideos; i++)
+            for (int i = 0; i < playlist.Videos.Count; i++)
             {
                 Items.Add(new Item()
                 {

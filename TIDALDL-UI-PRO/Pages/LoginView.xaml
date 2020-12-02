@@ -35,7 +35,7 @@
         <!--Err label-->
         <TextBlock Grid.Column="1" Text="{Binding Errlabel,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Foreground="Red" VerticalAlignment="Bottom" Margin="10,0,0,4" Grid.ColumnSpan="2"></TextBlock>
 
-        <Grid Margin="30,62,29.6,65" Grid.Column="1" VerticalAlignment="Center" Height="225">
+        <!--<Grid Margin="30,62,29.6,65" Grid.Column="1" VerticalAlignment="Center" Height="225">
             <StackPanel VerticalAlignment="Center">
                 <DockPanel>
                     <TextBlock Text="DeviceCode:" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" Padding="10"/>
@@ -43,10 +43,21 @@
                 </DockPanel>
                 <Button Content="Login" IsDefault="True" Command="{s:Action Login}" IsEnabled="{Binding BtnLoginEnable}"  Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Stretch" Margin="0,20,0,0"/>
             </StackPanel>
-        </Grid>
+        </Grid>-->
         
-        <!--<TabControl Margin="30,62,29.6,65" Grid.Column="1" VerticalAlignment="Center" Height="225">
+        <TabControl Margin="30,62,29.6,65" Grid.Column="1" VerticalAlignment="Center" Height="250">
             <TabItem Header="LOGIN" FontWeight="ExtraBold">
+                <Grid Margin="0 16 0 0" >
+                    <StackPanel VerticalAlignment="Center">
+                        <DockPanel>
+                            <TextBlock Text="DeviceCode:" VerticalAlignment="Center" HorizontalAlignment="Left" FontWeight="Bold" Padding="10"/>
+                            <hc:TextBox Text="{Binding DeviceCode.UserCode}" Height="30" FontWeight="Normal"/>
+                        </DockPanel>
+                        <Button Content="Login" IsDefault="True" Command="{s:Action Login}" IsEnabled="{Binding BtnLoginEnable}"  Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Stretch" Margin="5,20,5,0"/>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <!--<TabItem Header="LOGIN" FontWeight="ExtraBold">
                 <Grid Margin="0 16 0 0" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -88,7 +99,7 @@
                     <Button Grid.Row="3" IsDefault="True" Command="{s:Action Login}" IsEnabled="{Binding BtnLoginEnable}" CommandParameter="{Binding ElementName=PasswordBox}" Style="{StaticResource ButtonPrimary}"
                             Content="Login" Grid.RowSpan="2" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,15,0,0"/>
                 </Grid>
-            </TabItem>
+            </TabItem>-->
             <TabItem Header="PROXY" FontWeight="Bold">
                 <Grid Margin="0 16 0 0" >
                     <Grid.RowDefinitions>
@@ -116,11 +127,11 @@
                     <hc:TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Settings.ProxyUser}" Height="30" FontWeight="Normal"/>
                     <hc:TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Settings.ProxyPwd}"  Height="30" FontWeight="Normal"/>
 
-                    <Button Grid.Row="4" Grid.ColumnSpan="3" Command="{s:Action SaveProxy}" Content="Save" Style="{StaticResource ButtonPrimary}" Margin="22,3,20,2" Width="242"/>
+                    <Button Grid.Row="4" Grid.ColumnSpan="3" Command="{s:Action SaveProxy}" Content="Save" Style="{StaticResource ButtonPrimary}" Margin="5,5,5,2" HorizontalAlignment="Stretch" />
 
                 </Grid>
             </TabItem>
-        </TabControl>-->
+        </TabControl>
 
         <!--Message page-->
         <ScrollViewer Grid.ColumnSpan="3" VerticalScrollBarVisibility="Hidden" HorizontalAlignment="Right" VerticalAlignment="Bottom" VerticalContentAlignment="Bottom">

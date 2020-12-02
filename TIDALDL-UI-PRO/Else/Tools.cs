@@ -37,6 +37,7 @@ namespace TIDALDL_UI.Else
                 if (!bIsDir && sRet.Length > settings.MaxFileName)
                     sRet = sRet.Substring(0, settings.MaxFileName);
             }
+            sRet = sRet.Trim();
             return sRet;
         }
 

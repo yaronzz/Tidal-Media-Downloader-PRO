@@ -30,6 +30,7 @@
     <sys:String x:Key="strPlaylist">Playlist</sys:String>
     <sys:String x:Key="strTrackNum">TrackNum</sys:String>
     <sys:String x:Key="strVERSION">VERSION</sys:String>
+    <sys:String x:Key="strLASTVERSION">LAST-VERSION</sys:String>
     <sys:String x:Key="strSETTINGS">SETTINGS</sys:String>
     <sys:String x:Key="strUsername">Username</sys:String>
     <sys:String x:Key="strPassword">Password</sys:String>

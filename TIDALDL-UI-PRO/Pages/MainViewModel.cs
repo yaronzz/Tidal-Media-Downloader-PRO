@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -25,12 +26,12 @@ namespace TIDALDL_UI.Pages
         {
             Manager = manager;
         }
-
+        
         protected override async void OnViewLoaded()
         {
             Global.VMMain = this;
             Global.Settings = Settings.Read();
-
+        
             //Show search
             ShowPage("search");
 
@@ -47,10 +48,11 @@ namespace TIDALDL_UI.Pages
 
             //Update new version
             string version = await GithubHelper.getLastReleaseVersionAsync(Global.NAME_GITHUB_AUTHOR, Global.NAME_GITHUB_PROJECT);
-            //if(version != null && version != VMAbout.Version)
-            //{
-            //    ShowPage("about");
-            //}
+            VMAbout.LastVersion = version;
+            if (version != null && version != VMAbout.Version)
+            {
+                ShowPage("about");
+            }
         }
 
         #region Show page
