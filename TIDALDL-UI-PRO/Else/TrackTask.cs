@@ -101,6 +101,12 @@ namespace TIDALDL_UI.Else
                 Codec = Stream.Codec;
                 Progress.StatusMsg = "GetStream success...";
 
+                if (TidalAlbum == null && TidalTrack.Album != null)
+                {
+                    string tmpmsg;
+                    (tmpmsg, TidalAlbum) = Client.GetAlbum(key, TidalTrack.Album.ID, false).Result;
+                }
+
                 //Get path 
                 string path = Tools.GetTrackPath(Settings, TidalTrack, Stream, TidalAlbum, TidalPlaylist);
 

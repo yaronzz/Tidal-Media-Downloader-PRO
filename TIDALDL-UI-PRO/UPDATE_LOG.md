@@ -1,6 +1,9 @@
 - [ ] Auto update
 - [ ] Multi-language
 
+
+- [x] Fix: download playlist
+
 #### v1.2.1.1
 - [x] Fix: download video
 - [x] Show download speed

@@ -165,9 +165,12 @@ namespace TIDALDL_UI.Else
             name = name.Replace("{TrackTitle}", title);
             name = name.Replace("{ExplicitFlag}", sexplicit);
 
-            name = name.Replace("{AlbumID}", album.ID);
-            name = name.Replace("{AlbumYear}", album.ReleaseDate.Substring(0, 4));
-            name = name.Replace("{AlbumTitle}", FormatPath(album.Title, settings));
+            if (album != null)
+            {
+                name = name.Replace("{AlbumID}", album.ID);
+                name = name.Replace("{AlbumYear}", album.ReleaseDate.Substring(0, 4));
+                name = name.Replace("{AlbumTitle}", FormatPath(album.Title, settings));
+            }
             return $"{basepath}{name}{extension}";
         }
 
