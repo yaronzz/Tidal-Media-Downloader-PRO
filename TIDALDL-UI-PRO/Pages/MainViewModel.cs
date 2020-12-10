@@ -39,7 +39,8 @@ namespace TIDALDL_UI.Pages
             Settings.Change(Global.Settings);
 
             //Show about
-            if(Global.Settings.Version != VMAbout.Version)
+            VMAbout.MainVM = this;
+            if (Global.Settings.Version != VMAbout.Version)
             {
                 Global.Settings.Version = VMAbout.Version;
                 Global.Settings.Save();
@@ -47,10 +48,10 @@ namespace TIDALDL_UI.Pages
             }
 
             //Update new version
-            string version = await GithubHelper.getLastReleaseVersionAsync(Global.NAME_GITHUB_AUTHOR, Global.NAME_GITHUB_PROJECT);
-            VMAbout.LastVersion = version;
-            if (version != null && version != VMAbout.Version)
+            VMAbout.LastVersion = await GithubHelper.getLastReleaseVersionAsync(Global.NAME_GITHUB_AUTHOR, Global.NAME_GITHUB_PROJECT);
+            if (VMAbout.LastVersion != null && VMAbout.LastVersion != VMAbout.Version)
             {
+                VMAbout.EnableUpdate = Visibility.Visible;
                 ShowPage("about");
             }
         }

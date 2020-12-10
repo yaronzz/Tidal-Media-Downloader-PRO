@@ -24,6 +24,7 @@
     <sys:String x:Key="strCloudMusic">Cloud Music</sys:String>
     <sys:String x:Key="strSpotify">Spotify</sys:String>
     <sys:String x:Key="strTidal">Tidal</sys:String>
+    <sys:String x:Key="strUpdate">Update</sys:String>
     
     <!--Tip-->
     <sys:String x:Key="strPlatform">Platform</sys:String>

@@ -26,7 +26,8 @@ namespace TIDALDL_UI.Else
         public static string PATH_BASE = SystemHelper.GetUserFolders().PersonalPath + "\\Tidal-gui\\";
         public static string PATH_SETTINGS = PATH_BASE + "data\\settings.json";
         public static string PATH_USERSETTINGS = PATH_BASE + "data\\usersettings.json";
-        public static string PATH_UPDATE = PATH_BASE + "download\\";
+        public static string PATH_UPDATE = PATH_BASE + "update\\";
+        public static string PATH_UPDATEBAT = PATH_UPDATE + "update.bat";
 
         //url
         public static string URL_TIDAL_GROUP = "https://t.me/tidal_group";

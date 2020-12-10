@@ -3,6 +3,7 @@
 
 
 - [x] Fix: download playlist
+- [X] About-Page: show update-button when a new version released 
 
 #### v1.2.1.1
 - [x] Fix: download video
