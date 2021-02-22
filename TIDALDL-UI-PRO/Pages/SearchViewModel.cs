@@ -122,7 +122,7 @@ namespace TIDALDL_UI.Pages
                 id = SearchResult.Videos[((SearchView)this.View).ctrVideoGrid.SelectedIndex].ID.ToString();
                 type = eType.VIDEO;
             }
-            else if (selectHeader == Language.Get("strARTIST"))
+            else if (selectHeader == Language.Get("strARTISTS"))
             {
                 if (((SearchView)this.View).ctrArtistGrid.SelectedIndex < 0)
                     goto ERR_NO_SELECT;
