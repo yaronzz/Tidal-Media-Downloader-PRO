@@ -32,6 +32,7 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
+                    <!-- logo -->
                     <Image Source="/Resource/favicon2.ico" Height="180" Width="180"></Image>
                     <DockPanel Grid.Column="1" Margin="15,0,0,0" VerticalAlignment="Center">
                         <TextBlock Text="TIDAL-GUI" DockPanel.Dock="Top" FontSize="40" VerticalAlignment="Top" FontWeight="ExtraBlack" Margin="0,15,0,15" />

@@ -20,13 +20,13 @@
         </Grid.RowDefinitions>
 
         <Border Grid.Column="1" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource BorderBrush}">
-            <TextBlock Text="SETTINGS" FontWeight="Bold" FontSize="15" VerticalAlignment="Bottom" Margin="15"></TextBlock>
+            <TextBlock Text="{DynamicResource strSETTINGS}" FontWeight="Bold" FontSize="15" VerticalAlignment="Bottom" Margin="15"></TextBlock>
         </Border>
 
         <DockPanel Grid.Row="2" >
-            <Button Content="OK" Command="{s:Action Confim}" Width="100" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,20,0"></Button>
-            <Button Content="Cancel" Command="{s:Action Load}" Width="100" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,20,0"></Button>
-            <Button Content="Logout" Command="{s:Action Logout}" Width="100" Style="{StaticResource ButtonDanger}" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="30,0,0,0"></Button>
+            <Button Content="{DynamicResource strOK}" Command="{s:Action Confim}" Width="100" Style="{StaticResource ButtonPrimary}" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,20,0"></Button>
+            <Button Content="{DynamicResource strCancel}" Command="{s:Action Load}" Width="100" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,0,20,0"></Button>
+            <Button Content="{DynamicResource strLogout}" Command="{s:Action Logout}" Width="100" Style="{StaticResource ButtonDanger}" DockPanel.Dock="Left" HorizontalAlignment="Left" Margin="30,0,0,0"></Button>
         </DockPanel>
 
         <ScrollViewer Grid.Row="1" FontSize="13" Margin="30,0,0,0">
@@ -56,6 +56,7 @@
                     <RowDefinition Height="0"/>
                     <RowDefinition Height="15"/>
                     <RowDefinition Height="45"/>
+                    <RowDefinition Height="45"/>
                     <RowDefinition Height="100"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
@@ -64,53 +65,55 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Path:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="0" Text="{DynamicResource strPath}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <Button Grid.Column="1" Grid.ColumnSpan="2" Command="{s:Action SetOutputDir}" Content="{Binding Settings.OutputDir}" HorizontalAlignment="Left" Width="500" HorizontalContentAlignment="Left"></Button>
 
-                <TextBlock Grid.Row="1" Text="ThreadNum:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="limit 1~3" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
+                <TextBlock Grid.Row="1" Text="{DynamicResource strThreadNum}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource strLimit1To3}" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
                 <hc:NumericUpDown Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Maximum="3" Minimum="1" Value="{Binding Settings.ThreadNum}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                <TextBlock Grid.Row="2" Text="SearchNum:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
-                <TextBlock Grid.Row="2" Grid.Column="1" Text="limit 10~50" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
+                <TextBlock Grid.Row="2" Text="{DynamicResource strSearchNum}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource strLimit10To50}" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
                 <hc:NumericUpDown Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Maximum="50" Minimum="10" Value="{Binding Settings.SearchNum}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                <TextBlock Grid.Row="4" Text="AlbumFolderFormat:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="4" Text="{DynamicResource strAlbumFolderFormat}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Settings.AlbumFolderFormat}" hc:InfoElement.Placeholder="eg:  {Flag} {AlbumTitle} [{AlbumID}] [{AlbumYear}]  -->> [ME] Happy End [103578093] [2016]" Margin="0,6,10,6"/>
                 <!--<TextBlock Grid.Row="4" Text="AddYear:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />-->
                 <!--<ComboBox Grid.Row="4" Grid.Column="1" ItemsSource="{Binding ComboxAddYear}" SelectedValue="{Binding Settings.AddYear}" Grid.ColumnSpan="2" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>-->
 
-                <TextBlock Grid.Row="5" Text="TrackFileFormat:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="5" Text="{DynamicResource strTrackFileFormat}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding Settings.TrackFileFormat}" hc:InfoElement.Placeholder="eg:  {TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}  -->> 01 - Back Number - Happy End(Explicit)" Margin="0,6,10,6"/>
 
-                <TextBlock Grid.Row="6" Text="VideoFileFormat:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="6" Text="{DynamicResource strVideoFileFormat}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding Settings.VideoFileFormat}" hc:InfoElement.Placeholder="eg:  {ArtistName}/{TrackNumber} - {VideoTitle}  -->> Back Number\\01 - Happy End" Margin="0,6,10,6"/>
 
-                <TextBlock Grid.Row="7" Text="Choose:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="7" Text="{DynamicResource strChoose}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <!--<CheckBox Grid.Row="5" Grid.Column="1" IsChecked="{Binding Settings.ArtistBeforeTitle}" Content="Add artist-name before title, like 'adele - hello.flac'" HorizontalAlignment="Left"/>-->
                 <!--<CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding Settings.AddAlbumIDBeforeFolder}" Content="Add album-id befor album-folder, like '[123] Only one'" HorizontalAlignment="Left"/>-->
-                <CheckBox Grid.Row="7" Grid.Column="1" IsChecked="{Binding Settings.IncludeEP}"  Content="Search artist-album include single/ep" HorizontalAlignment="Left"/>
-                <CheckBox Grid.Row="8" Grid.Column="1" IsChecked="{Binding Settings.SaveCovers}" Content="Download cover" HorizontalAlignment="Left"/>
+                <CheckBox Grid.Row="7" Grid.Column="1" IsChecked="{Binding Settings.IncludeEP}"  Content="{DynamicResource strSearchArtistEP}" HorizontalAlignment="Left"/>
+                <CheckBox Grid.Row="8" Grid.Column="1" IsChecked="{Binding Settings.SaveCovers}" Content="{DynamicResource strDownloadCover}" HorizontalAlignment="Left"/>
 
-                <TextBlock Grid.Row="10" Text="MaxLength:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
-                <TextBlock Grid.Row="10" Grid.Column="1" Text="file name length limit 50~100" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
+                <TextBlock Grid.Row="10" Text="{Binding strMaxLength}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="10" Grid.Column="1" Text="{DynamicResource strLimitFileName}" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
                 <hc:NumericUpDown Grid.Row="10" Grid.Column="1" Maximum="100" Minimum="50" Value="{Binding Settings.MaxFileName}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="11" Grid.Column="1" Text="album folder name length limit 50~100" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
+                <TextBlock Grid.Row="11" Grid.Column="1" Text="{DynamicResource strLimitAlbumFolder}" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
                 <hc:NumericUpDown Grid.Row="11" Grid.Column="1" Maximum="100" Minimum="50" Value="{Binding Settings.MaxDirName}"  Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                <TextBlock Grid.Row="13" Text="Track:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
-                <CheckBox Grid.Row="13" Grid.Column="1" IsChecked="{Binding Settings.OnlyM4a}" Content="Convert mp4 to m4a" HorizontalAlignment="Left"/>
+                <TextBlock Grid.Row="13" Text="{DynamicResource strTrack}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <CheckBox Grid.Row="13" Grid.Column="1" IsChecked="{Binding Settings.OnlyM4a}" Content="{DynamicResource strConvertToM4a}" HorizontalAlignment="Left"/>
                 <!--<CheckBox Grid.Row="14" Grid.Column="1" IsChecked="{Binding Settings.UseTrackNumber}" Content="Add track number"  HorizontalAlignment="Left"/>-->
                 <!--<CheckBox Grid.Row="15" Grid.Column="1" IsChecked="{Binding Settings.AddHyphen}" Content="Addhyphen between track-number and title" HorizontalAlignment="Left"/>-->
-                <CheckBox Grid.Row="16" Grid.Column="1" IsChecked="{Binding Settings.CheckExist}" Content="Skipping exist file when downloading" HorizontalAlignment="Left"/>
+                <CheckBox Grid.Row="16" Grid.Column="1" IsChecked="{Binding Settings.CheckExist}" Content="{DynamicResource strSkipExist}" HorizontalAlignment="Left"/>
                 <!--<CheckBox Grid.Row="17" Grid.Column="1" IsChecked="{Binding Settings.AddExplicitTag}" Content="Add [explicit] after track-title "  HorizontalAlignment="Left"/>-->
 
-                <TextBlock Grid.Row="19" Text="Theme:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="19" Text="{DynamicResource strTheme}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <ComboBox Grid.Row="19" Grid.Column="1" ItemsSource="{Binding ComboxTheme}" SelectedValue="{Binding Settings.ThemeType}" Grid.ColumnSpan="2" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-                <TextBlock Grid.Row="20" Text="AccessToken:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <TextBlock Grid.Row="20" Text="{DynamicResource strLanguage}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <ComboBox Grid.Row="20" Grid.Column="1" ItemsSource="{Binding ComboxLanguage}" SelectedValue="{Binding Settings.LanguageType}" Grid.ColumnSpan="2" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                <DockPanel Grid.Row="20" Grid.Column="1" >
-                    <Button Content="Try Get" Command="{s:Action GetAccessToken}" Width="100" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Center" DockPanel.Dock="Right" Margin="0,10,10,10" Height="80" ></Button>
+                <TextBlock Grid.Row="21" Text="AccessToken:" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
+                <DockPanel Grid.Row="21" Grid.Column="1" >
+                    <Button Content="{DynamicResource strTryGet}" Command="{s:Action GetAccessToken}" Width="100" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Center" DockPanel.Dock="Right" Margin="0,10,10,10" Height="80" ></Button>
                     <hc:TextBox Text="{Binding AccessToken}" FontFamily="Microsoft Yahei Regular" FontWeight="Normal" VerticalAlignment="Center" TextWrapping="Wrap" Height="80" Width="auto" Margin="0,10,10,10" />
                 </DockPanel>
             </Grid>

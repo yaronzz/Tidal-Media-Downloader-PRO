@@ -26,6 +26,8 @@ namespace TIDALDL_UI.Pages
         public bool ShowList { get; set; } = false;
 
         //search parameter
+        public int searchOffset { get; set; } = 0;
+        public string SearchStr { get; set; }
         public SearchResult SearchResult { get; set; }
         public ObservableCollection<CoverCard> CoverCards { get; set; }
 
@@ -44,21 +46,31 @@ namespace TIDALDL_UI.Pages
         }
 
         #region search \ get detail \ download
-
-        public async void Search(string SearchStr)
+        public async void Search(string method)
         {
+            if (method == "search")
+                searchOffset = 0;
+            else if (method == "searchNext")
+                searchOffset += Global.Settings.SearchNum;
+            else if (method == "searchPre")
+            {
+                searchOffset -= Global.Settings.SearchNum;
+                if (searchOffset < 0)
+                    searchOffset = 0;
+            }
+
             if (SearchStr.IsBlank())
             {
-                Growl.Error("Search string is empty!", Global.TOKEN_MAIN);
+                Growl.Error(Language.Get("strmsgSearchStringIsEmpty"), Global.TOKEN_MAIN);
                 return;
             }
 
             ShowWait = true;
 
-            (string msg, eType type, object data) = await Client.Get(Global.CommonKey, SearchStr, eType.NONE, Global.Settings.SearchNum, Global.Settings.IncludeEP, false);
+            (string msg, eType type, object data) = await Client.Get(Global.CommonKey, SearchStr, eType.NONE, Global.Settings.SearchNum, Global.Settings.IncludeEP, false, searchOffset);
             if (msg.IsNotBlank() || data == null)
             {
-                Growl.Error("Search Err!" + msg, Global.TOKEN_MAIN);
+                Growl.Error(Language.Get("strmsgSearchErr") + msg, Global.TOKEN_MAIN);
             }
             else if (type == eType.SEARCH)
             {
@@ -80,7 +92,7 @@ namespace TIDALDL_UI.Pages
         {
             if (SearchResult == null)
             {
-                Growl.Error("Please search first!", Global.TOKEN_MAIN);
+                Growl.Error(Language.Get("strmsgPleaseSearchFirst"), Global.TOKEN_MAIN);
                 return;
             }
 
@@ -89,35 +101,35 @@ namespace TIDALDL_UI.Pages
             string id = null;
             eType type = eType.NONE;
             string selectHeader = ((System.Windows.Controls.TabItem)((SearchView)this.View).ctrSearchTab.SelectedItem).Header.ToString();
-            if (selectHeader == "ALBUM")
+            if (selectHeader == Language.Get("strALBUM"))
             {
                 if (((SearchView)this.View).ctrAlbumGrid.SelectedIndex < 0)
                     goto ERR_NO_SELECT;
                 id = SearchResult.Albums[((SearchView)this.View).ctrAlbumGrid.SelectedIndex].ID.ToString();
                 type = eType.ALBUM;
             }
-            else if (selectHeader == "TRACK")
+            else if (selectHeader == Language.Get("strTRACK"))
             {
                 if (((SearchView)this.View).ctrTrackGrid.SelectedIndex < 0)
                     goto ERR_NO_SELECT;
                 id = SearchResult.Tracks[((SearchView)this.View).ctrTrackGrid.SelectedIndex].ID.ToString();
                 type = eType.TRACK;
             }
-            else if (selectHeader == "VIDEO")
+            else if (selectHeader == Language.Get("strVIDEO"))
             {
                 if (((SearchView)this.View).ctrVideoGrid.SelectedIndex < 0)
                     goto ERR_NO_SELECT;
                 id = SearchResult.Videos[((SearchView)this.View).ctrVideoGrid.SelectedIndex].ID.ToString();
                 type = eType.VIDEO;
             }
-            else if (selectHeader == "ARTIST")
+            else if (selectHeader == Language.Get("strARTIST"))
             {
                 if (((SearchView)this.View).ctrArtistGrid.SelectedIndex < 0)
                     goto ERR_NO_SELECT;
                 id = SearchResult.Artists[((SearchView)this.View).ctrArtistGrid.SelectedIndex].ID.ToString();
                 type = eType.ARTIST;
             }
-            else if (selectHeader == "PLAYLIST")
+            else if (selectHeader == Language.Get("strPLAYLIST"))
             {
                 if (((SearchView)this.View).ctrPlaylistGrid.SelectedIndex < 0)
                     goto ERR_NO_SELECT;
@@ -134,7 +146,7 @@ namespace TIDALDL_UI.Pages
             return;
 
             ERR_NO_SELECT:
-            Growl.Error("Please select one item!", Global.TOKEN_MAIN);
+            Growl.Error(Language.Get("strmsgPleaseSelectOneItem"), Global.TOKEN_MAIN);
             ShowWait = false;
             return;
         }
@@ -143,7 +155,7 @@ namespace TIDALDL_UI.Pages
         {
             if (Detail == null)
             {
-                Growl.Error("Nothing to downlond!", Global.TOKEN_MAIN);
+                Growl.Error(Language.Get("strmsgNothingToDownload"), Global.TOKEN_MAIN);
                 return;
             }
 
@@ -156,7 +168,7 @@ namespace TIDALDL_UI.Pages
                 (string msg, Album album) = await Client.GetAlbum(Global.CommonKey, track.Album.ID, false);
                 if(msg.IsNotBlank() || album == null)
                 {
-                    Growl.Error("Get track's album information failed!", Global.TOKEN_MAIN);
+                    Growl.Error(Language.Get("strmsgGetTrackAlbumInfoFailed"), Global.TOKEN_MAIN);
                     goto RETURN_POINT;
                 }
                 track.Album = album;
@@ -170,7 +182,7 @@ namespace TIDALDL_UI.Pages
                     (msg, album.Tracks, album.Videos) = await Client.GetItems(Global.CommonKey, album.ID, eType.ALBUM);
                     if (msg.IsNotBlank())
                     {
-                        Growl.Error("Get artist's album information failed!", Global.TOKEN_MAIN);
+                        Growl.Error(Language.Get("strmsgGetArtistAlbumInfoFailed"), Global.TOKEN_MAIN);
                         goto RETURN_POINT;
                     }
                 }
@@ -301,9 +313,9 @@ namespace TIDALDL_UI.Pages
         {
             Data = album;
             Title = album.Title;
-            Intro = $"by {album.ArtistsName}-{TimeHelper.ConverIntToString(album.Duration)} Tracks-{album.NumberOfTracks} Videos-{album.NumberOfVideos}";
+            Intro = $"by {album.ArtistsName}-{TimeHelper.ConverIntToString(album.Duration)} {Language.Get("strTRACK")}-{album.NumberOfTracks} {Language.Get("strVIDEO")}-{album.NumberOfVideos}";
             CoverUrl = album.CoverUrl;
-            ReleaseDate = $"Release date {album.ReleaseDate}";
+            ReleaseDate = $"{Language.Get("strReleaseDate")} {album.ReleaseDate}";
             Flag = album.Flag;
 
             for (int i = 0; i < album.NumberOfTracks && i < album.Tracks.Count; i++)
@@ -338,7 +350,7 @@ namespace TIDALDL_UI.Pages
             Title = video.Title;
             Intro = $"by {video.ArtistsName}-{TimeHelper.ConverIntToString(video.Duration)}";
             CoverUrl = video.CoverUrl;
-            ReleaseDate = $"Release date {video.ReleaseDate}";
+            ReleaseDate = $"{Language.Get("strReleaseDate")} {video.ReleaseDate}";
             Flag = video.Flag;
             Items.Add(new Item()
             {
@@ -357,7 +369,7 @@ namespace TIDALDL_UI.Pages
             Title = track.Title;
             Intro = $"by {track.ArtistsName}-{TimeHelper.ConverIntToString(track.Duration)}";
             CoverUrl = track.Album.CoverUrl;
-            ReleaseDate = $"Release date {track.Album.ReleaseDate}";
+            ReleaseDate = $"{Language.Get("strReleaseDate")} {track.Album.ReleaseDate}";
             Flag = track.Flag;
             Items.Add(new Item()
             {
@@ -374,9 +386,9 @@ namespace TIDALDL_UI.Pages
         {
             Data = playlist;
             Title = playlist.Title;
-            Intro = $"by {TimeHelper.ConverIntToString(playlist.Duration)} Tracks-{playlist.NumberOfTracks} Videos-{playlist.NumberOfVideos}";
+            Intro = $"by {TimeHelper.ConverIntToString(playlist.Duration)} {Language.Get("strTRACK")}-{playlist.NumberOfTracks} {Language.Get("strVIDEO")}-{playlist.NumberOfVideos}";
             CoverUrl = playlist.CoverUrl;
-            ReleaseDate = $"Description {playlist.Description}";
+            ReleaseDate = $"{Language.Get("strDescription")} {playlist.Description}";
 
             for (int i = 0; i < playlist.Tracks.Count; i++)
             {
@@ -408,9 +420,9 @@ namespace TIDALDL_UI.Pages
         {
             Data = artist;
             Title = artist.Name;
-            Intro = $"by {artist.Name} Albums-{artist.Albums.Count}";
+            Intro = $"by {artist.Name} {Language.Get("strALBUM")}-{artist.Albums.Count}";
             CoverUrl = artist.CoverUrl;
-            ReleaseDate = $"Artist types: {string.Join(" / ", artist.ArtistTypes)}";
+            ReleaseDate = $"{Language.Get("strArtistType")}: {string.Join(" / ", artist.ArtistTypes)}";
 
             for (int i = 0; i < artist.Albums.Count; i++)
             {

@@ -123,6 +123,8 @@ namespace TIDALDL_UI.Else
 
         CALL_RETURN:
             TellParentOver();
+
+            DownloadSpeedString = "";
         }
 
         public bool UpdateDownloadNotify(long lTotalSize, long lAlreadyDownloadSize, long lIncreSize, object data)

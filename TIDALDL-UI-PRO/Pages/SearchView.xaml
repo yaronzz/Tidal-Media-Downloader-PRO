@@ -25,10 +25,10 @@
             <Button Command="{s:Action GoLeft}" Padding="8" Style="{StaticResource ButtonIcon}" Foreground="{DynamicResource PrimaryTextBrush}" hc:IconElement.Geometry="{StaticResource LeftGeometry}" Margin="5,0,0,0"/>
             <Button Command="{s:Action GoRight}" Padding="8" Style="{StaticResource ButtonIcon}" Foreground="{DynamicResource PrimaryTextBrush}" hc:IconElement.Geometry="{StaticResource RightGeometry}"/>
             <Button Visibility="Hidden" DockPanel.Dock="Right" Padding="8" Style="{StaticResource ButtonIcon}" Foreground="{DynamicResource PrimaryTextBrush}" hc:IconElement.Geometry="{StaticResource PageModeGeometry}" />
-            <hc:SearchBar Command="{s:Action Search}" hc:InfoElement.Placeholder="Enter ID\Url\Title" Style="{StaticResource SearchBarPlus}" CommandParameter="{Binding Text,RelativeSource={RelativeSource Self}}"/>
+            <hc:SearchBar Command="{s:Action Search}" Text="{Binding SearchStr, UpdateSourceTrigger=PropertyChanged}" hc:InfoElement.Placeholder="Enter ID\Url\Title" Style="{StaticResource SearchBarPlus}" CommandParameter="search"/>
         </DockPanel>
 
-        <!--covers-->
+        <!--covers--> 
         <Grid Grid.Row="1" Background="{DynamicResource RegionBrush}" >
             <ListBox Margin="32" BorderThickness="0" Style="{StaticResource WrapPanelHorizontalListBox}" ItemsSource="{Binding CoverCards}">
                 <ListBox.ItemTemplate>
@@ -50,14 +50,14 @@
         </Grid>
 
 
-        <!--Search list-->
+        <!--Search list -->
         <Grid Grid.Row="1" Margin="10,5" Visibility="{Binding ShowList, Converter={StaticResource Boolean2VisibilityConverter}}">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <TabControl x:Name="ctrSearchTab">
-                <TabItem Header="ALBUM" FontWeight="Bold">
+                <TabItem Header="{DynamicResource strALBUM}" FontWeight="Bold">
                     <DataGrid x:Name="ctrAlbumGrid" FontWeight="Normal" HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" CanUserSortColumns="False" ItemsSource="{Binding SearchResult.Albums}" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Width="60" CanUserResize="False">
@@ -68,14 +68,14 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTextColumn IsReadOnly="True" Header="" Binding="{Binding FlagShort}"/>
-                            <DataGridTextColumn IsReadOnly="True" Width="400" Header="TITLE" Binding="{Binding Title}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="ARTIST" Binding="{Binding ArtistsName}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="DATE" Binding="{Binding ReleaseDate}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="TIME" Binding="{Binding DurationStr}"/>
+                            <DataGridTextColumn IsReadOnly="True" Width="400" Header="{DynamicResource strTITLE}" Binding="{Binding Title}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource strARTISTS}" Binding="{Binding ArtistsName}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource strDATE}" Binding="{Binding ReleaseDate}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource strTIME}" Binding="{Binding DurationStr}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                <TabItem Header="TRACK" FontWeight="Bold">
+                <TabItem Header="{DynamicResource strTRACK}" FontWeight="Bold">
                     <DataGrid x:Name="ctrTrackGrid" FontWeight="Normal" HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" CanUserSortColumns="False" ItemsSource="{Binding SearchResult.Tracks}" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Width="60" CanUserResize="False">
@@ -86,14 +86,14 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTextColumn IsReadOnly="True" Header="" Binding="{Binding FlagShort}"/>
-                            <DataGridTextColumn IsReadOnly="True" Width="300" Header="TITLE" Binding="{Binding Title}" />
-                            <DataGridTextColumn IsReadOnly="True" Header="ALBUM" Binding="{Binding Album.Title}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="ARTIST" Binding="{Binding ArtistsName}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="TIME" Binding="{Binding DurationStr}"/>
+                            <DataGridTextColumn IsReadOnly="True" Width="300" Header="{DynamicResource strTITLE}" Binding="{Binding Title}" />
+                            <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource strALBUM}" Binding="{Binding Album.Title}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource strARTISTS}" Binding="{Binding ArtistsName}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource strTIME}" Binding="{Binding DurationStr}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                <TabItem Header="VIDEO" FontWeight="Bold">
+                <TabItem Header="{DynamicResource strVIDEO}" FontWeight="Bold">
                     <DataGrid x:Name="ctrVideoGrid" FontWeight="Normal" HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" CanUserSortColumns="False" ItemsSource="{Binding SearchResult.Videos}" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Width="60" CanUserResize="False">
@@ -104,13 +104,13 @@
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
                             <DataGridTextColumn IsReadOnly="True" Header="" Binding="{Binding FlagShort}"/>
-                            <DataGridTextColumn IsReadOnly="True" Width="400" Header="TITLE" Binding="{Binding Title}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="ARTIST" Binding="{Binding ArtistsName}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="TIME" Binding="{Binding DurationStr}"/>
+                            <DataGridTextColumn IsReadOnly="True" Width="400" Header="{DynamicResource strTITLE}" Binding="{Binding Title}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource strARTISTS}" Binding="{Binding ArtistsName}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource strTIME}" Binding="{Binding DurationStr}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                <TabItem Header="ARTIST" FontWeight="Bold">
+                <TabItem Header="{DynamicResource strARTISTS}" FontWeight="Bold">
                     <DataGrid x:Name="ctrArtistGrid" FontWeight="Normal" HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" CanUserSortColumns="False" ItemsSource="{Binding SearchResult.Artists}" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Width="60" CanUserResize="False">
@@ -120,12 +120,12 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn IsReadOnly="True" Width="400" Header="NAME" Binding="{Binding Name}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="POPULARITY" Binding="{Binding Popularity}"/>
+                            <DataGridTextColumn IsReadOnly="True" Width="400" Header="{DynamicResource strNAME}" Binding="{Binding Name}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource strPOPULARITY}" Binding="{Binding Popularity}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
-                <TabItem Header="PLAYLIST" FontWeight="Bold">
+                <TabItem Header="{DynamicResource strPLAYLIST}" FontWeight="Bold">
                     <DataGrid x:Name="ctrPlaylistGrid" FontWeight="Normal" HeadersVisibility="All" RowHeaderWidth="60" AutoGenerateColumns="False" CanUserSortColumns="False" ItemsSource="{Binding SearchResult.Playlists}" hc:DataGridAttach.ShowRowNumber="True" SelectionMode="Single">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Width="60" CanUserResize="False">
@@ -135,9 +135,9 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-                            <DataGridTextColumn IsReadOnly="True" Width="400" Header="TITLE" Binding="{Binding Title}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="TYPE" Binding="{Binding Type}"/>
-                            <DataGridTextColumn IsReadOnly="True" Header="DURATION" Binding="{Binding DurationStr}"/>
+                            <DataGridTextColumn IsReadOnly="True" Width="400" Header="{DynamicResource strTITLE}" Binding="{Binding Title}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource strTYPE}" Binding="{Binding Type}"/>
+                            <DataGridTextColumn IsReadOnly="True" Header="{DynamicResource strDURATION}" Binding="{Binding DurationStr}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
@@ -145,10 +145,12 @@
 
             <DockPanel Grid.Row="1">
                 <Button Command="{s:Action GetDetail}" Content="OK" DockPanel.Dock="Right" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Right" Margin="0,0,10,0" Padding="15,6" Width="88"></Button>
+                <Button Command="{s:Action Search}" Content="Next Page" CommandParameter="searchNext" DockPanel.Dock="Right" Style="{StaticResource ButtonInfo}" HorizontalAlignment="Right" Margin="0,0,10,0" Padding="15,6" Width="88"></Button>
+                <Button Command="{s:Action Search}" Content="Pre Page" CommandParameter="searchPre" DockPanel.Dock="Right" Style="{StaticResource ButtonInfo}" HorizontalAlignment="Right" Margin="0,0,10,0" Padding="15,6" Width="88"></Button>
             </DockPanel>
 
             <Grid Grid.RowSpan="3" Grid.ColumnSpan="3" Background="{DynamicResource RegionBrush}" Visibility="{Binding SearchResult, Converter={StaticResource ConverterEmptyToVisibility}}">
-                <TextBlock Text="Please Search First!" FontSize="50" Style="{StaticResource TextBlockLargeBold}"></TextBlock>
+                <TextBlock Text="{DynamicResource strmsgPleaseSearchFirst}" FontSize="50" Style="{StaticResource TextBlockLargeBold}"></TextBlock>
             </Grid>
         </Grid>
 
@@ -180,10 +182,10 @@
                         </DataGridCheckBoxColumn.Header>
                     </DataGridCheckBoxColumn>
                     <DataGridTextColumn IsReadOnly="True" Binding="{Binding Flag}" Header=""/>
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Title}" Header="TITLE"/>
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Album}" Header="ALBUM"/>
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Type}" Header="TYPE"/>
-                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Duration}" Header="TIME" Width="*"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Title}" Header="{DynamicResource strTITLE}"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Album}" Header="{DynamicResource strALBUM}"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Type}" Header="{DynamicResource strTYPE}"/>
+                    <DataGridTextColumn IsReadOnly="True" Binding="{Binding Duration}" Header="{DynamicResource strTIME}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
             
@@ -192,11 +194,11 @@
                 <ComboBox Width="100" VerticalAlignment="Center" SelectedValue="{Binding QualityValue}" ItemsSource="{Binding ComboxTrackQuality}" SelectionChanged="{s:Action ChangeQuality}"/>
                 <Path Fill="Gray" Width="18" Margin="10,0,10,0" Data="{StaticResource VideoGeometry}"/>
                 <ComboBox Width="100" VerticalAlignment="Center" SelectedValue="{Binding ResolutionValue}" ItemsSource="{Binding ComboxVideoResolution}" SelectionChanged="{s:Action ChangeResolution}"/>
-                <Button Command="{s:Action Download}" Content="Download" DockPanel.Dock="Right" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Right" Margin="0,0,10,0" Padding="15,6"></Button>
+                <Button Command="{s:Action Download}" Content="{DynamicResource strDownload}" DockPanel.Dock="Right" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Right" Margin="0,0,10,0" Padding="15,6"></Button>
             </DockPanel>
 
             <Grid Grid.RowSpan="3" Grid.ColumnSpan="3" Background="{DynamicResource RegionBrush}" Visibility="{Binding Detail, Converter={StaticResource ConverterEmptyToVisibility}}">
-                <TextBlock Text="Please Search First!" FontSize="50" Style="{StaticResource TextBlockLargeBold}"></TextBlock>
+                <TextBlock Text="{DynamicResource strmsgPleaseSearchFirst}" FontSize="50" Style="{StaticResource TextBlockLargeBold}"></TextBlock>
             </Grid>
         </Grid>
 

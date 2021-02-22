@@ -1,0 +1,100 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Button-->
+    <sys:String x:Key="strOK">Tamam</sys:String>
+    <sys:String x:Key="strCancel">İptal</sys:String>
+    <sys:String x:Key="strLogout">Çıkış</sys:String>
+    <sys:String x:Key="strLogin">Giriş</sys:String>
+    <sys:String x:Key="strSave">Kaydet</sys:String>
+    <sys:String x:Key="strFeedback">Geri Bildirim</sys:String>
+    <sys:String x:Key="strGroup">Grup</sys:String>
+    <sys:String x:Key="strDonation">Bağış</sys:String>
+    <sys:String x:Key="strWechat">Wechat</sys:String>
+    <sys:String x:Key="strAlipay">Alipay</sys:String>
+    <sys:String x:Key="strUpdate">Güncelleme</sys:String>
+    <sys:String x:Key="strTryGet">Deneyin, Alın</sys:String>
+    
+    <!--Tip-->
+    <sys:String x:Key="strPlaylist">Oynatma Listesi</sys:String>
+    <sys:String x:Key="strTrackNum">Parça Numarası</sys:String>
+    <sys:String x:Key="strVERSION">VERSİYON</sys:String>
+    <sys:String x:Key="strLASTVERSION">SON-VERSİYON</sys:String>
+    <sys:String x:Key="strSETTINGS">AYARLAR</sys:String>
+    <sys:String x:Key="strUsername">Kullanıcı Adı</sys:String>
+    <sys:String x:Key="strPassword">Şifre</sys:String>
+    <sys:String x:Key="strHost">Host</sys:String>
+    <sys:String x:Key="strWAIT">BEKLE</sys:String>
+    <sys:String x:Key="strSUCCESS">BAŞARILI</sys:String>
+    <sys:String x:Key="strUPDATE">GÜNCELLEME</sys:String>
+    <sys:String x:Key="strERROR">HATA</sys:String>
+    <sys:String x:Key="strUPLOADLIST">LİSTEYİ YÜKLE</sys:String>
+    <sys:String x:Key="strTASKLIST">GÖREV LİSTESİ</sys:String>
+    <sys:String x:Key="strDownload">İndir</sys:String>
+    <sys:String x:Key="strComplete">Tamamlandı</sys:String>
+    <sys:String x:Key="strError">Hata</sys:String>
+    <sys:String x:Key="strLOGIN">GİRİŞ</sys:String>
+    <sys:String x:Key="strPROXY">PROXY</sys:String>
+    <sys:String x:Key="strReleaseDate">Yayın tarihi</sys:String>
+    <sys:String x:Key="strDescription">Açıklama</sys:String>
+    <sys:String x:Key="strArtistType">Sanatçı türleri</sys:String>
+
+    <!--Message-->
+    <sys:String x:Key="strmsgPleaseSearchFirst">Lütfen önce arayın!</sys:String>
+    <sys:String x:Key="strmsgGetNewVersionUrl">Yeni sürüm dosya url'sini al...</sys:String>
+    <sys:String x:Key="strmsgCreatUpdateFolderFailed">Güncelleme klasörü oluşturma hatası!</sys:String>
+    <sys:String x:Key="strmsgStartUpdate">Güncellemeyi başlat...</sys:String>
+    <sys:String x:Key="strmsgDownloadCompleteStartUpdate">İndirme tamamlandı, güncellemeyi başlat...</sys:String>
+
+    <sys:String x:Key="strmsgGetDeviceCodeFailed">Cihaz kodunu alınamadı!</sys:String>
+    <sys:String x:Key="strmsgUsenamePasswordErr">Kullanıcı adı veya şifre hatalı!</sys:String>
+    <sys:String x:Key="strmsgLoginErr">Giriş hatası!</sys:String>
+    <sys:String x:Key="strmsgSearchStringIsEmpty">Arama dizesi boş!</sys:String>
+    <sys:String x:Key="strmsgSearchErr">Arama hatası!</sys:String>
+    <sys:String x:Key="strmsgPleaseSelectOneItem">Lütfen bir öğe seçin!</sys:String>
+    <sys:String x:Key="strmsgNothingToDownload">İndirilecek bir şey yok!</sys:String>
+    <sys:String x:Key="strmsgGetTrackAlbumInfoFailed">Parçanın albüm bilgilerini alınamadı!</sys:String>
+    <sys:String x:Key="strmsgGetArtistAlbumInfoFailed">Sanatçının albüm bilgilerini alınamadı!</sys:String>
+    <sys:String x:Key="strmsgRemoveTask">Görevi kaldır?</sys:String>
+    <sys:String x:Key="strmsgOpenFolderFailed">Klasör açılamadı!</sys:String>
+    <sys:String x:Key="strmsgGetAccessTokenSuccess">Erişim belirtecini alın!</sys:String>
+    <sys:String x:Key="strmsgRefreshSettingsSuccess">Ayarları yenileme başarılı!</sys:String>
+    <sys:String x:Key="strmsgAccessTokenIsNotValid">Erişim belirteci geçerli değil!</sys:String>
+    <sys:String x:Key="strmsgUserMismatch">Kullanıcı uyuşmazlığı! Lütfen kendi erişim kodunuzu kullanın.</sys:String>
+
+    <!--Column-->
+    <sys:String x:Key="strTITLE">BAŞLIK</sys:String>
+    <sys:String x:Key="strARTISTS">SANATÇILAR</sys:String>
+    <sys:String x:Key="strALBUM">ALBÜM</sys:String>
+    <sys:String x:Key="strTRACK">PARÇA</sys:String>
+    <sys:String x:Key="strVIDEO">VİDEO</sys:String>
+    <sys:String x:Key="strPLAYLIST">OYNATMA LİSTESİ</sys:String>
+    <sys:String x:Key="strNAME">İSİM</sys:String>
+    <sys:String x:Key="strPOPULARITY">POPÜLERLİK</sys:String>
+    <sys:String x:Key="strDURATION">SÜRE</sys:String>
+    <sys:String x:Key="strTYPE">TÜR</sys:String>
+    <sys:String x:Key="strDATE">TARİH</sys:String>
+    <sys:String x:Key="strTIME">ZAMAN</sys:String>
+    
+    <!--Settings-->
+    <sys:String x:Key="strPath">Yol:</sys:String>
+    <sys:String x:Key="strThreadNum">Konu Numarası:</sys:String>
+    <sys:String x:Key="strSearchNum">Arama Numarası:</sys:String>
+    <sys:String x:Key="strAlbumFolderFormat">Albüm Klasörü Formatı:</sys:String>
+    <sys:String x:Key="strTrackFileFormat">Parça Dosya Formatı:</sys:String>
+    <sys:String x:Key="strVideoFileFormat">Video Dosya Formatı:</sys:String>
+    <sys:String x:Key="strChoose">Seç:</sys:String>
+    <sys:String x:Key="strMaxLength">Maksimum Uzunluk:</sys:String>
+    <sys:String x:Key="strTrack">Parça:</sys:String>
+    <sys:String x:Key="strTheme">Tema:</sys:String>
+    <sys:String x:Key="strLanguage">Dil:</sys:String>
+
+    <sys:String x:Key="strLimit1To3">limit 1~3</sys:String>
+    <sys:String x:Key="strLimit10To50">limit 10~5</sys:String>
+    <sys:String x:Key="strSearchArtistEP">Sanatçı albümünü single/ep içerisinde ara</sys:String>
+    <sys:String x:Key="strDownloadCover">Kapağı indir</sys:String>
+    <sys:String x:Key="strLimitFileName">Dosya adı uzunluk sınırı 50 ~ 100</sys:String>
+    <sys:String x:Key="strLimitAlbumFolder">Albüm klasörü adı uzunluk sınırı 50 ~ 100</sys:String>
+    <sys:String x:Key="strConvertToM4a">Mp4'ü m4a'ya dönüştür</sys:String>
+    <sys:String x:Key="strSkipExist">İndirirken var olan dosyayı atla</sys:String>
+</ResourceDictionary>

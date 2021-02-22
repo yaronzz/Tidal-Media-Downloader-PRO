@@ -21,9 +21,9 @@ namespace TIDALDL_UI.Pages
         public bool VisibilityError{ get; set; }
 
         public string PageHeader { set { } get {
-                if (VisibilityDownload) return "Download";
-                if (VisibilityComplete) return "Complete";
-                return "Error";
+                if (VisibilityDownload) return Language.Get("strDownload");
+                if (VisibilityComplete) return Language.Get("strComplete");
+                return Language.Get("strError");
             }  }
 
         public DownloadViewModel()

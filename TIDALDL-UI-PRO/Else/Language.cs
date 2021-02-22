@@ -22,7 +22,9 @@ namespace TIDALDL_UI.Else
         {
             Default,
             English,
-            简体中文,
+            Chinese,
+            Russian,
+            Turkish,
         }
 
         private static ResourceDictionary GetResourceDictionaryByType(Type type = Type.Default)
@@ -36,12 +38,13 @@ namespace TIDALDL_UI.Else
                 pList.Add(item);
 
             //find resource file
-            if (type == Type.Default)
-                findstr = string.Format(@"StringResource.{0}.xaml", CultureInfo.CurrentCulture.Name);
-            else if(type == Type.简体中文)
-                findstr = string.Format(@"StringResource.{0}.xaml", "zh-CN");
-            else
+            if (type == Type.Default || type == Type.English)
                 findstr = @"StringResource.xaml";
+            else
+            {
+                string sub = AIGS.Common.Convert.ConverEnumToString((int)type, typeof(Type), 0);
+                findstr = string.Format(@"StringResource.{0}.xaml", sub);
+            }
 
             ret = pList.FirstOrDefault(x => x.Source != null && x.Source.OriginalString.Contains(findstr));
             if(ret == null)

@@ -24,24 +24,24 @@
         </Grid.RowDefinitions>
 
         <Border Grid.RowSpan="2" BorderThickness="0,0,1,0" BorderBrush="{DynamicResource BorderBrush}" ></Border>
-        <TextBlock Text="TASK LIST" FontWeight="Bold" FontSize="15" VerticalAlignment="Bottom" Margin="15"></TextBlock>
+        <TextBlock Text="{DynamicResource strTASKLIST}" FontWeight="Bold" FontSize="15" VerticalAlignment="Bottom" Margin="15"></TextBlock>
         <ListBox Grid.Row="1" Margin="15" BorderThickness="0" Background="{x:Null}">
             <ListBoxItem Margin="0,0,0,5" IsSelected="{Binding VisibilityDownload}" Style="{StaticResource MyListBoxItemTransparent}">
                 <StackPanel Orientation="Horizontal">
                     <Path Fill="{DynamicResource InfoBrush}" Width="18" Data="{StaticResource StartGeometry}"></Path>
-                    <TextBlock Margin="6,0,0,0" Text="Download"/>
+                    <TextBlock Margin="6,0,0,0" Text="{DynamicResource strDownload}"/>
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem Margin="0,0,0,5" IsSelected="{Binding VisibilityComplete}" Style="{StaticResource MyListBoxItemTransparent}">
                 <StackPanel Orientation="Horizontal">
                     <Path Fill="{DynamicResource SuccessBrush}" Width="18" Data="{StaticResource SuccessGeometry}"></Path>
-                    <TextBlock Margin="6,0,0,0" Text="Complete"/>
+                    <TextBlock Margin="6,0,0,0" Text="{DynamicResource strComplete}"/>
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem Margin="0,0,0,5" IsSelected="{Binding VisibilityError}" Style="{StaticResource MyListBoxItemTransparent}">
                 <StackPanel Orientation="Horizontal">
                     <Path Fill="{DynamicResource DangerBrush}" Width="18" Data="{StaticResource ErrorGeometry}"></Path>
-                    <TextBlock Margin="6,0,0,0" Text="Error"/>
+                    <TextBlock Margin="6,0,0,0" Text="{DynamicResource strError}"/>
                 </StackPanel>
             </ListBoxItem>
         </ListBox>

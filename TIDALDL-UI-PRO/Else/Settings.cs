@@ -164,8 +164,8 @@ namespace TIDALDL_UI.Else
         {
             if(oldItem == null || oldItem.ThemeType != newItem.ThemeType)
                 Theme.Change(newItem.ThemeType);
-            //if (oldItem == null || oldItem.LanguageType != newItem.LanguageType)
-            //    Language.Change(newItem.LanguageType);
+            if (oldItem == null || oldItem.LanguageType != newItem.LanguageType)
+                Language.Change(newItem.LanguageType);
             if (oldItem == null || oldItem.ThreadNum != newItem.ThreadNum)
                 ThreadTool.SetThreadNum(newItem.ThreadNum);
         }

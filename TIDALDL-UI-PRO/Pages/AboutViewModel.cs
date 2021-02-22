@@ -54,17 +54,17 @@ namespace TIDALDL_UI.Pages
             Progress.ValueInt = 0;
             CountIncreSize = 0;
             ShowProgress = Visibility.Visible;
-            DownloadStatusInfo = "Get new version file-url...";
+            DownloadStatusInfo = Language.Get("strmsgGetNewVersionUrl");
 
             string url = GithubHelper.getFileUrl(Global.NAME_GITHUB_AUTHOR, Global.NAME_GITHUB_PROJECT, LastVersion, Global.NAME_GITHUB_FILE);
             if (PathHelper.Mkdirs(Global.PATH_UPDATE) == false)
             {
-                DownloadStatusInfo = "Creat update folder falied!";
+                DownloadStatusInfo = Language.Get("strmsgCreatUpdateFolderFailed");
                 EndUpdate();
                 return;
             }
 
-            DownloadStatusInfo = "Start update...";
+            DownloadStatusInfo = Language.Get("strmsgStartUpdate");
             Progress.SetStatus(ProgressHelper.STATUS.RUNNING);
             StartTime = TimeHelper.GetCurrentTime();
             LoginKey key = Tools.GetKey();
@@ -99,7 +99,7 @@ namespace TIDALDL_UI.Pages
         {
             Progress.ValueInt = 100;
             Progress.SetStatus(ProgressHelper.STATUS.COMPLETE);
-            DownloadStatusInfo = "Download complete, start update...";
+            DownloadStatusInfo = Language.Get("strmsgDownloadCompleteStartUpdate");
 
             string sBat = "ping -n 5 127.0.0.1\n";
             sBat += string.Format("move {0} {1}\\tidal-gui.exe\n", Global.PATH_UPDATE + Global.NAME_GITHUB_FILE, Path.GetFullPath(".\\"));

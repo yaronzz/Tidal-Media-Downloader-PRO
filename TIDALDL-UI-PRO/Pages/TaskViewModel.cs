@@ -168,7 +168,7 @@ namespace TIDALDL_UI.Pages
             //if (MessageBox.Show("Remove task?", "Info", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.No)
             //    return;
 
-            Dialog.Show(new MessageView(MessageBoxImage.Information, "Remove task?", true, (x) =>
+            Dialog.Show(new MessageView(MessageBoxImage.Information, Language.Get("strmsgRemoveTask"), true, (x) =>
             {
                 foreach (var item in Items)
                 {
@@ -216,7 +216,7 @@ namespace TIDALDL_UI.Pages
             }
             catch
             {
-                Growl.Error("Open folder failed!" + path, Global.TOKEN_MAIN);
+                Growl.Error(Language.Get("strmsgOpenFolderFailed") + path, Global.TOKEN_MAIN);
             }
         }
         #endregion

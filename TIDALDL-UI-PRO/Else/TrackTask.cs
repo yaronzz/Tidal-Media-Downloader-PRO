@@ -169,6 +169,8 @@ namespace TIDALDL_UI.Else
 
         CALL_RETURN:
             TellParentOver();
+
+            DownloadSpeedString = "";
         }
 
         public void ErrDownloadNotify(long lTotalSize, long lAlreadyDownloadSize, string sErrMsg, object data)

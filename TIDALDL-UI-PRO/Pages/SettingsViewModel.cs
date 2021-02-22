@@ -22,6 +22,8 @@ namespace TIDALDL_UI.Pages
 
         public List<ePositionYear> ComboxAddYear { get; set; } = AIGS.Common.Convert.ConverEnumToList<ePositionYear>();
         public List<Else.Theme.Type> ComboxTheme { get; set; } = AIGS.Common.Convert.ConverEnumToList<Else.Theme.Type>();
+        public List<Else.Language.Type> ComboxLanguage { get; set; } = AIGS.Common.Convert.ConverEnumToList<Else.Language.Type>();
+
 
         public void Load()
         {
@@ -45,9 +47,9 @@ namespace TIDALDL_UI.Pages
             {
                 (string msg, LoginKey key) = await Client.Login(AccessToken);
                 if (msg.IsNotBlank() || key == null)
-                    Growl.Warning("Accesstoken is not valid! " + msg, Global.TOKEN_MAIN);
+                    Growl.Warning(Language.Get("strmsgAccessTokenIsNotValid") + msg, Global.TOKEN_MAIN);
                 else if(key.UserID != Global.CommonKey.UserID)
-                    Growl.Warning("User mismatch! Please use your own accesstoken.", Global.TOKEN_MAIN);
+                    Growl.Warning(Language.Get("strmsgUserMismatch"), Global.TOKEN_MAIN);
                 else
                 {
                     UserSettings user = UserSettings.Read();
@@ -70,7 +72,7 @@ namespace TIDALDL_UI.Pages
             Global.Settings.Save();
 
             Load();
-            Growl.Success("Refresh settings success!", Global.TOKEN_MAIN);
+            Growl.Success(Language.Get("strmsgRefreshSettingsSuccess"), Global.TOKEN_MAIN);
         }
 
         public void Logout()
@@ -88,7 +90,7 @@ namespace TIDALDL_UI.Pages
                 return;
             }
 
-            Growl.Success("Get accesstoken success!", Global.TOKEN_MAIN);
+            Growl.Success(Language.Get("strmsgGetAccessTokenSuccess"), Global.TOKEN_MAIN);
             AccessToken = key.AccessToken;
         }
     }

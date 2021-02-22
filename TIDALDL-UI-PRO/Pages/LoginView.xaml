@@ -46,7 +46,7 @@
         </Grid>-->
         
         <TabControl Margin="30,62,29.6,65" Grid.Column="1" VerticalAlignment="Center" Height="250">
-            <TabItem Header="LOGIN" FontWeight="ExtraBold">
+            <TabItem Header="{DynamicResource strLOGIN}" FontWeight="ExtraBold">
                 <Grid Margin="0 16 0 0" >
                     <StackPanel VerticalAlignment="Center">
                         <DockPanel>
@@ -57,7 +57,7 @@
                     </StackPanel>
                 </Grid>
             </TabItem>
-            <!--<TabItem Header="LOGIN" FontWeight="ExtraBold">
+            <!--<TabItem Header="{DynamicResource strLOGIN}" FontWeight="ExtraBold">
                 <Grid Margin="0 16 0 0" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -100,7 +100,7 @@
                             Content="Login" Grid.RowSpan="2" VerticalAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" Margin="0,15,0,0"/>
                 </Grid>
             </TabItem>-->
-            <TabItem Header="PROXY" FontWeight="Bold">
+            <TabItem Header="{DynamicResource strPROXY}" FontWeight="Bold">
                 <Grid Margin="0 16 0 0" >
                     <Grid.RowDefinitions>
                         <RowDefinition />
@@ -116,10 +116,10 @@
                     </Grid.ColumnDefinitions>
 
                     <TextBlock Text="HttpProxy" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
-                    <TextBlock Grid.Row="1" Text="Host" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
+                    <TextBlock Grid.Row="1" Text="{DynamicResource strHost}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
                     <TextBlock Grid.Row="1" Text=":" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal" Grid.Column="2" Margin="0,10,79,3" Width="8" Height="23" TextAlignment="Center"/>
-                    <TextBlock Grid.Row="2" Text="Username" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
-                    <TextBlock Grid.Row="3" Text="Password" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
+                    <TextBlock Grid.Row="2" Text="{DynamicResource strUsername}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
+                    <TextBlock Grid.Row="3" Text="{DynamicResource strPassword}" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Normal"/>
 
                     <ToggleButton Grid.Column="2" IsChecked="{Binding Settings.ProxyEnable,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource ToggleButtonSwitch}" HorizontalAlignment="Left"/>
                     <hc:TextBox Grid.Row="1" Grid.Column="2" Text="{Binding Settings.ProxyHost}" Height="30" FontWeight="Normal" Margin="0,3,87,3"/>
@@ -127,7 +127,7 @@
                     <hc:TextBox Grid.Row="2" Grid.Column="2" Text="{Binding Settings.ProxyUser}" Height="30" FontWeight="Normal"/>
                     <hc:TextBox Grid.Row="3" Grid.Column="2" Text="{Binding Settings.ProxyPwd}"  Height="30" FontWeight="Normal"/>
 
-                    <Button Grid.Row="4" Grid.ColumnSpan="3" Command="{s:Action SaveProxy}" Content="Save" Style="{StaticResource ButtonPrimary}" Margin="5,5,5,2" HorizontalAlignment="Stretch" />
+                    <Button Grid.Row="4" Grid.ColumnSpan="3" Command="{s:Action SaveProxy}" Content="{DynamicResource strSave}" Style="{StaticResource ButtonPrimary}" Margin="5,5,5,2" HorizontalAlignment="Stretch" />
 
                 </Grid>
             </TabItem>

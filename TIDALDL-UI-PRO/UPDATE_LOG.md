@@ -1,7 +1,10 @@
-- [ ] Auto update
-- [ ] Multi-language
+#### v1.2.1.3
+- [x] Multi-language
+- [x] Show DOLBY_ATMOS flag [A]
+- [x] Search: turn page
 
-
+#### v1.2.1.2
+- [x] Auto update
 - [x] Fix: download playlist
 - [X] About-Page: show update-button when a new version released 
 

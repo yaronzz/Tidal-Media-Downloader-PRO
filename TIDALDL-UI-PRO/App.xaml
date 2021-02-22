@@ -27,7 +27,9 @@
                 <ResourceDictionary Source="Properties/ControlResources.xaml" />
 
                 <!--Language-->
-                <ResourceDictionary Source="Properties/Lang/StringResource.zh-CN.xaml" />
+                <ResourceDictionary Source="Properties/Lang/StringResource.Chinese.xaml" />
+                <ResourceDictionary Source="Properties/Lang/StringResource.Russian.xaml" />
+                <ResourceDictionary Source="Properties/Lang/StringResource.Turkish.xaml" />
                 <ResourceDictionary Source="Properties/Lang/StringResource.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </s:ApplicationLoader>

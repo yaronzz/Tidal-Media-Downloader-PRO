@@ -66,7 +66,7 @@ namespace TIDALDL_UI.Pages
             //get device code
             (string msg1, TidalDeviceCode code) = await Client.GetDeviceCode(PROXY);
             if (msg1.IsNotBlank())
-                Growl.Error("Get device code failed!", Global.TOKEN_LOGIN);
+                Growl.Error(Language.Get("strmsgGetDeviceCodeFailed"), Global.TOKEN_LOGIN);
             else
                 DeviceCode = code;
             goto RETURN_POINT;
@@ -96,7 +96,7 @@ namespace TIDALDL_UI.Pages
                 (string msg1, TidalDeviceCode code) = await Client.GetDeviceCode(PROXY);
                 if (msg1.IsNotBlank())
                 {
-                    Growl.Error("Get device code failed!", Global.TOKEN_LOGIN);
+                    Growl.Error(Language.Get("strmsgGetDeviceCodeFailed"), Global.TOKEN_LOGIN);
                     BtnLoginEnable = true;
                     return;
                 }
@@ -121,7 +121,7 @@ namespace TIDALDL_UI.Pages
 
             if (Settings.Username.IsBlank() || Settings.Password.IsBlank())
             {
-                Growl.Error("Username or password is err!", Global.TOKEN_LOGIN);
+                Growl.Error(Language.Get("strmsgUsenamePasswordErr"), Global.TOKEN_LOGIN);
                 goto RETURN_POINT;
             }
 
@@ -136,7 +136,7 @@ namespace TIDALDL_UI.Pages
             (string msg3, LoginKey key3) = await Client.Login(Settings.Username, Settings.Password, token2, PROXY);
             if (msg.IsNotBlank() || key == null)
             {
-                Growl.Error("Login Err! " + msg, Global.TOKEN_LOGIN);
+                Growl.Error(Language.Get("strmsgLoginErr") + msg, Global.TOKEN_LOGIN);
                 goto RETURN_POINT;
             }
 
