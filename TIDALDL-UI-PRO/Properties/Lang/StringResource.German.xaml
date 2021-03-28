@@ -96,5 +96,5 @@
     <sys:String x:Key="strLimitFileName">Limit Länge Dateiname 50~100</sys:String>
     <sys:String x:Key="strLimitAlbumFolder">Limit Länge Albumname 50~100</sys:String>
     <sys:String x:Key="strConvertToM4a">Umwandeln von mp4 in m4a</sys:String>
-    <sys:String x:Key="strSkipExist">Überspringen vorhandener Dateien beim Herunterladen</sys:String>
+    <sys:String x:Key="strSkipExist">Überspringe vorhandene Dateien beim Herunterladen</sys:String>
 </ResourceDictionary>
