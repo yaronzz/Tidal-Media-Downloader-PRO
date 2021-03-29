@@ -13,7 +13,7 @@
     <sys:String x:Key="strWechat">Wechat</sys:String>
     <sys:String x:Key="strAlipay">Alipay</sys:String>
     <sys:String x:Key="strUpdate">Обновить</sys:String>
-    <sys:String x:Key="strTryGet">Попробовать снова</sys:String>
+    <sys:String x:Key="strTryGet">Получить</sys:String>
     
     <!--Tip-->
     <sys:String x:Key="strPlaylist">Плейлист</sys:String>
@@ -30,9 +30,9 @@
     <sys:String x:Key="strERROR">ОШИБКА</sys:String>
     <sys:String x:Key="strUPLOADLIST">ЗАГРУЗИТЬ ЛИСТ</sys:String>
     <sys:String x:Key="strTASKLIST">СПИСОК ЗАДАНИЙ</sys:String>
-    <sys:String x:Key="strDownload">Скачать</sys:String>
+    <sys:String x:Key="strDownload">Скачивание</sys:String>
     <sys:String x:Key="strComplete">Готово</sys:String>
-    <sys:String x:Key="strError">Ошибка</sys:String>
+    <sys:String x:Key="strError">С ошибками</sys:String>
     <sys:String x:Key="strLOGIN">ЛОГИН</sys:String>
     <sys:String x:Key="strPROXY">ПРОКСИ</sys:String>
     <sys:String x:Key="strReleaseDate">Дата выхода</sys:String>
@@ -47,7 +47,7 @@
     <sys:String x:Key="strmsgDownloadCompleteStartUpdate">Загружено, началось обновление...</sys:String>
 
     <sys:String x:Key="strmsgGetDeviceCodeFailed">Ошибка получения кода девайса!</sys:String>
-    <sys:String x:Key="strmsgUsenamePasswordErr">Логин или пароль не верный!</sys:String>
+    <sys:String x:Key="strmsgUsenamePasswordErr">Логин или пароль неверный!</sys:String>
     <sys:String x:Key="strmsgLoginErr">Ошибка входа!</sys:String>
     <sys:String x:Key="strmsgSearchStringIsEmpty">Строка поиска пуста!</sys:String>
     <sys:String x:Key="strmsgSearchErr">Ошибка поиска!</sys:String>
@@ -59,8 +59,8 @@
     <sys:String x:Key="strmsgOpenFolderFailed">Ошибка открытия папки!</sys:String>
     <sys:String x:Key="strmsgGetAccessTokenSuccess">Токен получен!</sys:String>
     <sys:String x:Key="strmsgRefreshSettingsSuccess">Обновление настроек завершено!</sys:String>
-    <sys:String x:Key="strmsgAccessTokenIsNotValid">Токен не действительный!</sys:String>
-    <sys:String x:Key="strmsgUserMismatch">Несоответсвующий пользователь! Пожалуйста, введите свой токен.</sys:String>
+    <sys:String x:Key="strmsgAccessTokenIsNotValid">Токен недействительный!</sys:String>
+    <sys:String x:Key="strmsgUserMismatch">Несоответствующий пользователь! Пожалуйста, введите свой токен.</sys:String>
 
     <!--Column-->
     <sys:String x:Key="strTITLE">НАЗВАНИЕ</sys:String>
@@ -78,7 +78,7 @@
     
     <!--Settings-->
     <sys:String x:Key="strPath">Папка загрузки:</sys:String>
-    <sys:String x:Key="strThreadNum">Номер:</sys:String>
+    <sys:String x:Key="strThreadNum">Параллельных загрузок:</sys:String>
     <sys:String x:Key="strSearchNum">Количество запросов:</sys:String>
     <sys:String x:Key="strAlbumFolderFormat">Формат названия папки альбома:</sys:String>
     <sys:String x:Key="strTrackFileFormat">Формат названия трека:</sys:String>
