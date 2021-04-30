@@ -48,6 +48,7 @@ namespace TIDALDL_UI.Pages
         #region search \ get detail \ download
         public async void Search(string method)
         {
+            string searchText = SearchStr;
             if (method == "search")
                 searchOffset = 0;
             else if (method == "searchNext")
@@ -58,8 +59,12 @@ namespace TIDALDL_UI.Pages
                 if (searchOffset < 0)
                     searchOffset = 0;
             }
+            else
+            {
+                searchText = method;
+            }
 
-            if (SearchStr.IsBlank())
+            if (searchText.IsBlank())
             {
                 Growl.Error(Language.Get("strmsgSearchStringIsEmpty"), Global.TOKEN_MAIN);
                 return;
@@ -67,7 +72,7 @@ namespace TIDALDL_UI.Pages
 
             ShowWait = true;
 
-            (string msg, eType type, object data) = await Client.Get(Global.CommonKey, SearchStr, eType.NONE, Global.Settings.SearchNum, Global.Settings.IncludeEP, false, searchOffset);
+            (string msg, eType type, object data) = await Client.Get(Global.CommonKey, searchText, eType.NONE, Global.Settings.SearchNum, Global.Settings.IncludeEP, false, searchOffset);
             if (msg.IsNotBlank() || data == null)
             {
                 Growl.Error(Language.Get("strmsgSearchErr") + msg, Global.TOKEN_MAIN);

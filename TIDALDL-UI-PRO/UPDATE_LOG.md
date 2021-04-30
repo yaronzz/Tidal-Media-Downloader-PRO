@@ -1,3 +1,6 @@
+- [x] Fix: download video
+- [x] Fix: search
+
 #### v1.2.1.3
 - [x] Multi-language
 - [x] Show DOLBY_ATMOS flag [A]
