@@ -190,9 +190,9 @@
             </DataGrid>
             
             <DockPanel Grid.Row="2">
-                <Path Fill="Gray" Width="18" Margin="10,0,10,0" Data="{StaticResource LogoGeometry}"/>
+                <Path Fill="Gray" Width="18" Margin="10,0,10,0" Data="{StaticResource LogoGeometry}" Stretch="Uniform"/>
                 <ComboBox Width="100" VerticalAlignment="Center" SelectedValue="{Binding QualityValue}" ItemsSource="{Binding ComboxTrackQuality}" SelectionChanged="{s:Action ChangeQuality}"/>
-                <Path Fill="Gray" Width="18" Margin="10,0,10,0" Data="{StaticResource VideoGeometry}"/>
+                <Path Fill="Gray" Width="18" Margin="10,0,10,0" Data="{StaticResource VideoGeometry}" Stretch="Uniform"/>
                 <ComboBox Width="100" VerticalAlignment="Center" SelectedValue="{Binding ResolutionValue}" ItemsSource="{Binding ComboxVideoResolution}" SelectionChanged="{s:Action ChangeResolution}"/>
                 <Button Command="{s:Action Download}" Content="{DynamicResource strDownload}" DockPanel.Dock="Right" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Right" Margin="0,0,10,0" Padding="15,6"></Button>
             </DockPanel>

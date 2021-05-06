@@ -24,7 +24,7 @@
         <!--Image-->
         <Grid Background="Black" Grid.RowSpan="2">
             <!--<Image Source="pack://application:,,,/resource/tidal.jpg" Margin="5" />-->
-            <Path Width="150" Fill="White" Data="{StaticResource LogoGeometry}"></Path>
+            <Path Fill="White" Data="{StaticResource LogoGeometry}" Margin="61,0,67,0" Stretch="Uniform"/>
         </Grid>
 
         <!--Close button-->
@@ -44,7 +44,7 @@
                 <Button Content="Login" IsDefault="True" Command="{s:Action Login}" IsEnabled="{Binding BtnLoginEnable}"  Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Stretch" Margin="0,20,0,0"/>
             </StackPanel>
         </Grid>-->
-        
+
         <TabControl Margin="30,62,29.6,65" Grid.Column="1" VerticalAlignment="Center" Height="250">
             <TabItem Header="{DynamicResource strLOGIN}" FontWeight="ExtraBold">
                 <Grid Margin="0 16 0 0" >

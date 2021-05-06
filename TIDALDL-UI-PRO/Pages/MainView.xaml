@@ -29,23 +29,23 @@
         <Grid Grid.RowSpan="2" Background="Black">
             <StackPanel >
                 <Button Margin="0,45,0,15" Background="Black" BorderThickness="0" Height="60" hc:BackgroundSwitchElement.MouseHoverBackground="Gray" Padding="0">
-                    <Path Fill="White" Width="30" Data="{StaticResource LogoGeometry}"></Path>
+                    <Path Fill="White" Width="30" Data="{StaticResource LogoGeometry}" Stretch="Uniform"></Path>
                 </Button>
 
                 <Button Command="{s:Action ShowSearch}" Background="Black" BorderThickness="0" Height="60" hc:BackgroundSwitchElement.MouseHoverBackground="Gray" Padding="0" HorizontalAlignment="Stretch">
-                    <Path Fill="LightGray" Width="26" Data="{StaticResource SearchGeometry}"></Path>
+                    <Path Fill="LightGray" Width="26" Data="{StaticResource SearchGeometry}" Stretch="Uniform"></Path>
                 </Button>
                 <Button Command="{s:Action ShowDownload}" Background="Black" BorderThickness="0" Height="60" hc:BackgroundSwitchElement.MouseHoverBackground="Gray" Padding="0">
-                    <Path Fill="LightGray" Width="26" Data="{StaticResource SDownloadGeometry}"></Path>
+                    <Path Fill="LightGray" Width="26" Data="{StaticResource SDownloadGeometry}" Stretch="Uniform"></Path>
                 </Button>
             </StackPanel>
 
             <StackPanel Height="130" VerticalAlignment="Bottom">
                 <Button Command="{s:Action ShowSettings}" Background="Black" BorderThickness="0" Height="60"  hc:BackgroundSwitchElement.MouseHoverBackground="Gray" Padding="0">
-                    <Path Fill="LightGray" Width="26" Data="{StaticResource SettingsGeometry}"></Path>
+                    <Path Fill="LightGray" Width="26" Data="{StaticResource SettingsGeometry}" Stretch="Uniform"></Path>
                 </Button>
                 <Button Command="{s:Action ShowAbout}" Background="Black" BorderThickness="0" Height="60" hc:BackgroundSwitchElement.MouseHoverBackground="Gray" Padding="0">
-                    <Path Fill="LightGray" Width="26" Data="{StaticResource AboutGeometry}"></Path>
+                    <Path Fill="LightGray" Width="26" Data="{StaticResource AboutGeometry}" Stretch="Uniform"></Path>
                 </Button>
             </StackPanel>
         </Grid>
@@ -66,13 +66,13 @@
         <!--Windows button-->
         <StackPanel Background="{DynamicResource RegionBrush}" MouseLeftButtonDown="{s:Action WindowMove}" Orientation="Horizontal" FlowDirection="RightToLeft" Grid.Column="1" Margin="0" HorizontalAlignment="Right">
             <Button Command="{s:Action WindowClose}" Height="32" Width="32" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MyButtonClose}" hc:BackgroundSwitchElement.MouseHoverBackground="Red" hc:BackgroundSwitchElement.MouseDownBackground="PaleVioletRed" Padding="0" Grid.Column="1">
-                <Path Fill="LightGray" Width="12" Data="{StaticResource CloseGeometry}"></Path>
+                <Path Fill="LightGray" Width="12" Data="{StaticResource CloseGeometry}" Stretch="Uniform"></Path>
             </Button>
             <Button Command="{s:Action WindowMax}" Height="32" Width="32" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MyButtonDefault}" hc:BackgroundSwitchElement.MouseHoverBackground="{DynamicResource DarkDefaultBrush}" hc:BackgroundSwitchElement.MouseDownBackground="PaleVioletRed" Padding="5" Grid.Column="1">
-                <Path Fill="LightGray" Width="12" Data="{StaticResource WindowMaxGeometry}"></Path>
+                <Path Fill="LightGray" Width="12" Data="{StaticResource WindowMaxGeometry}" Stretch="Uniform"></Path>
             </Button>
             <Button Command="{s:Action WindowMin}" Height="32" Width="32" HorizontalAlignment="Right" VerticalAlignment="Top" Style="{StaticResource MyButtonDefault}" hc:BackgroundSwitchElement.MouseHoverBackground="{DynamicResource DarkDefaultBrush}" hc:BackgroundSwitchElement.MouseDownBackground="PaleVioletRed" Padding="5" Grid.Column="1">
-                <Path Fill="LightGray" Width="12" Data="{StaticResource WindowMinGeometry}"></Path>
+                <Path Fill="LightGray" Width="12" Data="{StaticResource WindowMinGeometry}" Stretch="Uniform"></Path>
             </Button>
         </StackPanel>
 

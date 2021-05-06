@@ -28,19 +28,19 @@
         <ListBox Grid.Row="1" Margin="15" BorderThickness="0" Background="{x:Null}">
             <ListBoxItem Margin="0,0,0,5" IsSelected="{Binding VisibilityDownload}" Style="{StaticResource MyListBoxItemTransparent}">
                 <StackPanel Orientation="Horizontal">
-                    <Path Fill="{DynamicResource InfoBrush}" Width="18" Data="{StaticResource StartGeometry}"></Path>
+                    <Path Fill="{DynamicResource InfoBrush}" Width="18" Data="{StaticResource StartGeometry}" Stretch="Uniform"></Path>
                     <TextBlock Margin="6,0,0,0" Text="{DynamicResource strDownload}"/>
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem Margin="0,0,0,5" IsSelected="{Binding VisibilityComplete}" Style="{StaticResource MyListBoxItemTransparent}">
                 <StackPanel Orientation="Horizontal">
-                    <Path Fill="{DynamicResource SuccessBrush}" Width="18" Data="{StaticResource SuccessGeometry}"></Path>
+                    <Path Fill="{DynamicResource SuccessBrush}" Width="18" Data="{StaticResource SuccessGeometry}" Stretch="Uniform"></Path>
                     <TextBlock Margin="6,0,0,0" Text="{DynamicResource strComplete}"/>
                 </StackPanel>
             </ListBoxItem>
             <ListBoxItem Margin="0,0,0,5" IsSelected="{Binding VisibilityError}" Style="{StaticResource MyListBoxItemTransparent}">
                 <StackPanel Orientation="Horizontal">
-                    <Path Fill="{DynamicResource DangerBrush}" Width="18" Data="{StaticResource ErrorGeometry}"></Path>
+                    <Path Fill="{DynamicResource DangerBrush}" Width="18" Data="{StaticResource ErrorGeometry}" Stretch="Uniform"></Path>
                     <TextBlock Margin="6,0,0,0" Text="{DynamicResource strError}"/>
                 </StackPanel>
             </ListBoxItem>

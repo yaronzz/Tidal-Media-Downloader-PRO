@@ -13,7 +13,7 @@
         <StackPanel Margin="32" VerticalAlignment="Center">
             
             <StackPanel Orientation="Horizontal">
-                <Path x:Name="CtlIcon" Width="32" Fill="GreenYellow" Data="{StaticResource InfoGeometry}" Margin="10,0"></Path>
+                <Path x:Name="CtlIcon" Width="32" Fill="GreenYellow" Data="{StaticResource InfoGeometry}" Margin="10,0" Stretch="Uniform"></Path>
                 <TextBlock x:Name="CtlMsg" Text="This is a example msg." Margin="0,0,0,5" VerticalAlignment="Center"></TextBlock>
             </StackPanel>
 

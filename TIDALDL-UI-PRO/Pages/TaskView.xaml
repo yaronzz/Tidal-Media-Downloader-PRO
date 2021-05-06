@@ -28,16 +28,16 @@
 
                 <Button Margin="5" Command="{s:Action ChangeExpand}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" hc:IconElement.Geometry="{StaticResource UpDownGeometry}" Style="{StaticResource ButtonIcon}" Foreground="{DynamicResource PrimaryTextBrush}"/>
                 <Button Margin="1" Command="{s:Action OpenFolder}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5">
-                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource OpenFolderGeometry}"/>
+                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource OpenFolderGeometry}" Stretch="Uniform"/>
                 </Button>
                 <Button Margin="1" Command="{s:Action Delete}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5">
-                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource RemoveGeometry}"/>
+                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource RemoveGeometry}" Stretch="Uniform"/>
                 </Button>
                 <Button Margin="1" Command="{s:Action RetryOrCancel}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5" Visibility="{Binding IsCancel, Converter={StaticResource ConverterUnBoolToVisibility}}">
-                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource CancelGeometry}"/>
+                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource CancelGeometry}" Stretch="Uniform"/>
                 </Button>
                 <Button Margin="1" Command="{s:Action RetryOrCancel}" BorderThickness="0" DockPanel.Dock="Right" HorizontalAlignment="Right" Padding="5" Visibility="{Binding IsCancel, Converter={StaticResource ConverterBoolToVisibility}}">
-                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource RetryGeometry}"/>
+                    <Path Fill="{DynamicResource PrimaryBrush}" Data="{StaticResource RetryGeometry}" Stretch="Uniform"/>
                 </Button>
             </DockPanel>
 
