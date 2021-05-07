@@ -1,0 +1,100 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Button-->
+    <sys:String x:Key="strOK">OK</sys:String>
+    <sys:String x:Key="strCancel">Abbrechen</sys:String>
+    <sys:String x:Key="strLogout">Abmelden</sys:String>
+    <sys:String x:Key="strLogin">Anmelden</sys:String>
+    <sys:String x:Key="strSave">Speichern</sys:String>
+    <sys:String x:Key="strFeedback">Rückmeldung</sys:String>
+    <sys:String x:Key="strGroup">Telegram</sys:String>
+    <sys:String x:Key="strDonation">Spenden</sys:String>
+    <sys:String x:Key="strWechat">Wechat</sys:String>
+    <sys:String x:Key="strAlipay">Alipay</sys:String>
+    <sys:String x:Key="strUpdate">Aktualisieren</sys:String>
+    <sys:String x:Key="strTryGet">Token auslesen</sys:String>
+    
+    <!--Tip-->
+    <sys:String x:Key="strPlaylist">Wiedergabeliste</sys:String>
+    <sys:String x:Key="strTrackNum">Titelnummer</sys:String>
+    <sys:String x:Key="strVERSION">AKTUELLE VERSION</sys:String>
+    <sys:String x:Key="strLASTVERSION">LETZTE VERSION</sys:String>
+    <sys:String x:Key="strSETTINGS">EINSTELLUNGEN</sys:String>
+    <sys:String x:Key="strUsername">Benutzername</sys:String>
+    <sys:String x:Key="strPassword">Passwort</sys:String>
+    <sys:String x:Key="strHost">Host</sys:String>
+    <sys:String x:Key="strWAIT">WARTE</sys:String>
+    <sys:String x:Key="strSUCCESS">ERFOLGREICH</sys:String>
+    <sys:String x:Key="strUPDATE">AKTUALISIEREN</sys:String>
+    <sys:String x:Key="strERROR">FEHLER</sys:String>
+    <sys:String x:Key="strUPLOADLIST">LADE LISTE</sys:String>
+    <sys:String x:Key="strTASKLIST">AUFGABENLISTE</sys:String>
+    <sys:String x:Key="strDownload">Herunterladen</sys:String>
+    <sys:String x:Key="strComplete">Erfolgreich</sys:String>
+    <sys:String x:Key="strError">Fehler</sys:String>
+    <sys:String x:Key="strLOGIN">ANMELDEN</sys:String>
+    <sys:String x:Key="strPROXY">PROXY</sys:String>
+    <sys:String x:Key="strReleaseDate">Veröffentlichung</sys:String>
+    <sys:String x:Key="strDescription">Beschreibung</sys:String>
+    <sys:String x:Key="strArtistType">Künstler</sys:String>
+
+    <!--Message-->
+    <sys:String x:Key="strmsgPleaseSearchFirst">Nutze die Suche zuerst!</sys:String>
+    <sys:String x:Key="strmsgGetNewVersionUrl">Lade hier neue Version herunter...</sys:String>
+    <sys:String x:Key="strmsgCreatUpdateFolderFailed">Ordner für Aktualisierung konnte nicht erstellt werden!</sys:String>
+    <sys:String x:Key="strmsgStartUpdate">Starte Aktualisierung...</sys:String>
+    <sys:String x:Key="strmsgDownloadCompleteStartUpdate">Herunterladen erfolgreich, starte Aktualisierung...</sys:String>
+
+    <sys:String x:Key="strmsgGetDeviceCodeFailed">Fehler beim Abrufen des Gerätecodes!</sys:String>
+    <sys:String x:Key="strmsgUsenamePasswordErr">Benutzername oder Passwort falsch!</sys:String>
+    <sys:String x:Key="strmsgLoginErr">Fehler beim anmelden!</sys:String>
+    <sys:String x:Key="strmsgSearchStringIsEmpty">Suchfeld ist leer!</sys:String>
+    <sys:String x:Key="strmsgSearchErr">Fehler bei der Suche!</sys:String>
+    <sys:String x:Key="strmsgPleaseSelectOneItem">Bitte wähle etwas aus!</sys:String>
+    <sys:String x:Key="strmsgNothingToDownload">Nichts zum herunterladen!</sys:String>
+    <sys:String x:Key="strmsgGetTrackAlbumInfoFailed">Fehler beim Abrufen der Titelinformation!</sys:String>
+    <sys:String x:Key="strmsgGetArtistAlbumInfoFailed">Fehler beim Abrufen der Albuminformation!</sys:String>
+    <sys:String x:Key="strmsgRemoveTask">Aufgabe löschen?</sys:String>
+    <sys:String x:Key="strmsgOpenFolderFailed">Fehler beim Öffnen des Ordners!</sys:String>
+    <sys:String x:Key="strmsgGetAccessTokenSuccess">Token erhalten!</sys:String>
+    <sys:String x:Key="strmsgRefreshSettingsSuccess">Einstellungen gespeichert!</sys:String>
+    <sys:String x:Key="strmsgAccessTokenIsNotValid">Token ungültig!</sys:String>
+    <sys:String x:Key="strmsgUserMismatch">Falscher Benutzer! Bitte nutze deinen eigenen Token.</sys:String>
+
+    <!--Column-->
+    <sys:String x:Key="strTITLE">ALBUM</sys:String>
+    <sys:String x:Key="strARTISTS">KÜNSTLER</sys:String>
+    <sys:String x:Key="strALBUM">ALBUM</sys:String>
+    <sys:String x:Key="strTRACK">TITEL</sys:String>
+    <sys:String x:Key="strVIDEO">VIDEO</sys:String>
+    <sys:String x:Key="strPLAYLIST">WIEDERGABELISTE</sys:String>
+    <sys:String x:Key="strNAME">NAME</sys:String>
+    <sys:String x:Key="strPOPULARITY">BELIEBTHEIT</sys:String>
+    <sys:String x:Key="strDURATION">DAUER</sys:String>
+    <sys:String x:Key="strTYPE">TYP</sys:String>
+    <sys:String x:Key="strDATE">DATUM</sys:String>
+    <sys:String x:Key="strTIME">ZEIT</sys:String>
+    
+    <!--Settings-->
+    <sys:String x:Key="strPath">Pfad:</sys:String>
+    <sys:String x:Key="strThreadNum">Gleichzeitige Downloads:</sys:String>
+    <sys:String x:Key="strSearchNum">Sucheinträge pro Seite:</sys:String>
+    <sys:String x:Key="strAlbumFolderFormat">Format Albumordner:</sys:String>
+    <sys:String x:Key="strTrackFileFormat">Format Titeldatei:</sys:String>
+    <sys:String x:Key="strVideoFileFormat">Format Videodatei:</sys:String>
+    <sys:String x:Key="strChoose">Option:</sys:String>
+    <sys:String x:Key="strMaxLength">Maximale Zeichenanzahl:</sys:String>
+    <sys:String x:Key="strTrack">Titel:</sys:String>
+    <sys:String x:Key="strTheme">Thema:</sys:String>
+    <sys:String x:Key="strLanguage">Sprache:</sys:String>
+
+    <sys:String x:Key="strLimit1To3">Limit 1~3</sys:String>
+    <sys:String x:Key="strLimit10To50">Limit 10~5</sys:String>
+    <sys:String x:Key="strSearchArtistEP">Suche nach Künster oder Album inclusive Single/EP</sys:String>
+    <sys:String x:Key="strDownloadCover">Lade Cover</sys:String>
+    <sys:String x:Key="strLimitFileName">Limit Länge Dateiname 50~100</sys:String>
+    <sys:String x:Key="strLimitAlbumFolder">Limit Länge Albumname 50~100</sys:String>
+    <sys:String x:Key="strConvertToM4a">Umwandeln von mp4 in m4a</sys:String>
+    <sys:String x:Key="strSkipExist">Überspringe vorhandene Datei beim Herunterladen</sys:String>
+</ResourceDictionary>
