@@ -1,5 +1,6 @@
-
+#### v1.2.1.5
 - [x] Fix: video path err
+- [x] Add language: german
 
 #### v1.2.1.4
 - [x] Fix: download video

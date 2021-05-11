@@ -25,6 +25,7 @@ namespace TIDALDL_UI.Else
             Chinese,
             Russian,
             Turkish,
+            German,
         }
 
         private static ResourceDictionary GetResourceDictionaryByType(Type type = Type.Default)
