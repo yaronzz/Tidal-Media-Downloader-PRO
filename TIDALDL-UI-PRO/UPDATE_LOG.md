@@ -1,3 +1,6 @@
+
+- [x] Fix: video path err
+
 #### v1.2.1.4
 - [x] Fix: download video
 - [x] Fix: search

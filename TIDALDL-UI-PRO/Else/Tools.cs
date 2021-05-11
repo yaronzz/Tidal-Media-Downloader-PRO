@@ -59,29 +59,36 @@ namespace TIDALDL_UI.Else
         //{ArtistName}/{Flag} [{AlbumID}] [{AlbumYear}] {AlbumTitle}
         public static string GetAlbumPath(Album album, Settings settings)
         {
-            // outputdir/Album/
-            string basepath = $"{settings.OutputDir}/Album/";
-            // string basepath = $"{settings.OutputDir}/Album/{FormatPath(album.Artists[0].Name, settings)}";
+            try
+            {
+                // outputdir/Album/
+                string basepath = $"{settings.OutputDir}/Album/";
+                // string basepath = $"{settings.OutputDir}/Album/{FormatPath(album.Artists[0].Name, settings)}";
 
-            // album folder pre: [ME][ID]
-            string flag = Client.GetFlag(album, eType.ALBUM, true, "");
-            if (settings.AudioQuality != eAudioQuality.Master)
-                flag = flag.Replace("M", "");
-            if (flag.IsNotBlank())
-                flag = $"[{flag}]";
-            
-            string artist = FormatPath(album.Artists[0].Name, settings);
+                // album folder pre: [ME][ID]
+                string flag = Client.GetFlag(album, eType.ALBUM, true, "");
+                if (settings.AudioQuality != eAudioQuality.Master)
+                    flag = flag.Replace("M", "");
+                if (flag.IsNotBlank())
+                    flag = $"[{flag}]";
 
-            string name = settings.AlbumFolderFormat;
-            if (name.IsBlank())
-                name = "{ArtistName}/{Flag} [{AlbumID}] [{AlbumYear}] {AlbumTitle}";
-            name = name.Replace("{ArtistName}", artist);
-            name = name.Replace("{AlbumID}", album.ID);
-            name = name.Replace("{AlbumYear}", album.ReleaseDate.Substring(0, 4));
-            name = name.Replace("{AlbumTitle}", FormatPath(album.Title, settings));
-            name = name.Replace("{Flag}", flag);
-            name = name.Trim();
-            return $"{basepath}/{name}/";
+                string artist = FormatPath(album.Artists[0].Name, settings);
+
+                string name = settings.AlbumFolderFormat;
+                if (name.IsBlank())
+                    name = "{ArtistName}/{Flag} [{AlbumID}] [{AlbumYear}] {AlbumTitle}";
+                name = name.Replace("{ArtistName}", artist);
+                name = name.Replace("{AlbumID}", album.ID);
+                name = name.Replace("{AlbumYear}", album.ReleaseDate.Substring(0, 4));
+                name = name.Replace("{AlbumTitle}", FormatPath(album.Title, settings));
+                name = name.Replace("{Flag}", flag);
+                name = name.Trim();
+                return $"{basepath}/{name}/";
+            }
+            catch
+            {
+                return null;
+            }
 
         }
         public static string GetAlbumPath2(Album album, Settings settings)
@@ -252,7 +259,8 @@ namespace TIDALDL_UI.Else
                 basepath = GetAlbumPath(album, settings);
             else if (playlist != null)
                 basepath = GetPlaylistPath(playlist, settings);
-            else
+            
+            if (basepath == null)
                 basepath = $"{settings.OutputDir}/Video/";
 
             string name = settings.VideoFileFormat;
