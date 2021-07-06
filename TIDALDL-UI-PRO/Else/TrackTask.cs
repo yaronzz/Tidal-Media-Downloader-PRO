@@ -127,6 +127,7 @@ namespace TIDALDL_UI.Else
                     if ((bool)DownloadFileHepler.Start(Stream.Url, path, Timeout: 5 * 1000, UpdateFunc: UpdateDownloadNotify, ErrFunc: ErrDownloadNotify, Proxy: key.Proxy))
                     {
                         //Decrypt
+                        Progress.StatusMsg = "Decrypt...";
                         if (!Tools.DecryptTrackFile(Stream, path))
                         {
                             Progress.Errmsg = "Decrypt failed!";
@@ -140,10 +141,15 @@ namespace TIDALDL_UI.Else
                                 goto ERR_RETURN;
                         }
 
-                        //SetMetaData 
+                        //Get lyrics
+                        Progress.StatusMsg = "Get lyrics...";
+                        string lyrics = Client.GetLyrics(key, TidalTrack.Title, TidalTrack.Artist == null ? "" : TidalTrack.Artist.Name);
+
+                        //SetMetaData
+                        Progress.StatusMsg = "Set metaData...";
                         if (TidalAlbum == null)
                             (Progress.Errmsg, TidalAlbum) = Client.GetAlbum(key, TidalTrack.Album.ID, false).Result;
-                        Progress.Errmsg = Tools.SetMetaData(path, TidalAlbum, TidalTrack);
+                        Progress.Errmsg = Tools.SetMetaData(path, TidalAlbum, TidalTrack, lyrics);
                         if (Progress.Errmsg.IsNotBlank())
                         {
                             Progress.Errmsg = "Set metadata failed!" + Progress.Errmsg;
