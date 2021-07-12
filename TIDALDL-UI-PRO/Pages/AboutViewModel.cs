@@ -31,7 +31,7 @@ namespace TIDALDL_UI.Pages
         public void Feedback() => NetHelper.OpenWeb(Global.URL_TIDAL_ISSUES);
         public void Telegram() => NetHelper.OpenWeb(Global.URL_TIDAL_GROUP);
         public void ClickPaypal() => NetHelper.OpenWeb(Global.URL_PAYPAL);
-        public void ClickBuymeacoffee() => NetHelper.OpenWeb(Global.URL_PAYPAL);
+        public void ClickBuymeacoffee() => NetHelper.OpenWeb(Global.URL_BUYMEACOFFEE);
 
         public void Donate()
         {

@@ -1,12 +1,16 @@
 ﻿using AIGS.Common;
 using AIGS.Helper;
+using Genius;
+using HtmlAgilityPack;
 using MediaToolkit;
 using MediaToolkit.Model;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using TagLib;
@@ -368,8 +372,11 @@ namespace TIDALDL_UI.Else
             }
         }
 
-        public static string SetMetaData(string filepath, Album TidalAlbum, Track TidalTrack)
-        {
+        
+
+
+        public static string SetMetaData(string filepath, Album TidalAlbum, Track TidalTrack, string lyrics = "")
+        { 
             try
             {
                 var tfile = TagLib.File.Create(filepath);
@@ -383,6 +390,7 @@ namespace TIDALDL_UI.Else
                 tfile.Tag.Copyright = TidalTrack.Copyright;
                 tfile.Tag.AlbumArtists = Client.GetArtistsList(TidalAlbum.Artists);
                 tfile.Tag.Performers = Client.GetArtistsList(TidalTrack.Artists);
+                tfile.Tag.Lyrics = lyrics;
 
                 //ReleaseDate
                 if (TidalAlbum.ReleaseDate.IsNotBlank())

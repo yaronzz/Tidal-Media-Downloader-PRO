@@ -1,3 +1,6 @@
+#### v1.2.1.6
+- [x] add lyrics
+
 #### v1.2.1.5
 - [x] Fix: video path err
 - [x] Add language: german
