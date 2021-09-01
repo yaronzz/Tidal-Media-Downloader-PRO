@@ -76,7 +76,7 @@ namespace TIDALDL_UI.Else
                 if (flag.IsNotBlank())
                     flag = $"[{flag}]";
 
-                string artist = FormatPath(album.Artists[0].Name, settings);
+                string artist = FormatPath(string.Join(", ", album.Artists.Select(an_artist => an_artist.Name)), settings);
 
                 string name = settings.AlbumFolderFormat;
                 if (name.IsBlank())
@@ -97,7 +97,7 @@ namespace TIDALDL_UI.Else
         }
         public static string GetAlbumPath2(Album album, Settings settings)
         {
-            // outputdir/Album/artist/ 
+            // outputdir/Album/artist/
             string basepath = $"{settings.OutputDir}/Album/{FormatPath(album.Artists[0].Name, settings)}";
 
             // album folder pre: [ME][ID]
@@ -139,7 +139,7 @@ namespace TIDALDL_UI.Else
             if (playlist != null)
                 number = (playlist.Tracks.IndexOf(track) + 1).ToString().PadLeft(2, '0');
 
-            string artist = FormatPath(track.Artists[0].Name, settings, false);
+            string artist = FormatPath(string.Join(", ", track.Artists.Select(an_artist => an_artist.Name)), settings, false);
 
             //get explicit
             string sexplicit = "";
@@ -247,7 +247,7 @@ namespace TIDALDL_UI.Else
                 number = (playlist.Videos.IndexOf(video) + 1).ToString().PadLeft(2, '0');
 
             //get artist
-            string artist = FormatPath(video.Artists[0].Name, settings, false);
+            string artist = FormatPath(string.Join(", ", video.Artists.Select(an_artist => an_artist.Name)), settings, false);
 
             //get explicit
             string sexplicit = "";
@@ -263,7 +263,7 @@ namespace TIDALDL_UI.Else
                 basepath = GetAlbumPath(album, settings);
             else if (playlist != null)
                 basepath = GetPlaylistPath(playlist, settings);
-            
+
             if (basepath == null)
                 basepath = $"{settings.OutputDir}/Video/";
 
@@ -372,11 +372,11 @@ namespace TIDALDL_UI.Else
             }
         }
 
-        
+
 
 
         public static string SetMetaData(string filepath, Album TidalAlbum, Track TidalTrack, string lyrics = "")
-        { 
+        {
             try
             {
                 var tfile = TagLib.File.Create(filepath);
