@@ -83,7 +83,7 @@ namespace TIDALDL_UI.Else
                     name = "{ArtistName}/{Flag} [{AlbumID}] [{AlbumYear}] {AlbumTitle}";
                 name = name.Replace("{ArtistName}", artist);
                 name = name.Replace("{AlbumID}", album.ID);
-                name = name.Replace("{AlbumYear}", album.ReleaseDate.Substring(0, 4));
+                name = name.Replace("{AlbumYear}", album.ReleaseDate != null ? album.ReleaseDate.Substring(0, 4) : "");
                 name = name.Replace("{AlbumTitle}", FormatPath(album.Title, settings));
                 name = name.Replace("{Flag}", flag);
                 name = name.Trim();
@@ -115,7 +115,7 @@ namespace TIDALDL_UI.Else
 
             // album and addyear
             string albumName = FormatPath(album.Title, settings);
-            string addyear = $"[{album.ReleaseDate.Substring(0, 4)}]";
+            string addyear = album.ReleaseDate == null ? "" : $"[{album.ReleaseDate.Substring(0, 4)}]";
 
             if (settings.AddYear == ePositionYear.After)
                 albumName = albumName + addyear;
@@ -179,7 +179,7 @@ namespace TIDALDL_UI.Else
             if (album != null)
             {
                 name = name.Replace("{AlbumID}", album.ID);
-                name = name.Replace("{AlbumYear}", album.ReleaseDate.Substring(0, 4));
+                name = name.Replace("{AlbumYear}", album.ReleaseDate == null ? "" : album.ReleaseDate.Substring(0, 4));
                 name = name.Replace("{AlbumTitle}", FormatPath(album.Title, settings));
             }
             return $"{basepath}{name}{extension}";
@@ -393,7 +393,7 @@ namespace TIDALDL_UI.Else
                 tfile.Tag.Lyrics = lyrics;
 
                 //ReleaseDate
-                if (TidalAlbum.ReleaseDate.IsNotBlank())
+                if (TidalAlbum.ReleaseDate != null && TidalAlbum.ReleaseDate.IsNotBlank())
                     tfile.Tag.Year = (uint)AIGS.Common.Convert.ConverStringToInt(TidalAlbum.ReleaseDate.Split("-")[0]);
 
                 //Cover
