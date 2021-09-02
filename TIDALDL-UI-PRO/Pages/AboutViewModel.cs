@@ -18,8 +18,10 @@ namespace TIDALDL_UI.Pages
         public string Type { get; set; } = "(BETA)";
         public string Version { get; set; } = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
         public string LastVersion { get; set; }
+        public string LastVersionDesc { get; set; }
         public Visibility ShowDonate { get; set; } = Visibility.Collapsed;
         public Visibility ShowProgress { get; set; } = Visibility.Collapsed;
+        public Visibility ShowVersionDesc { get; set; } = Visibility.Collapsed;
         public Visibility EnableUpdate { get; set; } = Visibility.Collapsed;
         public ProgressHelper Progress { get; set; } = new ProgressHelper(false);
         public string DownloadStatusInfo { get; set; }

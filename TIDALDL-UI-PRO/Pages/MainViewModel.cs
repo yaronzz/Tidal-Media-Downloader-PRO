@@ -48,9 +48,13 @@ namespace TIDALDL_UI.Pages
             }
 
             //Update new version
-            VMAbout.LastVersion = await GithubHelper.getLastReleaseVersionAsync(Global.NAME_GITHUB_AUTHOR, Global.NAME_GITHUB_PROJECT);
-            if (VMAbout.LastVersion != null && VMAbout.LastVersion != VMAbout.Version)
+            GithubHelper.VER Ver = await GithubHelper.getLastReleaseVersionAsync(Global.NAME_GITHUB_AUTHOR, Global.NAME_GITHUB_PROJECT);
+            VMAbout.LastVersion = Ver.version;
+            VMAbout.LastVersionDesc = Ver.desc;
+            if (VMAbout.LastVersion.IsNotBlank() && VMAbout.LastVersion != VMAbout.Version)
             {
+                if (VMAbout.LastVersionDesc.IsNotBlank())
+                    VMAbout.ShowVersionDesc = Visibility.Visible;
                 VMAbout.EnableUpdate = Visibility.Visible;
                 ShowPage("about");
             }

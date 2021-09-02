@@ -1,5 +1,6 @@
 
 
+#### v1.2.1.7
 - [x] Fix bug of "Index out of range" [#126](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/126)
 - [x] Fix bug of "Illegal characters in path" [#132](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/132)
 - [x] Fix bug of "Russian lyrics are added as Chinese" [#130](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/issues/130)
