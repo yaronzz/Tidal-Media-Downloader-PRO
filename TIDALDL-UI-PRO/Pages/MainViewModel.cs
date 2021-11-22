@@ -51,10 +51,10 @@ namespace TIDALDL_UI.Pages
             GithubHelper.VER Ver = await GithubHelper.getLastReleaseVersionAsync(Global.NAME_GITHUB_AUTHOR, Global.NAME_GITHUB_PROJECT);
             VMAbout.LastVersion = Ver.version;
             VMAbout.LastVersionDesc = Ver.desc;
+            if (VMAbout.LastVersionDesc.IsNotBlank())
+                VMAbout.ShowVersionDesc = Visibility.Visible;
             if (VMAbout.LastVersion.IsNotBlank() && VMAbout.LastVersion != VMAbout.Version)
             {
-                if (VMAbout.LastVersionDesc.IsNotBlank())
-                    VMAbout.ShowVersionDesc = Visibility.Visible;
                 VMAbout.EnableUpdate = Visibility.Visible;
                 ShowPage("about");
             }
