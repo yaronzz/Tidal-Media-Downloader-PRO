@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Yaronzz")]
 [assembly: AssemblyProduct("TIDALDL-UI")]
-[assembly: AssemblyCopyright("Copyright © Yaronzz 2021")]
+[assembly: AssemblyCopyright("Copyright © Yaronzz 2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -51,5 +51,5 @@ using System.Windows;
 //可以指定所有这些值，也可以使用“生成号”和“修订号”的默认值
 //通过使用 "*"，如下所示:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.2.1.8")]
-[assembly: AssemblyFileVersion("1.2.1.8")]
+[assembly: AssemblyVersion("1.2.1.9")]
+[assembly: AssemblyFileVersion("1.2.1.9")]
