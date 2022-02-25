@@ -1,31 +1,50 @@
-name: Bug report
-description: If you are experiencing an issue, please fill out this form.
-title: "[Issue]: "
+name: Bug Report
+description: Create a bug report to help us improve.
+title: "[BUG]: "
 labels: bug
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for taking the time to fill out this bug form!
+        Please search for this issue in issues-page first. Avoid duplication.
+        Please read Wiki first.
+        https://github.com/yaronzz/Tidal-Media-Downloader/wiki
+  - type: textarea
+    id: which-tool
+    attributes:
+      label: Which tool
+      description: Describe which tool has been used.
+      placeholder: |
+        tidal-gui or tidal-dl
+    validations:
+      required: true
+  - type: textarea
+    id: version
+    attributes:
+      label: Version
+      description: Describe the version of the tool.
+      placeholder: |
+        eg 2019.12.1.0
+    validations:
+      required: true
+  - type: textarea
+    id: platform
+    attributes:
+      label: Platform
+      description: Describe the platform on which the tool has been used.
+      placeholder: |
+        Windows\Linux\Macos\Android
+    validations:
+      required: true
   - type: textarea
     id: describe-bug
     attributes:
       label: Describe the bug
       description: Describe the bug as accurately as possible.
-    validations:
-      required: true
-  - type: textarea
-    id: steps-reproduce
-    attributes:
-      label: Steps to reproduce
-      description: Describe the steps to reproduce the bug as accurately as possible.
-    validations:
-      required: true
-  - type: textarea
-    id: expected-behavior
-    attributes:
-      label: Expected behavior
-      description: Describe what you expected to happen.
+      placeholder: |
+        How to reappear this bug?
+        Which albumID\trackID\artistID?
+        Please describe in detail.
     validations:
       required: true
   - type: textarea

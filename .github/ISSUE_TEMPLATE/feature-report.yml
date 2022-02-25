@@ -1,12 +1,23 @@
-name: Feature request
-description: If you want to have a feature to be added, please fill out this form.
-title: "[Feature request]: "
+name: Feature Request
+description: Open a feature request to Tidal-Media-Downloader.
+title: "[FEATURE]: "
 labels: enhancement
 body:
   - type: markdown
     attributes:
       value: |
-        Thank you for taking the time to fill out this feature form!
+        Please search for this issue in issues-page first. Avoid duplication.
+        Please read Wiki first.
+        https://github.com/yaronzz/Tidal-Media-Downloader/wiki
+  - type: textarea
+    id: which-tool
+    attributes:
+      label: Which tool
+      description: Describe for which tool you want a feature to be added.
+      placeholder: |
+        tidal-gui or tidal-dl
+    validations:
+      required: true
   - type: textarea
     id: feature
     attributes:
