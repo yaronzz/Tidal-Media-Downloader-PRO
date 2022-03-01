@@ -33,6 +33,15 @@
 | tidal-gui      | Windows                           | [tidal-gui.exe](https://github.com/yaronzz/Tidal-Media-Downloader-PRO/releases) |
 | tidal-dl (cli) | Windows \ Linux \ Macos \ Android | ```pip3 install tidal-dl --upgrade```<br />[Detailed Description](https://yaronzz.com/post/tidal_dl_installation/#Install) |
 
+### Nightly Builds
+
+|Download nightly builds from continuous integration: 	| [![Build Status][Build]][Actions] 
+|-------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+
+[Actions]: https://github.com/yaronzz/Tidal-Media-Downloader-PRO/actions/workflows/continuous-integration-workflow.yml
+[Build]: https://github.com/yaronzz/Tidal-Media-Downloader-PRO/actions/workflows/continuous-integration-workflow.yml/badge.svg
+
+
 ## 📡 Telegram
 
 - [Group](https://t.me/tidal_group) : Feed back

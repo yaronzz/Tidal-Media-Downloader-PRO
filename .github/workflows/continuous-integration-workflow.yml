@@ -1,0 +1,68 @@
+name: Tidal Media Downloader
+
+on: [push, pull_request]
+
+jobs:
+  Build:
+    name: Build tidal-gui
+    runs-on: windows-latest
+
+    steps:
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Checkout Tidal-Media-Downloader-PRO repo
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+        path: Tidal-Media-Downloader-PRO
+
+    - name: Checkout TidalLib repo
+      uses: actions/checkout@v2
+      with:
+        repository: yaronzz/TidalLib
+        path: TidalLib
+
+    - name: Checkout AIGS repo
+      uses: actions/checkout@v2
+      with:
+        repository: AIGMix/AIGS
+        path: AIGS
+
+    - name: Patch AIGS.csproj artifact
+      run: |
+        $File = "AIGS.csproj"
+        (Get-Content $File) -replace "v4.6.1", "v4.8" | Set-Content $File
+        (Get-Content $File) -replace [regex]::escape('..\Suda\Suda\'), "" | Set-Content $File
+      working-directory: AIGS
+
+    - name: Intall AIGS dependencies
+      run: msbuild -t:restore -p:RestorePackagesConfig=true
+      working-directory: AIGS
+
+    - name: Intall TidalLib dependencies
+      run: msbuild -t:restore -p:RestorePackagesConfig=true
+      working-directory: TidalLib\TidalLib
+
+    - name: Intall TIDALDL-UI-PRO dependencies
+      run: msbuild -t:restore -p:RestorePackagesConfig=true
+      working-directory: Tidal-Media-Downloader-PRO\TIDALDL-UI-PRO
+
+    - name: Build AIGS artifact
+      run: msbuild AIGS.csproj -verbosity:diag -property:Configuration=Debug
+      working-directory: AIGS
+
+    - name: Build TidalLib artifact
+      run: msbuild TidalLib.csproj -verbosity:diag -property:Configuration=Debug
+      working-directory: TidalLib\TidalLib
+
+    - name: Build tidal-gui artifact
+      run: msbuild TIDALDL-UI.csproj -verbosity:diag -property:Configuration=Release
+      working-directory: Tidal-Media-Downloader-PRO\TIDALDL-UI-PRO
+
+    - name: Upload tidal-gui artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: tidal-gui
+        path: Tidal-Media-Downloader-PRO\TIDALDL-UI-PRO\bin\Release\tidal-gui.exe
+
