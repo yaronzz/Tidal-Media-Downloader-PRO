@@ -397,6 +397,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Properties\Lang\StringResource.Dutch.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Properties\Lang\StringResource.German.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
