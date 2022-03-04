@@ -29,13 +29,6 @@ jobs:
         repository: AIGMix/AIGS
         path: AIGS
 
-    - name: Patch AIGS.csproj artifact
-      run: |
-        $File = "AIGS.csproj"
-        (Get-Content $File) -replace "v4.6.1", "v4.8" | Set-Content $File
-        (Get-Content $File) -replace [regex]::escape('..\Suda\Suda\'), "" | Set-Content $File
-      working-directory: AIGS
-
     - name: Intall AIGS dependencies
       run: msbuild -t:restore -p:RestorePackagesConfig=true
       working-directory: AIGS
