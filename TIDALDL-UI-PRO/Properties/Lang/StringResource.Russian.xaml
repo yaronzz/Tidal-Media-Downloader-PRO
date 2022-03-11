@@ -98,4 +98,3 @@
     <sys:String x:Key="strConvertToM4a">Конвертировать mp4 в m4a</sys:String>
     <sys:String x:Key="strSkipExist">Пропуск существующего файла при загрузке</sys:String>
 </ResourceDictionary>
-

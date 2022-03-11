@@ -42,17 +42,17 @@
     <!--Message-->
     <sys:String x:Key="strmsgPleaseSearchFirst">Please search first!</sys:String>
     <sys:String x:Key="strmsgGetNewVersionUrl">Get new version file-url...</sys:String>
-    <sys:String x:Key="strmsgCreatUpdateFolderFailed">Creat update folder falied!</sys:String>
+    <sys:String x:Key="strmsgCreatUpdateFolderFailed">Create update folder failed!</sys:String>
     <sys:String x:Key="strmsgStartUpdate">Start update...</sys:String>
     <sys:String x:Key="strmsgDownloadCompleteStartUpdate">Download complete, start update...</sys:String>
 
     <sys:String x:Key="strmsgGetDeviceCodeFailed">Get device code failed!</sys:String>
     <sys:String x:Key="strmsgUsenamePasswordErr">Username or password is err!</sys:String>
-    <sys:String x:Key="strmsgLoginErr">Login Err!</sys:String>
+    <sys:String x:Key="strmsgLoginErr">Login Error!</sys:String>
     <sys:String x:Key="strmsgSearchStringIsEmpty">Search string is empty!</sys:String>
-    <sys:String x:Key="strmsgSearchErr">Search Err!</sys:String>
+    <sys:String x:Key="strmsgSearchErr">Search Error!</sys:String>
     <sys:String x:Key="strmsgPleaseSelectOneItem">Please select one item!</sys:String>
-    <sys:String x:Key="strmsgNothingToDownload">Nothing to downlond!</sys:String>
+    <sys:String x:Key="strmsgNothingToDownload">Nothing to download!</sys:String>
     <sys:String x:Key="strmsgGetTrackAlbumInfoFailed">Get track's album information failed!</sys:String>
     <sys:String x:Key="strmsgGetArtistAlbumInfoFailed">Get artist's album information failed!</sys:String>
     <sys:String x:Key="strmsgRemoveTask">Remove task?</sys:String>
@@ -89,12 +89,12 @@
     <sys:String x:Key="strTheme">Theme:</sys:String>
     <sys:String x:Key="strLanguage">Language:</sys:String>
 
-    <sys:String x:Key="strLimit1To3">limit 1~3</sys:String>
-    <sys:String x:Key="strLimit10To50">limit 10~5</sys:String>
+    <sys:String x:Key="strLimit1To3">Limit 1~3</sys:String>
+    <sys:String x:Key="strLimit10To50">Limit 10~5</sys:String>
     <sys:String x:Key="strSearchArtistEP">Search artist-album include single/ep</sys:String>
     <sys:String x:Key="strDownloadCover">Download cover</sys:String>
-    <sys:String x:Key="strLimitFileName">file name length limit 50~100</sys:String>
-    <sys:String x:Key="strLimitAlbumFolder">album folder name length limit 50~100</sys:String>
+    <sys:String x:Key="strLimitFileName">File name length limit 50~100</sys:String>
+    <sys:String x:Key="strLimitAlbumFolder">Album folder name length limit 50~100</sys:String>
     <sys:String x:Key="strConvertToM4a">Convert mp4 to m4a</sys:String>
     <sys:String x:Key="strSkipExist">Skipping exist file when downloading</sys:String>
 </ResourceDictionary>

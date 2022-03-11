@@ -1,0 +1,100 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Button-->
+    <sys:String x:Key="strOK">Oke</sys:String>
+    <sys:String x:Key="strCancel">Annuleren</sys:String>
+    <sys:String x:Key="strLogout">Uitloggen</sys:String>
+    <sys:String x:Key="strLogin">Log in</sys:String>
+    <sys:String x:Key="strSave">Opslaan</sys:String>
+    <sys:String x:Key="strFeedback">Feedback</sys:String>
+    <sys:String x:Key="strGroup">Groep</sys:String>
+    <sys:String x:Key="strDonation">Bijdrage</sys:String>
+    <sys:String x:Key="strWechat">Wechat</sys:String>
+    <sys:String x:Key="strAlipay">Alipay</sys:String>
+    <sys:String x:Key="strUpdate">Bijwerken</sys:String>
+    <sys:String x:Key="strTryGet">Token uitlezen</sys:String>
+    
+    <!--Tip-->
+    <sys:String x:Key="strPlaylist">Afspeellijst</sys:String>
+    <sys:String x:Key="strTrackNum">Tracknummer</sys:String>
+    <sys:String x:Key="strVERSION">HUIDIGE VERSIE</sys:String>
+    <sys:String x:Key="strLASTVERSION">LAATSTE VERSIE</sys:String>
+    <sys:String x:Key="strSETTINGS">INSTELLINGEN</sys:String>
+    <sys:String x:Key="strUsername">Gebruikersnaam</sys:String>
+    <sys:String x:Key="strPassword">Wachtwoord</sys:String>
+    <sys:String x:Key="strHost">Host</sys:String>
+    <sys:String x:Key="strWAIT">WACHTEN</sys:String>
+    <sys:String x:Key="strSUCCESS">SUCCESS</sys:String>
+    <sys:String x:Key="strUPDATE">BIJWERKEN</sys:String>
+    <sys:String x:Key="strERROR">FOUT</sys:String>
+    <sys:String x:Key="strUPLOADLIST">UPLOAD LIJST</sys:String>
+    <sys:String x:Key="strTASKLIST">TAKENLIJST</sys:String>
+    <sys:String x:Key="strDownload">Download</sys:String>
+    <sys:String x:Key="strComplete">Compleet</sys:String>
+    <sys:String x:Key="strError">Fout</sys:String>
+    <sys:String x:Key="strLOGIN">LOG IN</sys:String>
+    <sys:String x:Key="strPROXY">PROXY</sys:String>
+    <sys:String x:Key="strReleaseDate">Publicatiedatum</sys:String>
+    <sys:String x:Key="strDescription">Beschrijving</sys:String>
+    <sys:String x:Key="strArtistType">Soorten artiesten</sys:String>
+
+    <!--Message-->
+    <sys:String x:Key="strmsgPleaseSearchFirst">Zoek eerst!</sys:String>
+    <sys:String x:Key="strmsgGetNewVersionUrl">Nieuwe versie bestands-url ophalen...</sys:String>
+    <sys:String x:Key="strmsgCreatUpdateFolderFailed">Updatemap maken mislukt!</sys:String>
+    <sys:String x:Key="strmsgStartUpdate">Update starten...</sys:String>
+    <sys:String x:Key="strmsgDownloadCompleteStartUpdate">Download voltooid, update starten...</sys:String>
+
+    <sys:String x:Key="strmsgGetDeviceCodeFailed">Apparaatcode ophalen mislukt!</sys:String>
+    <sys:String x:Key="strmsgUsenamePasswordErr">Gebruikersnaam of wachtwoord is fout!</sys:String>
+    <sys:String x:Key="strmsgLoginErr">Inlog Fout!</sys:String>
+    <sys:String x:Key="strmsgSearchStringIsEmpty">Zoekreeks is leeg!</sys:String>
+    <sys:String x:Key="strmsgSearchErr">Zoek fout!</sys:String>
+    <sys:String x:Key="strmsgPleaseSelectOneItem">Selecteer een item!</sys:String>
+    <sys:String x:Key="strmsgNothingToDownload">Niets te downloaden!</sys:String>
+    <sys:String x:Key="strmsgGetTrackAlbumInfoFailed">Het ophalen van de albuminformatie van het nummer is mislukt!</sys:String>
+    <sys:String x:Key="strmsgGetArtistAlbumInfoFailed">Het ophalen van de albuminformatie van de artiest is mislukt!</sys:String>
+    <sys:String x:Key="strmsgRemoveTask">Taak verwijderen?</sys:String>
+    <sys:String x:Key="strmsgOpenFolderFailed">Map openen mislukt!</sys:String>
+    <sys:String x:Key="strmsgGetAccessTokenSuccess">Toegangstoken ontvangen!</sys:String>
+    <sys:String x:Key="strmsgRefreshSettingsSuccess">Instellingen opgeslagen!</sys:String>
+    <sys:String x:Key="strmsgAccessTokenIsNotValid">Toegangstoken is niet geldig!</sys:String>
+    <sys:String x:Key="strmsgUserMismatch">Gebruiker komt niet overeen! Gebruik a.u.b. uw eigen toegangstoken.</sys:String>
+
+    <!--Column-->
+    <sys:String x:Key="strTITLE">TITEL</sys:String>
+    <sys:String x:Key="strARTISTS">ARTIEST</sys:String>
+    <sys:String x:Key="strALBUM">ALBUM</sys:String>
+    <sys:String x:Key="strTRACK">TRACK</sys:String>
+    <sys:String x:Key="strVIDEO">VIDEO</sys:String>
+    <sys:String x:Key="strPLAYLIST">AFSPEELLIJST</sys:String>
+    <sys:String x:Key="strNAME">NAAM</sys:String>
+    <sys:String x:Key="strPOPULARITY">POPULARITEIT</sys:String>
+    <sys:String x:Key="strDURATION">DUUR</sys:String>
+    <sys:String x:Key="strTYPE">TYPE</sys:String>
+    <sys:String x:Key="strDATE">DATUM</sys:String>
+    <sys:String x:Key="strTIME">TIJD</sys:String>
+    
+    <!--Settings-->
+    <sys:String x:Key="strPath">Pad:</sys:String>
+    <sys:String x:Key="strThreadNum">Aantal threads:</sys:String>
+    <sys:String x:Key="strSearchNum">Zoek Nummer:</sys:String>
+    <sys:String x:Key="strAlbumFolderFormat">AlbumMapFormaat:</sys:String>
+    <sys:String x:Key="strTrackFileFormat">TrackBestandsformaat:</sys:String>
+    <sys:String x:Key="strVideoFileFormat">VideoBestandsformaat:</sys:String>
+    <sys:String x:Key="strChoose">Kies:</sys:String>
+    <sys:String x:Key="strMaxLength">Maximale lengte:</sys:String>
+    <sys:String x:Key="strTrack">Track:</sys:String>
+    <sys:String x:Key="strTheme">Thema:</sys:String>
+    <sys:String x:Key="strLanguage">Taal:</sys:String>
+
+    <sys:String x:Key="strLimit1To3">Limiet 1~3</sys:String>
+    <sys:String x:Key="strLimit10To50">Limiet 10~5</sys:String>
+    <sys:String x:Key="strSearchArtistEP">Zoek artiest-album inclusief single/ep</sys:String>
+    <sys:String x:Key="strDownloadCover">Omslag downloaden</sys:String>
+    <sys:String x:Key="strLimitFileName">Maximale lengte bestandsnaam 50~100</sys:String>
+    <sys:String x:Key="strLimitAlbumFolder">Maximale lengte albummapnaam 50~100</sys:String>
+    <sys:String x:Key="strConvertToM4a">Converteer mp4 naar m4a</sys:String>
+    <sys:String x:Key="strSkipExist">Bestaand bestand overslaan tijdens downloaden</sys:String>
+</ResourceDictionary>
