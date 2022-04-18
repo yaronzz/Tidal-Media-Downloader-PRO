@@ -1,0 +1,100 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Button-->
+    <sys:String x:Key="strOK">OK</sys:String>
+    <sys:String x:Key="strCancel">Cancelar</sys:String>
+    <sys:String x:Key="strLogout">Cerrar Sesión</sys:String>
+    <sys:String x:Key="strLogin">Iniciar Sesión</sys:String>
+    <sys:String x:Key="strSave">Guardar</sys:String>
+    <sys:String x:Key="strFeedback">Feddback</sys:String>
+    <sys:String x:Key="strGroup">Grupo</sys:String>
+    <sys:String x:Key="strDonation">Donación</sys:String>
+    <sys:String x:Key="strWechat">Wechat</sys:String>
+    <sys:String x:Key="strAlipay">Alipay</sys:String>
+    <sys:String x:Key="strUpdate">Actualización</sys:String>
+    <sys:String x:Key="strTryGet">Obtener Token</sys:String>
+    
+    <!--Tip-->
+    <sys:String x:Key="strPlaylist">Playlist</sys:String>
+    <sys:String x:Key="strTrackNum">NumTrack</sys:String>
+    <sys:String x:Key="strVERSION">VERSIÓN</sys:String>
+    <sys:String x:Key="strLASTVERSION">ÚLTIMA-VERSION</sys:String>
+    <sys:String x:Key="strSETTINGS">Ajustes</sys:String>
+    <sys:String x:Key="strUsername">Usuario</sys:String>
+    <sys:String x:Key="strPassword">Contraseña</sys:String>
+    <sys:String x:Key="strHost">Host</sys:String>
+    <sys:String x:Key="strWAIT">ESPERA</sys:String>
+    <sys:String x:Key="strSUCCESS">ÉXITO</sys:String>
+    <sys:String x:Key="strUPDATE">ACTUALIZACIÓN</sys:String>
+    <sys:String x:Key="strERROR">ERROR</sys:String>
+    <sys:String x:Key="strUPLOADLIST">SUBIR LISTA</sys:String>
+    <sys:String x:Key="strTASKLIST">LISTA DE TAREAS</sys:String>
+    <sys:String x:Key="strDownload">Descargas</sys:String>
+    <sys:String x:Key="strComplete">Finalizados</sys:String>
+    <sys:String x:Key="strError">Error</sys:String>
+    <sys:String x:Key="strLOGIN">INICIAR SESIÓN</sys:String>
+    <sys:String x:Key="strPROXY">PROXY</sys:String>
+    <sys:String x:Key="strReleaseDate">Fecha de lanzamiento</sys:String>
+    <sys:String x:Key="strDescription">Descripción</sys:String>
+    <sys:String x:Key="strArtistType">Tipo de Artista</sys:String>
+
+    <!--Message-->
+    <sys:String x:Key="strmsgPleaseSearchFirst">Por favor, ¡busca primero!</sys:String>
+    <sys:String x:Key="strmsgGetNewVersionUrl">Obtén una nueva version de archivo-url...</sys:String>
+    <sys:String x:Key="strmsgCreatUpdateFolderFailed">¡No se pudo crear la carpeta de actualización!</sys:String>
+    <sys:String x:Key="strmsgStartUpdate">Iniciar Actualización...</sys:String>
+    <sys:String x:Key="strmsgDownloadCompleteStartUpdate">Descarga completada, iniciar actualización...</sys:String>
+
+    <sys:String x:Key="strmsgGetDeviceCodeFailed">¡Error al obtener el código del dispositivo!</sys:String>
+    <sys:String x:Key="strmsgUsenamePasswordErr">¡Error en usuario o contraseña!</sys:String>
+    <sys:String x:Key="strmsgLoginErr">¡Error de inicio de sesión!</sys:String>
+    <sys:String x:Key="strmsgSearchStringIsEmpty">¡La cadena de búsqueda está vacía!</sys:String>
+    <sys:String x:Key="strmsgSearchErr">¡Error en la búsqueda!</sys:String>
+    <sys:String x:Key="strmsgPleaseSelectOneItem">Por favor, ¡selecciona un item!</sys:String>
+    <sys:String x:Key="strmsgNothingToDownload">Nada por descargar</sys:String>
+    <sys:String x:Key="strmsgGetTrackAlbumInfoFailed">¡Error al obtener la información del álbum de la pista!</sys:String>
+    <sys:String x:Key="strmsgGetArtistAlbumInfoFailed">¡Error al obtener la información del álbum del artista!</sys:String>
+    <sys:String x:Key="strmsgRemoveTask">¿Borrar tarea?</sys:String>
+    <sys:String x:Key="strmsgOpenFolderFailed">¡Error al abrir la carpeta!</sys:String>
+    <sys:String x:Key="strmsgGetAccessTokenSuccess">¡Obtención del Token de Acceso exitoso!</sys:String>
+    <sys:String x:Key="strmsgRefreshSettingsSuccess">¡Actualizar la configuración exitosa!</sys:String>
+    <sys:String x:Key="strmsgAccessTokenIsNotValid">¡El Token de Acceso no es válido!</sys:String>
+    <sys:String x:Key="strmsgUserMismatch">¡El usuario no coincidió! Por favor, usa tu propio Token de Acceso.</sys:String>
+
+    <!--Column-->
+    <sys:String x:Key="strTITLE">TÍTULO</sys:String>
+    <sys:String x:Key="strARTISTS">ARTISTAS</sys:String>
+    <sys:String x:Key="strALBUM">ALBUM</sys:String>
+    <sys:String x:Key="strTRACK">PISTA</sys:String>
+    <sys:String x:Key="strVIDEO">VÍDEO</sys:String>
+    <sys:String x:Key="strPLAYLIST">PLAYLIST</sys:String>
+    <sys:String x:Key="strNAME">NOMBRE</sys:String>
+    <sys:String x:Key="strPOPULARITY">POPULARIDAD</sys:String>
+    <sys:String x:Key="strDURATION">DURACIÓN</sys:String>
+    <sys:String x:Key="strTYPE">TIPO</sys:String>
+    <sys:String x:Key="strDATE">FECHA</sys:String>
+    <sys:String x:Key="strTIME">TIEMPO</sys:String>
+    
+    <!--Settings-->
+    <sys:String x:Key="strPath">Ruta de acceso:</sys:String>
+    <sys:String x:Key="strThreadNum">NumHilo:</sys:String>
+    <sys:String x:Key="strSearchNum">NumBúsqueda:</sys:String>
+    <sys:String x:Key="strAlbumFolderFormat">FormatoCarpetaÁlbum:</sys:String>
+    <sys:String x:Key="strTrackFileFormat">FormatoArchivoPista:</sys:String>
+    <sys:String x:Key="strVideoFileFormat">FormatoArchivoVideo:</sys:String>
+    <sys:String x:Key="strChoose">Escoge:</sys:String>
+    <sys:String x:Key="strMaxLength">DuraciónMáx:</sys:String>
+    <sys:String x:Key="strTrack">Pista:</sys:String>
+    <sys:String x:Key="strTheme">Tema:</sys:String>
+    <sys:String x:Key="strLanguage">Idioma:</sys:String>
+
+    <sys:String x:Key="strLimit1To3">Límite 1~3</sys:String>
+    <sys:String x:Key="strLimit10To50">Límite 10~5</sys:String>
+    <sys:String x:Key="strSearchArtistEP">Buscar artista-álbum incluir sencillo/ep</sys:String>
+    <sys:String x:Key="strDownloadCover">Descargar portada</sys:String>
+    <sys:String x:Key="strLimitFileName">Archivo nombre duración límite 50~100</sys:String>
+    <sys:String x:Key="strLimitAlbumFolder">Álbum carpeta nombre duración límite 50~100</sys:String>
+    <sys:String x:Key="strConvertToM4a">Convertir de mp4 a m4a</sys:String>
+    <sys:String x:Key="strSkipExist">Omitir el archivo existente al descargar</sys:String>
+</ResourceDictionary>
