@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace TIDALDL_UI.Else
@@ -28,6 +24,7 @@ namespace TIDALDL_UI.Else
             German,
             Dutch,
             Spanish,
+            Portuguese,
         }
 
         private static ResourceDictionary GetResourceDictionaryByType(Type type = Type.Default)

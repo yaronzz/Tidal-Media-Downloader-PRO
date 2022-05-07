@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media.Imaging;
-using AIGS.Common;
-using AIGS.Helper;
-using Stylet;
+﻿using Stylet;
 using TIDALDL_UI.Else;
 
 namespace TIDALDL_UI.Pages

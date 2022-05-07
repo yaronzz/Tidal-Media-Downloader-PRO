@@ -1,19 +1,11 @@
-﻿using System;
+﻿using AIGS.Helper;
+using HandyControl.Controls;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using AIGS.Common;
-using AIGS.Helper;
-using HandyControl.Controls;
-using HandyControl.Data;
-using Stylet;
 using TIDALDL_UI.Else;
 using TidalLib;
-using MessageBox = HandyControl.Controls.MessageBox;
 
 namespace TIDALDL_UI.Pages
 {

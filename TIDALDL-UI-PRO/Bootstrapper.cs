@@ -1,8 +1,6 @@
-﻿using System;
-using Stylet;
+﻿using Stylet;
 using StyletIoC;
 using TIDALDL_UI.Pages;
-using TIDALDL_UI.Else;
 
 namespace TIDALDL_UI
 {

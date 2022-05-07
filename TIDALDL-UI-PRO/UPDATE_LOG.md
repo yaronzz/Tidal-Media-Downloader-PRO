@@ -1,5 +1,7 @@
 
 
+- [x] Add language: dutch
+
 #### v1.2.1.7
 - [x] Fix bug of "Index out of range" [#126]
 - [x] Fix bug of "Illegal characters in path" [#132]

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Forms;
-using AIGS.Common;
-using AIGS.Helper;
+﻿using AIGS.Common;
 using HandyControl.Controls;
-using HandyControl.Themes;
-using Stylet;
+using System.Collections.Generic;
+using System.Windows.Forms;
 using TIDALDL_UI.Else;
 using TidalLib;
 

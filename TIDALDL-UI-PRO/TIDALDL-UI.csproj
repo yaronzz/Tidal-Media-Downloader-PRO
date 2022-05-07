@@ -77,8 +77,8 @@
     <Reference Include="Genius, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Genius.NET.4.0.1\lib\netstandard1.6\Genius.dll</HintPath>
     </Reference>
-    <Reference Include="HandyControl, Version=3.2.0.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
-      <HintPath>packages\HandyControl.3.2.0\lib\net48\HandyControl.dll</HintPath>
+    <Reference Include="HandyControl, Version=3.3.0.0, Culture=neutral, PublicKeyToken=45be8712787a1e5b, processorArchitecture=MSIL">
+      <HintPath>packages\HandyControl.3.3.0\lib\net48\HandyControl.dll</HintPath>
     </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.11.34.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <HintPath>packages\HtmlAgilityPack.1.11.34\lib\Net45\HtmlAgilityPack.dll</HintPath>
@@ -402,6 +402,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Properties\Lang\StringResource.German.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Properties\Lang\StringResource.Portuguese.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
