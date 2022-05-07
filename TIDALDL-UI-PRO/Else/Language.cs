@@ -23,6 +23,7 @@ namespace TIDALDL_UI.Else
             Turkish,
             German,
             Dutch,
+            Spanish,
             Portuguese,
         }
 
