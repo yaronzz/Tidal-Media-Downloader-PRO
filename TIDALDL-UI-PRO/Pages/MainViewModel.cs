@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Imaging;
-using AIGS.Common;
+﻿using AIGS.Common;
 using AIGS.Helper;
-using HandyControl.Controls;
 using Stylet;
+using System.Windows;
 using TIDALDL_UI.Else;
 
 namespace TIDALDL_UI.Pages

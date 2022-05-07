@@ -1,12 +1,6 @@
 ﻿using AIGS.Common;
 using AIGS.Helper;
 using Stylet;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TidalLib;
 
 namespace TIDALDL_UI.Else

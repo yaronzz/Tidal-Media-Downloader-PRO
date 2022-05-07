@@ -1,18 +1,10 @@
 ﻿using AIGS.Common;
 using AIGS.Helper;
-using Genius;
-using HtmlAgilityPack;
 using MediaToolkit;
 using MediaToolkit.Model;
-using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using TagLib;
 using TidalLib;
 

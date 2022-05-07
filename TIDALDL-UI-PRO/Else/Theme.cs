@@ -1,11 +1,5 @@
-﻿using HandyControl.Data;
-using HandyControl.Themes;
+﻿using HandyControl.Themes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace TIDALDL_UI.Else

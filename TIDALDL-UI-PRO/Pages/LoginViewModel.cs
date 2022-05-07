@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
-using System.Windows;
-using AIGS.Common;
-using HandyControl.Tools;
+﻿using AIGS.Common;
 using AIGS.Helper;
-using Stylet;
-using TIDALDL_UI.Else;
 using HandyControl.Controls;
+using Stylet;
+using System;
+using System.Threading.Tasks;
+using TIDALDL_UI.Else;
 using TidalLib;
-using System.Windows.Forms;
 
 namespace TIDALDL_UI.Pages
 {

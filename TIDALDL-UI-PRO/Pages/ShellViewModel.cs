@@ -1,5 +1,4 @@
-﻿using System;
-using Stylet;
+﻿using Stylet;
 
 namespace TIDALDL_UI.Pages
 {

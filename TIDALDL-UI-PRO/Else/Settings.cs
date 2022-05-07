@@ -1,15 +1,6 @@
 ﻿using AIGS.Helper;
-using HandyControl.Properties.Langs;
-using Microsoft.Win32;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using TidalLib;
 
 namespace TIDALDL_UI.Else

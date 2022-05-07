@@ -1,13 +1,5 @@
 ﻿using AIGS.Common;
 using AIGS.Helper;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using TIDALDL_UI.Pages;
 using TidalLib;
 
