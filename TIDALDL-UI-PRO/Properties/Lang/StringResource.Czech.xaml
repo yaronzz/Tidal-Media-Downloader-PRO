@@ -1,0 +1,100 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Button-->
+    <sys:String x:Key="strOK">OK</sys:String>
+    <sys:String x:Key="strCancel">Zrušit</sys:String>
+    <sys:String x:Key="strLogout">Odhlásit</sys:String>
+    <sys:String x:Key="strLogin">Přihlásit</sys:String>
+    <sys:String x:Key="strSave">Uložit</sys:String>
+    <sys:String x:Key="strFeedback">Zpětná vazba</sys:String>
+    <sys:String x:Key="strGroup">Skupina</sys:String>
+    <sys:String x:Key="strDonation">Darování</sys:String>
+    <sys:String x:Key="strWechat">Wechat</sys:String>
+    <sys:String x:Key="strAlipay">Alipay</sys:String>
+    <sys:String x:Key="strUpdate">Aktualizace</sys:String>
+    <sys:String x:Key="strTryGet">Try Get</sys:String>
+    
+    <!--Tip-->
+    <sys:String x:Key="strPlaylist">Playlist</sys:String>
+    <sys:String x:Key="strTrackNum">ČísloSkladby</sys:String>
+    <sys:String x:Key="strVERSION">VERZE</sys:String>
+    <sys:String x:Key="strLASTVERSION">NEJNOVĚJŠÍ-VERZE</sys:String>
+    <sys:String x:Key="strSETTINGS">NASTAVENÍ</sys:String>
+    <sys:String x:Key="strUsername">Uživatelské jméno</sys:String>
+    <sys:String x:Key="strPassword">Heslo</sys:String>
+    <sys:String x:Key="strHost">Host</sys:String>
+    <sys:String x:Key="strWAIT">VYČKEJTE</sys:String>
+    <sys:String x:Key="strSUCCESS">ÚSPĚCH</sys:String>
+    <sys:String x:Key="strUPDATE">AKTUALIZOVAT</sys:String>
+    <sys:String x:Key="strERROR">CHYBA</sys:String>
+    <sys:String x:Key="strUPLOADLIST">NAHRÁT SEZNAM</sys:String>
+    <sys:String x:Key="strTASKLIST">SEZNAM ÚLOH</sys:String>
+    <sys:String x:Key="strDownload">Stáhnout</sys:String>
+    <sys:String x:Key="strComplete">Dokončeno</sys:String>
+    <sys:String x:Key="strError">Chyba</sys:String>
+    <sys:String x:Key="strLOGIN">PŘIHLÁŠENÍ</sys:String>
+    <sys:String x:Key="strPROXY">PROXY</sys:String>
+    <sys:String x:Key="strReleaseDate">Datum vydání</sys:String>
+    <sys:String x:Key="strDescription">Popis</sys:String>
+    <sys:String x:Key="strArtistType">Typ umělce</sys:String>
+
+    <!--Message-->
+    <sys:String x:Key="strmsgPleaseSearchFirst">Nejdřív hledejte, prosím</sys:String>
+    <sys:String x:Key="strmsgGetNewVersionUrl">Získat novou verzi URL souboru...</sys:String>
+    <sys:String x:Key="strmsgCreatUpdateFolderFailed">Vytvoření složky pro aktualizaci se nezdařilo!</sys:String>
+    <sys:String x:Key="strmsgStartUpdate">Zahájení aktualizace...</sys:String>
+    <sys:String x:Key="strmsgDownloadCompleteStartUpdate">Stahování dokončeno, začíná aktualizace...</sys:String>
+
+    <sys:String x:Key="strmsgGetDeviceCodeFailed">Získání kódu zařízení se nezdařilo!</sys:String>
+    <sys:String x:Key="strmsgUsenamePasswordErr">Chybné uživatelské jméno nebo heslo! Získání kódu zařízení se nezdařilo!</sys:String>
+    <sys:String x:Key="strmsgLoginErr">Chyba přihlášení!</sys:String>
+    <sys:String x:Key="strmsgSearchStringIsEmpty">Vyhledávací řetězec je prázdný!</sys:String>
+    <sys:String x:Key="strmsgSearchErr">Chyba vyhledávání!</sys:String>
+    <sys:String x:Key="strmsgPleaseSelectOneItem">Vyberte, prosím, jednu položku!</sys:String>
+    <sys:String x:Key="strmsgNothingToDownload">Nic ke stažení!</sys:String>
+    <sys:String x:Key="strmsgGetTrackAlbumInfoFailed">Nepodařilo se získat informace o albu skladby!</sys:String>
+    <sys:String x:Key="strmsgGetArtistAlbumInfoFailed">Nepodařilo se získat informace o albu interpreta!</sys:String>
+    <sys:String x:Key="strmsgRemoveTask">Odstranit úlohu?</sys:String>
+    <sys:String x:Key="strmsgOpenFolderFailed">Otevření složky se nezdařilo!</sys:String>
+    <sys:String x:Key="strmsgGetAccessTokenSuccess">Přístupový token získán úspěšně!</sys:String>
+    <sys:String x:Key="strmsgRefreshSettingsSuccess">Nastavení úspěšně obnoveno!</sys:String>
+    <sys:String x:Key="strmsgAccessTokenIsNotValid">Přístupový token není platný!</sys:String>
+    <sys:String x:Key="strmsgUserMismatch">Uživatel se neshoduje. Použijte, prosím, svůj vlastní přístupový token.</sys:String>
+
+    <!--Column-->
+    <sys:String x:Key="strTITLE">NÁZEV</sys:String>
+    <sys:String x:Key="strARTISTS">INTERPRET</sys:String>
+    <sys:String x:Key="strALBUM">ALBUM</sys:String>
+    <sys:String x:Key="strTRACK">STOPA</sys:String>
+    <sys:String x:Key="strVIDEO">VIDEO</sys:String>
+    <sys:String x:Key="strPLAYLIST">PLAYLIST</sys:String>
+    <sys:String x:Key="strNAME">JMÉNO</sys:String>
+    <sys:String x:Key="strPOPULARITY">OBLÍBENOST</sys:String>
+    <sys:String x:Key="strDURATION">DÉLKA</sys:String>
+    <sys:String x:Key="strTYPE">TYP</sys:String>
+    <sys:String x:Key="strDATE">DATUM</sys:String>
+    <sys:String x:Key="strTIME">ČAS</sys:String>
+    
+    <!--Settings-->
+    <sys:String x:Key="strPath">Cesta:</sys:String>
+    <sys:String x:Key="strThreadNum">Počet vláken:</sys:String>
+    <sys:String x:Key="strSearchNum">Počet výsledků hledání:</sys:String>
+    <sys:String x:Key="strAlbumFolderFormat">Formát názvu složky alba:</sys:String>
+    <sys:String x:Key="strTrackFileFormat">Formát názvu souboru skladby:</sys:String>
+    <sys:String x:Key="strVideoFileFormat">Formát názvu souboru videa:</sys:String>
+    <sys:String x:Key="strChoose">Výber:</sys:String>
+    <sys:String x:Key="strMaxLength">Maximální délka:</sys:String>
+    <sys:String x:Key="strTrack">Skladba:</sys:String>
+    <sys:String x:Key="strTheme">Motiv:</sys:String>
+    <sys:String x:Key="strLanguage">Jazyk:</sys:String>
+
+    <sys:String x:Key="strLimit1To3">Omezit 1~3</sys:String>
+    <sys:String x:Key="strLimit10To50">Omezit 10~5</sys:String>
+    <sys:String x:Key="strSearchArtistEP">Do vyhledávání alb umělců zahrnout singly/EP</sys:String>
+    <sys:String x:Key="strDownloadCover">Stáhnout obal</sys:String>
+    <sys:String x:Key="strLimitFileName">Omezení délky názvu souboru 50~100</sys:String>
+    <sys:String x:Key="strLimitAlbumFolder">Omezení délky názvu složky alba na 50~100</sys:String>
+    <sys:String x:Key="strConvertToM4a">Převést mp4 na m4a</sys:String>
+    <sys:String x:Key="strSkipExist">Při stahování přeskočit již existující soubor</sys:String>
+</ResourceDictionary>
