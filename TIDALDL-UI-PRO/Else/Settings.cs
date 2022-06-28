@@ -7,36 +7,17 @@ namespace TIDALDL_UI.Else
 {
     public class UserSettings : Stylet.Screen
     {
-        //User information
-
         [JsonProperty("Userid")]
         public string Userid { get; set; } = null;
-
-        [JsonProperty("Username")]
-        public string Username { get; set; } = null;
-
-        [JsonProperty("Password")]
-        public string Password { get; set; } = null;
-
-        [JsonProperty("Sessionid1")]
-        public string Sessionid1 { get; set; } = null;
-
-        [JsonProperty("Sessionid2")]
-        public string Sessionid2 { get; set; } = null;
 
         [JsonProperty("Countrycode")]
         public string Countrycode { get; set; } = null;
 
         [JsonProperty("Accesstoken")]
         public string Accesstoken { get; set; } = null;
+
         [JsonProperty("Refreshtoken")]
         public string Refreshtoken { get; set; } = null;
-
-        [JsonProperty("Remember")]
-        public bool Remember { get; set; } = true;
-
-        [JsonProperty("AutoLogin")]
-        public bool AutoLogin { get; set; } = true;
 
         [JsonProperty("ProxyEnable")]
         public bool ProxyEnable { get; set; } = false;
@@ -56,12 +37,12 @@ namespace TIDALDL_UI.Else
         public bool Save()
         {
             string data = JsonHelper.ConverObjectToString<UserSettings>(this, true);
-            return FileHelper.Write(EncryptHelper.Encode(data, Global.KEY_BASE), true, Global.PATH_USERSETTINGS);
+            return FileHelper.Write(EncryptHelper.Encode(data, Global.KEY_BASE), true, Paths.GetUserSettingsPath());
         }
 
         public static UserSettings Read()
         {
-            string buf = FileHelper.Read(Global.PATH_USERSETTINGS);
+            string buf = FileHelper.Read(Paths.GetUserSettingsPath());
             string data = EncryptHelper.Decode(buf, Global.KEY_BASE);
             UserSettings ret = JsonHelper.ConverStringToObject<UserSettings>(data);
             if (ret == null)
@@ -72,8 +53,6 @@ namespace TIDALDL_UI.Else
 
     public class Settings : Stylet.Screen
     {
-        //Common
-
         [JsonProperty("ThemeType")]
         public Theme.Type ThemeType { get; set; } = Theme.Type.Default;
         
@@ -92,56 +71,32 @@ namespace TIDALDL_UI.Else
         [JsonProperty("Version")]
         public string Version { get; set; } = null;
 
-        //Track 
-
-        [JsonProperty("OnlyM4a")]
-        public bool OnlyM4a { get; set; } = true;
-
-        [JsonProperty("AddExplicitTag")]
-        public bool AddExplicitTag { get; set; } = true;
-
-        [JsonProperty("AddHyphen")]
-        public bool AddHyphen { get; set; } = true;
-
-        [JsonProperty("UseTrackNumber")]
-        public bool UseTrackNumber { get; set; } = true;
 
         [JsonProperty("AudioQuality")]
         public eAudioQuality AudioQuality { get; set; } = eAudioQuality.HiFi;
 
-        [JsonProperty("MaxFileName")]
-        public int MaxFileName { get; set; } = 50;
-
-        [JsonProperty("MaxDirName")]
-        public int MaxDirName { get; set; } = 50;
+        [JsonProperty("VideoQuality")]
+        public eVideoQuality VideoQuality { get; set; } = eVideoQuality.P720;
 
         [JsonProperty("CheckExist")]
         public bool CheckExist { get; set; } = true;
 
-        [JsonProperty("ArtistBeforeTitle")]
-        public bool ArtistBeforeTitle { get; set; } = true;
-
-        //Video
-
-        [JsonProperty("VideoQuality")]
-        public eVideoQuality VideoQuality { get; set; } = eVideoQuality.P720;
-
-        //Album
+        [JsonProperty("UsePlaylistFolder")]
+        public bool UsePlaylistFolder { get; set; } = true;
 
         [JsonProperty("IncludeEP")]
         public bool IncludeEP { get; set; } = true;
 
-        [JsonProperty("AddAlbumIDBeforeFolder")]
-        public bool AddAlbumIDBeforeFolder { get; set; } = false;
-
         [JsonProperty("SaveCovers")]
         public bool SaveCovers { get; set; } = true;
 
-        [JsonProperty("AddYear")]
-        public ePositionYear AddYear { get; set; } = ePositionYear.None;
+        [JsonProperty("SaveLyrics")]
+        public bool SaveLyrics { get; set; } = true;
+
+        [JsonProperty("SaveAlbumInfo")]
+        public bool SaveAlbumInfo { get; set; } = true;
 
         [JsonProperty("AlbumFolderFormat")]
-        
         public string AlbumFolderFormat { get; set; } = "{ArtistName}/{Flag} {AlbumTitle} [{AlbumID}] [{AlbumYear}]";
 
         [JsonProperty("TrackFileFormat")]
@@ -164,24 +119,17 @@ namespace TIDALDL_UI.Else
         public bool Save()
         {
             string data = JsonHelper.ConverObjectToString<Settings>(this,true);
-            return FileHelper.Write(data, true, Global.PATH_SETTINGS);
+            return FileHelper.Write(data, true, Paths.GetSettingsPath());
         }
 
         public static Settings Read()
         {
-            string data = FileHelper.Read(Global.PATH_SETTINGS);
+            string data = FileHelper.Read(Paths.GetSettingsPath());
             Settings ret = JsonHelper.ConverStringToObject<Settings>(data);
             if (ret == null)
                 return new Settings();
             return ret;
         }
-    }
-
-    public enum ePositionYear
-    {
-        None,
-        Before,
-        After,
     }
 }
 

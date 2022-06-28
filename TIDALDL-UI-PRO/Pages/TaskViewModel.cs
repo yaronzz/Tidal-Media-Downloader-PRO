@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using TIDALDL_UI.Download;
 using TIDALDL_UI.Else;
 using TidalLib;
 
@@ -44,7 +45,7 @@ namespace TIDALDL_UI.Pages
 
         public void SetAlbum(Detail detail, Album album)
         {
-            BasePath = Tools.GetAlbumPath(album, Settings);
+            BasePath = Paths.GetAlbumPath(album);
 
             if(Settings.SaveCovers)
                 NetHelper.DownloadFile(album.CoverHighUrl, BasePath + "/Cover.jpg");
@@ -54,28 +55,28 @@ namespace TIDALDL_UI.Pages
                 if (item.Check == false)
                     continue;
                 if(item.Data.GetType() == typeof(Track))
-                    Items.Add(new TrackTask((Track)item.Data, Items.Count + 1, Settings, RecieveDownloadOver, album));
+                    Items.Add(new TrackTask((Track)item.Data, Items.Count + 1, RecieveDownloadOver, album));
                 else
-                    Items.Add(new VideoTask((Video)item.Data, Items.Count + 1, Settings, RecieveDownloadOver, album));
+                    Items.Add(new VideoTask((Video)item.Data, Items.Count + 1, RecieveDownloadOver, album));
             }
         }
 
         public void SetTrack(Detail detail, Track track)
         {
-            BasePath = Tools.GetAlbumPath(track.Album, Settings);
-            Items.Add(new TrackTask((Track)detail.Data, Items.Count + 1, Settings, RecieveDownloadOver, track.Album));
+            BasePath = Paths.GetAlbumPath(track.Album);
+            Items.Add(new TrackTask((Track)detail.Data, Items.Count + 1, RecieveDownloadOver, track.Album));
         }
 
         public void SetVideo(Detail detail, Video video)
         {
-            BasePath = Tools.GetVideoPath(Settings, video, null);
+            BasePath = Paths.GetVideoPath(video, null);
             BasePath = Path.GetDirectoryName(BasePath);
-            Items.Add(new VideoTask((Video)detail.Data, Items.Count + 1, Settings, RecieveDownloadOver, video.Album));
+            Items.Add(new VideoTask((Video)detail.Data, Items.Count + 1, RecieveDownloadOver, video.Album));
         }
 
         public void SetArtist(Detail detail, Artist artist)
         {
-            BasePath = Tools.GetArtistPath(artist, Settings);
+            BasePath = "./";
             foreach (var item in detail.Items)
             {
                 if (item.Check == false)
@@ -83,27 +84,27 @@ namespace TIDALDL_UI.Pages
                 Album album = (Album)item.Data;
 
                 if (Settings.SaveCovers)
-                    NetHelper.DownloadFile(album.CoverHighUrl, Tools.GetAlbumPath(album, Settings) + "/Cover.jpg");
+                    NetHelper.DownloadFile(album.CoverHighUrl, Paths.GetAlbumPath(album) + "/Cover.jpg");
 
                 foreach (var track in album.Tracks)
-                    Items.Add(new TrackTask(track, Items.Count + 1, Settings, RecieveDownloadOver, album));
+                    Items.Add(new TrackTask(track, Items.Count + 1, RecieveDownloadOver, album));
                 foreach (var video in album.Videos)
-                    Items.Add(new VideoTask(video, Items.Count + 1, Settings, RecieveDownloadOver, album));
+                    Items.Add(new VideoTask(video, Items.Count + 1, RecieveDownloadOver, album));
             }
         }
 
         public void SetPlaylist(Detail detail, Playlist playlist)
         {
-            BasePath = Tools.GetPlaylistPath(playlist, Settings);
+            BasePath = Paths.GetPlaylistPath(playlist);
 
             foreach (var item in detail.Items)
             {
                 if (item.Check == false)
                     continue;
                 if (item.Data.GetType() == typeof(Track))
-                    Items.Add(new TrackTask((Track)item.Data, Items.Count + 1, Settings, RecieveDownloadOver, null, playlist));
+                    Items.Add(new TrackTask((Track)item.Data, Items.Count + 1, RecieveDownloadOver, null, playlist));
                 else
-                    Items.Add(new VideoTask((Video)item.Data, Items.Count + 1, Settings, RecieveDownloadOver, null, playlist));
+                    Items.Add(new VideoTask((Video)item.Data, Items.Count + 1, RecieveDownloadOver, null, playlist));
             }
         }
 

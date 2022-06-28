@@ -252,7 +252,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="TidalLib">
-      <HintPath>..\..\TidalLib\TidalLib\bin\Debug\TidalLib.dll</HintPath>
+      <HintPath>..\..\TidalLib2\TidalLib\bin\Debug\TidalLib.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
@@ -268,16 +268,18 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Download\Decryption.cs" />
+    <Compile Include="Download\Task.cs" />
+    <Compile Include="Download\TrackTask.cs" />
+    <Compile Include="Download\VideoTask.cs" />
     <Compile Include="Else\CoverCard.cs" />
     <Compile Include="Else\Global.cs" />
     <Compile Include="Else\Language.cs" />
     <Compile Include="Else\ModelBase.cs" />
+    <Compile Include="Else\Paths.cs" />
     <Compile Include="Else\Settings.cs" />
     <Compile Include="Else\Theme.cs" />
-    <Compile Include="Else\Tools.cs" />
-    <Compile Include="Else\TrackTask.cs" />
-    <Compile Include="Else\TreadTool.cs" />
-    <Compile Include="Else\VideoTask.cs" />
+    <Compile Include="Else\ThreadTool.cs" />
     <Compile Include="Pages\AboutView.xaml.cs">
       <DependentUpon>AboutView.xaml</DependentUpon>
     </Compile>
@@ -428,7 +430,7 @@
     <Page Include="Properties\Lang\StringResource.Spanish.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>    
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resource\Tidal.ico" />

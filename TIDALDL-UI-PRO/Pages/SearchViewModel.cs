@@ -65,22 +65,25 @@ namespace TIDALDL_UI.Pages
 
             ShowWait = true;
 
-            (string msg, eType type, object data) = await Client.Get(Global.CommonKey, searchText, eType.NONE, Global.Settings.SearchNum, Global.Settings.IncludeEP, false, searchOffset);
-            if (msg.IsNotBlank() || data == null)
+            try
             {
-                Growl.Error(Language.Get("strmsgSearchErr") + msg, Global.TOKEN_MAIN);
+                (eType type, object data) = await Global.Client.Get(searchText, eType.NONE, Global.Settings.SearchNum, searchOffset);
+                if (type == eType.NONE)
+                {
+                    SearchResult = (SearchResult)data;
+                    ShowDetail = false;
+                    ShowList = true;
+                }
+                else
+                {
+                    Detail = Detail.Creat(data, type);
+                    ShowDetail = true;
+                    ShowList = false;
+                }
             }
-            else if (type == eType.SEARCH)
+            catch (System.Exception e)
             {
-                SearchResult = (SearchResult)data;
-                ShowDetail = false;
-                ShowList = true;
-            }
-            else
-            {
-                Detail = Detail.Creat(data, type);
-                ShowDetail = true;
-                ShowList = false;
+                Growl.Error(Language.Get("strmsgSearchErr") + e.Message, Global.TOKEN_MAIN);
             }
 
             ShowWait = false;
@@ -135,13 +138,18 @@ namespace TIDALDL_UI.Pages
                 type = eType.PLAYLIST;
             }
 
-            (string msg, eType otype, object data) = await Client.Get(Global.CommonKey, id, type, Global.Settings.SearchNum, Global.Settings.IncludeEP, false);
-
-            Detail = Detail.Creat(data, type);
-            ShowDetail = true;
-            ShowList = false;
-            ShowWait = false;
-            return;
+            try
+            {
+                (eType otype, object data) = await Global.Client.Get(id, type, Global.Settings.SearchNum);
+                Detail = Detail.Creat(data, type);
+                ShowDetail = true;
+                ShowList = false;
+                ShowWait = false;
+                return;
+            }
+            catch (System.Exception)
+            {
+            }
 
             ERR_NO_SELECT:
             Growl.Error(Language.Get("strmsgPleaseSelectOneItem"), Global.TOKEN_MAIN);
@@ -163,13 +171,15 @@ namespace TIDALDL_UI.Pages
             if(Detail.Data.GetType() == typeof(Track))
             {
                 Track track = (Track)Detail.Data;
-                (string msg, Album album) = await Client.GetAlbum(Global.CommonKey, track.Album.ID, false);
-                if(msg.IsNotBlank() || album == null)
+                try
+                {
+                    track.Album = await Global.Client.GetAlbum(track.Album.ID);
+                }
+                catch (System.Exception)
                 {
                     Growl.Error(Language.Get("strmsgGetTrackAlbumInfoFailed"), Global.TOKEN_MAIN);
                     goto RETURN_POINT;
                 }
-                track.Album = album;
             }
             if(Detail.Data.GetType() == typeof(Artist))
             {
@@ -177,8 +187,12 @@ namespace TIDALDL_UI.Pages
                 {
                     string msg = null;
                     Album album = (Album)item.Data;
-                    (msg, album.Tracks, album.Videos) = await Client.GetItems(Global.CommonKey, album.ID, eType.ALBUM);
-                    if (msg.IsNotBlank())
+
+                    try
+                    {
+                        (album.Tracks, album.Videos) = await Global.Client.GetItems(album.ID, eType.ALBUM);
+                    }
+                    catch (System.Exception)
                     {
                         Growl.Error(Language.Get("strmsgGetArtistAlbumInfoFailed"), Global.TOKEN_MAIN);
                         goto RETURN_POINT;

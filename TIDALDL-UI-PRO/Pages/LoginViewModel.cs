@@ -34,47 +34,52 @@ namespace TIDALDL_UI.Pages
 
             BtnLoginEnable = false;
 
-            //Proxy
-            HttpHelper.ProxyInfo PROXY = Settings.ProxyEnable ? new HttpHelper.ProxyInfo(Settings.ProxyHost, Settings.ProxyPort, Settings.ProxyUser, Settings.ProxyPwd) : null;
+            SaveProxy();
 
             //Auto login by accessToken
-            string msg;
-            LoginKey key;
             if (Settings.Accesstoken.IsNotBlank())
             {
-                (msg, key) = await Client.Login(Settings.Accesstoken, PROXY);
-                if (msg.IsBlank())
-                    goto LOGIN_SUCCESS;
-                if (Settings.Refreshtoken.IsNotBlank())
+                try
                 {
-                    (msg, key) = await Client.RefreshAccessToken(Settings.Refreshtoken, PROXY);
-                    if (msg.IsBlank())
-                    {
-                        Settings.Userid = key.UserID;
-                        Settings.Accesstoken = key.AccessToken;
-                        Settings.Save();
-                        Global.AccessKey = key;
-                        goto LOGIN_SUCCESS;
-                    }
+                    var key = await Global.Client.Login(Settings.Accesstoken);
+                    goto LOGIN_SUCCESS;
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+            if (Settings.Refreshtoken.IsNotBlank())
+            {
+                try
+                {
+                    var key = await Global.Client.RefreshAccessToken(Settings.Refreshtoken);
+                    Settings.Userid = key.UserID;
+                    Settings.Accesstoken = key.AccessToken;
+                    Settings.Save();
+                    goto LOGIN_SUCCESS;
+                }
+                catch (Exception)
+                {
                 }
             }
 
             //get device code
-            (string msg1, TidalDeviceCode code) = await Client.GetDeviceCode(PROXY);
-            if (msg1.IsNotBlank())
+            try
+            {
+                DeviceCode = await Global.Client.GetDeviceCode();
+            }
+            catch (Exception)
+            {
                 Growl.Error(Language.Get("strmsgGetDeviceCodeFailed"), Global.TOKEN_LOGIN);
-            else
-                DeviceCode = code;
-            goto RETURN_POINT;
+                BtnLoginEnable = true;
+                return;
+            }
+
 
         LOGIN_SUCCESS:
-            Global.AccessKey = key;
-            Global.CommonKey = key;
-            Global.VideoKey = key;
             Manager.ShowWindow(VMMain);
             RequestClose();
-
-        RETURN_POINT:
             BtnLoginEnable = true;
             return;
         }
@@ -83,21 +88,16 @@ namespace TIDALDL_UI.Pages
         {
             BtnLoginEnable = false;
 
-            //Proxy
-            HttpHelper.ProxyInfo PROXY = Settings.ProxyEnable ? new HttpHelper.ProxyInfo(Settings.ProxyHost, Settings.ProxyPort, Settings.ProxyUser, Settings.ProxyPwd) : null;
+            SaveProxy();
 
-            if (DeviceCode == null)
+            try
             {
-                //get device code
-                (string msg1, TidalDeviceCode code) = await Client.GetDeviceCode(PROXY);
-                if (msg1.IsNotBlank())
-                {
-                    Growl.Error(Language.Get("strmsgGetDeviceCodeFailed"), Global.TOKEN_LOGIN);
-                    BtnLoginEnable = true;
-                    return;
-                }
-                else
-                    DeviceCode = code;
+                DeviceCode = await Global.Client.GetDeviceCode();
+            }
+            catch (Exception)
+            {
+                Growl.Error(Language.Get("strmsgGetDeviceCodeFailed"), Global.TOKEN_LOGIN);
+                BtnLoginEnable = true;
             }
 
             ThreadHelper.Start(CheckAuthThreadFunc);
@@ -106,80 +106,15 @@ namespace TIDALDL_UI.Pages
 
         public void SaveProxy()
         {
-            //Proxy
-            HttpHelper.ProxyInfo PROXY = Settings.ProxyEnable ? new HttpHelper.ProxyInfo(Settings.ProxyHost, Settings.ProxyPort, Settings.ProxyUser, Settings.ProxyPwd) : null;
+            if (Global.Client == null)
+                Global.Client = new Client();
+            Global.Client.proxy = null;
+            if (Settings.ProxyEnable)
+                Global.Client.proxy = new HttpHelper.ProxyInfo(Settings.ProxyHost, 
+                                                                Settings.ProxyPort, 
+                                                                Settings.ProxyUser, 
+                                                                Settings.ProxyPwd);
             Settings.Save();
-        }
-
-        public async void Login2()
-        {
-            BtnLoginEnable = false;
-
-            if (Settings.Username.IsBlank() || Settings.Password.IsBlank())
-            {
-                Growl.Error(Language.Get("strmsgUsenamePasswordErr"), Global.TOKEN_LOGIN);
-                goto RETURN_POINT;
-            }
-
-            //Proxy
-            HttpHelper.ProxyInfo PROXY = Settings.ProxyEnable ? new HttpHelper.ProxyInfo(Settings.ProxyHost, Settings.ProxyPort, Settings.ProxyUser, Settings.ProxyPwd) : null;
-
-            //token
-            (string token1, string token2) = await GetToken();
-
-            //Login (lossless key \ video key)
-            (string msg, LoginKey key)   = await Client.Login(Settings.Username, Settings.Password, token1, PROXY);
-            (string msg3, LoginKey key3) = await Client.Login(Settings.Username, Settings.Password, token2, PROXY);
-            if (msg.IsNotBlank() || key == null)
-            {
-                Growl.Error(Language.Get("strmsgLoginErr") + msg, Global.TOKEN_LOGIN);
-                goto RETURN_POINT;
-            }
-
-            //Auto get accesstoken(master key)
-            string printSuccess = null;
-            string printWarning = null;
-            (string msg2, LoginKey key2) = Client.GetAccessTokenFromTidalDesktop(key.UserID);
-            if (key2 != null && msg2.IsBlank() && key2.AccessToken != Settings.Accesstoken)
-            {
-                (msg2, key2) = await Client.Login(key2.AccessToken, PROXY);
-                if (msg2.IsBlank() && key2 != null)
-                {
-                    printSuccess = "Auto get accesstoken success!";
-                    Settings.Accesstoken = key2.AccessToken;
-                }
-            }
-            else
-                key2 = null;
-
-            if (key2 == null && Settings.Accesstoken.IsNotBlank())
-            {
-                (msg2, key2) = await Client.Login(Settings.Accesstoken, PROXY);
-                if (msg2.IsNotBlank() || key2 == null)
-                    printWarning = "Accesstoken is not valid! " + msg;
-            }
-            
-            if (!Settings.Remember)
-                Settings.Password = null;
-            Settings.Userid      = key.UserID;
-            Settings.Sessionid1  = key.SessionID;
-            Settings.Accesstoken = Settings.Accesstoken;
-            Settings.Save();
-            Global.CommonKey = key;
-            Global.VideoKey = key3;
-            Global.AccessKey = key2;
-
-            Manager.ShowWindow(VMMain);
-            if (printSuccess.IsNotBlank())
-                Growl.Success(printSuccess, Global.TOKEN_MAIN);
-            else if (printWarning.IsNotBlank())
-                Growl.Warning(printWarning, Global.TOKEN_MAIN);
-
-            RequestClose();
-
-        RETURN_POINT:
-            BtnLoginEnable = true;
-            return;
         }
 
         public void WindowMove()
@@ -194,51 +129,31 @@ namespace TIDALDL_UI.Pages
         }
 
 
-        public async Task<(string, string)> GetToken()
-        {
-            try
-            {
-                HttpHelper.Result result = await HttpHelper.GetOrPostAsync("https://cdn.jsdelivr.net/gh/yaronzz/CDN@latest/app/tidal/token.json");
-                if (result.sData.IsNotBlank())
-                {
-                    string token = JsonHelper.GetValue(result.sData, "token");
-                    string token2 = JsonHelper.GetValue(result.sData, "token2");
-                    return (token, token2);
-                }
-            }
-            catch { }
-            return Client.GetDefaultToken();
-        }
-
         public void CheckAuthThreadFunc(object[] datas)
         {
-            NetHelper.OpenWeb("https://" + DeviceCode.VerificationUri);
+            NetHelper.OpenWeb($"https://{DeviceCode.VerificationUri}/{DeviceCode.UserCode}");
+            
+            SaveProxy();
 
-            //Proxy
-            HttpHelper.ProxyInfo PROXY = Settings.ProxyEnable ? new HttpHelper.ProxyInfo(Settings.ProxyHost, Settings.ProxyPort, Settings.ProxyUser, Settings.ProxyPwd) : null;
-
-            (string msg, LoginKey key) = Client.CheckAuthStatus(DeviceCode, PROXY).Result;
-            if (msg.IsNotBlank())
+            try
             {
-                Growl.Error(msg, Global.TOKEN_LOGIN);
-                goto RETURN_POINT;
+                var key = Global.Client.CheckAuthStatus(DeviceCode).Result;
+                Settings.Userid = key.UserID;
+                Settings.Countrycode = key.CountryCode;
+                Settings.Accesstoken = key.AccessToken;
+                Settings.Refreshtoken = key.RefreshToken;
+                Settings.Save();
+
+                this.View.Dispatcher.Invoke(new Action(() => {
+                    Manager.ShowWindow(VMMain);
+                    RequestClose();
+                }));
+            }
+            catch (Exception e)
+            {
+                Growl.Error(e.ToString(), Global.TOKEN_LOGIN);
             }
 
-            Settings.Userid = key.UserID;
-            Settings.Countrycode = key.CountryCode;
-            Settings.Accesstoken = key.AccessToken;
-            Settings.Refreshtoken = key.RefreshToken;
-            Settings.Save();
-            Global.AccessKey = key;
-            Global.CommonKey = key;
-            Global.VideoKey = key;
-
-            this.View.Dispatcher.Invoke(new Action(() => {
-                Manager.ShowWindow(VMMain);
-                RequestClose();
-            }));
-
-        RETURN_POINT:
             BtnLoginEnable = true;
         }
 

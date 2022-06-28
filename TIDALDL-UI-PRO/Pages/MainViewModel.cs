@@ -24,7 +24,7 @@ namespace TIDALDL_UI.Pages
         {
             Global.VMMain = this;
             Global.Settings = Settings.Read();
-        
+
             //Show search
             ShowPage("search");
 

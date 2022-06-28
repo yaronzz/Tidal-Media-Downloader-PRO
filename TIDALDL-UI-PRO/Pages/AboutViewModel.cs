@@ -55,7 +55,7 @@ namespace TIDALDL_UI.Pages
             DownloadStatusInfo = Language.Get("strmsgGetNewVersionUrl");
 
             string url = GithubHelper.getFileUrl(Global.NAME_GITHUB_AUTHOR, Global.NAME_GITHUB_PROJECT, LastVersion, Global.NAME_GITHUB_FILE);
-            if (PathHelper.Mkdirs(Global.PATH_UPDATE) == false)
+            if (PathHelper.Mkdirs(Paths.GetUpdatePath()) == false)
             {
                 DownloadStatusInfo = Language.Get("strmsgCreatUpdateFolderFailed");
                 EndUpdate();
@@ -65,8 +65,7 @@ namespace TIDALDL_UI.Pages
             DownloadStatusInfo = Language.Get("strmsgStartUpdate");
             Progress.SetStatus(ProgressHelper.STATUS.RUNNING);
             StartTime = TimeHelper.GetCurrentTime();
-            LoginKey key = Tools.GetKey();
-            DownloadFileHepler.StartAsync(url, Global.PATH_UPDATE + Global.NAME_GITHUB_FILE, null, UpdateDownloadNotify, CompleteDownloadNotify, ErrDownloadNotify, 3, Proxy: key.Proxy);
+            DownloadFileHepler.StartAsync(url, Paths.GetUpdatePath() + Global.NAME_GITHUB_FILE, null, UpdateDownloadNotify, CompleteDownloadNotify, ErrDownloadNotify, 3, Proxy: Global.Client.proxy);
         }
 
         public bool UpdateDownloadNotify(long lTotalSize, long lAlreadyDownloadSize, long lIncreSize, object data)
@@ -100,13 +99,13 @@ namespace TIDALDL_UI.Pages
             DownloadStatusInfo = Language.Get("strmsgDownloadCompleteStartUpdate");
 
             string sBat = "ping -n 5 127.0.0.1\n";
-            sBat += string.Format("move {0} {1}\\tidal-gui.exe\n", Global.PATH_UPDATE + Global.NAME_GITHUB_FILE, Path.GetFullPath(".\\"));
+            sBat += string.Format("move {0} {1}\\tidal-gui.exe\n", Paths.GetUpdatePath() + Global.NAME_GITHUB_FILE, Path.GetFullPath(".\\"));
             sBat += string.Format("start {0}\\tidal-gui.exe\n", Path.GetFullPath(".\\"));
-            FileHelper.Write(sBat, true, Global.PATH_UPDATEBAT);
+            FileHelper.Write(sBat, true, Paths.GetUpdateShellPath());
 
             Application.Current.Dispatcher.BeginInvoke((Action)delegate ()
             {
-                CmdHelper.StartExe(Global.PATH_UPDATEBAT, null, IsShowWindow: false);
+                CmdHelper.StartExe(Paths.GetUpdateShellPath(), null, IsShowWindow: false);
                 MainVM.WindowClose();
             });
         }
