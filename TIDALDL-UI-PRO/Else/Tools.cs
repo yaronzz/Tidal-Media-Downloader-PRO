@@ -129,7 +129,7 @@ namespace TIDALDL_UI.Else
         {
             string number = track.TrackNumber.ToString().PadLeft(2, '0');
             if (playlist != null)
-                number = (playlist.Tracks.IndexOf(track) + 1).ToString().PadLeft(2, '0');
+                number = (playlist.Tracks.IndexOf(track) + 1).ToString().PadLeft(4, '0');
 
             string artist = FormatPath(string.Join(", ", track.Artists.Select(an_artist => an_artist.Name)), settings, false);
 
