@@ -17,14 +17,16 @@ namespace TIDALDL_UI.Else
         public enum Type
         {
             Default,
-            English,
             Chinese,
-            Russian,
-            Turkish,
-            German,
+            Czech,			
             Dutch,
+            English,
+            German,
+            PortugueseBR,
+            PortuguesePT,			
+            Russian,
             Spanish,
-            Portuguese,
+            Turkish,
         }
 
         private static ResourceDictionary GetResourceDictionaryByType(Type type = Type.Default)
@@ -38,8 +40,8 @@ namespace TIDALDL_UI.Else
                 pList.Add(item);
 
             //find resource file
-            if (type == Type.Default || type == Type.English)
-                findstr = @"StringResource.xaml";
+            if (type == Type.Default)
+                findstr = @"StringResource.English.xaml";
             else
             {
                 string sub = AIGS.Common.Convert.ConverEnumToString((int)type, typeof(Type), 0);
@@ -48,7 +50,7 @@ namespace TIDALDL_UI.Else
 
             ret = pList.FirstOrDefault(x => x.Source != null && x.Source.OriginalString.Contains(findstr));
             if(ret == null)
-                ret = pList.FirstOrDefault(x => x.Source != null && x.Source.OriginalString.Contains("StringResource.xaml"));
+                ret = pList.FirstOrDefault(x => x.Source != null && x.Source.OriginalString.Contains("StringResource.English.xaml"));
             return ret;
         }
 
