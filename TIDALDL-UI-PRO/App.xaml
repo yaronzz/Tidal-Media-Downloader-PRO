@@ -30,13 +30,13 @@
                 <ResourceDictionary Source="Properties/Lang/StringResource.Chinese.xaml" />
                 <ResourceDictionary Source="Properties/Lang/StringResource.Czech.xaml" />				
                 <ResourceDictionary Source="Properties/Lang/StringResource.Dutch.xaml" />
-                <ResourceDictionary Source="Properties/Lang/StringResource.English.xaml" />				
                 <ResourceDictionary Source="Properties/Lang/StringResource.German.xaml" />
                 <ResourceDictionary Source="Properties/Lang/StringResource.PortugueseBR.xaml" />
                 <ResourceDictionary Source="Properties/Lang/StringResource.PortuguesePT.xaml" />
                 <ResourceDictionary Source="Properties/Lang/StringResource.Russian.xaml" />
                 <ResourceDictionary Source="Properties/Lang/StringResource.Spanish.xaml" />
                 <ResourceDictionary Source="Properties/Lang/StringResource.Turkish.xaml" />
+                <ResourceDictionary Source="Properties/Lang/StringResource.English.xaml" />		
             </ResourceDictionary.MergedDictionaries>
         </s:ApplicationLoader>
     </Application.Resources>
