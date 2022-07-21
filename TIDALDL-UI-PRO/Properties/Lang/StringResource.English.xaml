@@ -1,0 +1,100 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Button-->
+    <sys:String x:Key="strOK">OK</sys:String>
+    <sys:String x:Key="strCancel">Cancel</sys:String>
+    <sys:String x:Key="strLogout">Logout</sys:String>
+    <sys:String x:Key="strLogin">Login</sys:String>
+    <sys:String x:Key="strSave">Save</sys:String>
+    <sys:String x:Key="strFeedback">Feedback</sys:String>
+    <sys:String x:Key="strGroup">Group</sys:String>
+    <sys:String x:Key="strDonation">Donation</sys:String>
+    <sys:String x:Key="strWechat">Wechat</sys:String>
+    <sys:String x:Key="strAlipay">Alipay</sys:String>
+    <sys:String x:Key="strUpdate">Update</sys:String>
+    <sys:String x:Key="strTryGet">Try Get</sys:String>
+    
+    <!--Tip-->
+    <sys:String x:Key="strPlaylist">Playlist</sys:String>
+    <sys:String x:Key="strTrackNum">TrackNum</sys:String>
+    <sys:String x:Key="strVERSION">VERSION</sys:String>
+    <sys:String x:Key="strLASTVERSION">LAST-VERSION</sys:String>
+    <sys:String x:Key="strSETTINGS">SETTINGS</sys:String>
+    <sys:String x:Key="strUsername">Username</sys:String>
+    <sys:String x:Key="strPassword">Password</sys:String>
+    <sys:String x:Key="strHost">Host</sys:String>
+    <sys:String x:Key="strWAIT">WAIT</sys:String>
+    <sys:String x:Key="strSUCCESS">SUCCESS</sys:String>
+    <sys:String x:Key="strUPDATE">UPDATE</sys:String>
+    <sys:String x:Key="strERROR">ERROR</sys:String>
+    <sys:String x:Key="strUPLOADLIST">UPLOAD LIST</sys:String>
+    <sys:String x:Key="strTASKLIST">TASK LIST</sys:String>
+    <sys:String x:Key="strDownload">Download</sys:String>
+    <sys:String x:Key="strComplete">Complete</sys:String>
+    <sys:String x:Key="strError">Error</sys:String>
+    <sys:String x:Key="strLOGIN">LOGIN</sys:String>
+    <sys:String x:Key="strPROXY">PROXY</sys:String>
+    <sys:String x:Key="strReleaseDate">Release date</sys:String>
+    <sys:String x:Key="strDescription">Description</sys:String>
+    <sys:String x:Key="strArtistType">Artist types</sys:String>
+
+    <!--Message-->
+    <sys:String x:Key="strmsgPleaseSearchFirst">Please search first!</sys:String>
+    <sys:String x:Key="strmsgGetNewVersionUrl">Get new version file-url...</sys:String>
+    <sys:String x:Key="strmsgCreatUpdateFolderFailed">Create update folder failed!</sys:String>
+    <sys:String x:Key="strmsgStartUpdate">Start update...</sys:String>
+    <sys:String x:Key="strmsgDownloadCompleteStartUpdate">Download complete, start update...</sys:String>
+
+    <sys:String x:Key="strmsgGetDeviceCodeFailed">Get device code failed!</sys:String>
+    <sys:String x:Key="strmsgUsenamePasswordErr">Username or password is err!</sys:String>
+    <sys:String x:Key="strmsgLoginErr">Login Error!</sys:String>
+    <sys:String x:Key="strmsgSearchStringIsEmpty">Search string is empty!</sys:String>
+    <sys:String x:Key="strmsgSearchErr">Search Error!</sys:String>
+    <sys:String x:Key="strmsgPleaseSelectOneItem">Please select one item!</sys:String>
+    <sys:String x:Key="strmsgNothingToDownload">Nothing to download!</sys:String>
+    <sys:String x:Key="strmsgGetTrackAlbumInfoFailed">Get track's album information failed!</sys:String>
+    <sys:String x:Key="strmsgGetArtistAlbumInfoFailed">Get artist's album information failed!</sys:String>
+    <sys:String x:Key="strmsgRemoveTask">Remove task?</sys:String>
+    <sys:String x:Key="strmsgOpenFolderFailed">Open folder failed!</sys:String>
+    <sys:String x:Key="strmsgGetAccessTokenSuccess">Get accesstoken success!</sys:String>
+    <sys:String x:Key="strmsgRefreshSettingsSuccess">Refresh settings success!</sys:String>
+    <sys:String x:Key="strmsgAccessTokenIsNotValid">Accesstoken is not valid!</sys:String>
+    <sys:String x:Key="strmsgUserMismatch">User mismatch! Please use your own accesstoken.</sys:String>
+
+    <!--Column-->
+    <sys:String x:Key="strTITLE">TITLE</sys:String>
+    <sys:String x:Key="strARTISTS">ARTISTS</sys:String>
+    <sys:String x:Key="strALBUM">ALBUM</sys:String>
+    <sys:String x:Key="strTRACK">TRACK</sys:String>
+    <sys:String x:Key="strVIDEO">VIDEO</sys:String>
+    <sys:String x:Key="strPLAYLIST">PLAYLIST</sys:String>
+    <sys:String x:Key="strNAME">NAME</sys:String>
+    <sys:String x:Key="strPOPULARITY">POPULARITY</sys:String>
+    <sys:String x:Key="strDURATION">DURATION</sys:String>
+    <sys:String x:Key="strTYPE">TYPE</sys:String>
+    <sys:String x:Key="strDATE">DATE</sys:String>
+    <sys:String x:Key="strTIME">TIME</sys:String>
+    
+    <!--Settings-->
+    <sys:String x:Key="strPath">Path:</sys:String>
+    <sys:String x:Key="strThreadNum">ThreadNum:</sys:String>
+    <sys:String x:Key="strSearchNum">SearchNum:</sys:String>
+    <sys:String x:Key="strAlbumFolderFormat">AlbumFolderFormat:</sys:String>
+    <sys:String x:Key="strTrackFileFormat">TrackFileFormat:</sys:String>
+    <sys:String x:Key="strVideoFileFormat">VideoFileFormat:</sys:String>
+    <sys:String x:Key="strChoose">Choose:</sys:String>
+    <sys:String x:Key="strMaxLength">MaxLength:</sys:String>
+    <sys:String x:Key="strTrack">Track:</sys:String>
+    <sys:String x:Key="strTheme">Theme:</sys:String>
+    <sys:String x:Key="strLanguage">Language:</sys:String>
+
+    <sys:String x:Key="strLimit1To3">Limit 1~3</sys:String>
+    <sys:String x:Key="strLimit10To50">Limit 10~5</sys:String>
+    <sys:String x:Key="strSearchArtistEP">Search artist-album include single/ep</sys:String>
+    <sys:String x:Key="strDownloadCover">Download cover</sys:String>
+    <sys:String x:Key="strLimitFileName">File name length limit 50~100</sys:String>
+    <sys:String x:Key="strLimitAlbumFolder">Album folder name length limit 50~100</sys:String>
+    <sys:String x:Key="strConvertToM4a">Convert mp4 to m4a</sys:String>
+    <sys:String x:Key="strSkipExist">Skipping exist file when downloading</sys:String>
+</ResourceDictionary>
