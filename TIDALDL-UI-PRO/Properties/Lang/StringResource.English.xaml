@@ -89,7 +89,7 @@
     <sys:String x:Key="strTheme">Theme:</sys:String>
     <sys:String x:Key="strLanguage">Language:</sys:String>
 
-    <sys:String x:Key="strDownloadThreadLimit">Limit 1~20</sys:String>
+    <sys:String x:Key="strDownloadThreadLimit">Limit 1~20 (This is the number of parallel download threads. You can try setting this a little lower than the number of cores on your CPU)</sys:String>
     <sys:String x:Key="strLimit10To50">Limit 10~5</sys:String>
     <sys:String x:Key="strSearchArtistEP">Search artist-album include single/ep</sys:String>
     <sys:String x:Key="strDownloadCover">Download cover</sys:String>
