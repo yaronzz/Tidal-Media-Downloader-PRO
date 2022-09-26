@@ -69,8 +69,8 @@
                 <Button Grid.Column="1" Grid.ColumnSpan="2" Command="{s:Action SetOutputDir}" Content="{Binding Settings.OutputDir}" HorizontalAlignment="Left" Width="500" HorizontalContentAlignment="Left"></Button>
 
                 <TextBlock Grid.Row="1" Text="{DynamicResource strThreadNum}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource strLimit1To3}" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
-                <hc:NumericUpDown Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Maximum="3" Minimum="1" Value="{Binding Settings.ThreadNum}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{DynamicResource strDownloadThreadLimit}" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
+                <hc:NumericUpDown Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Maximum="20" Minimum="1" Value="{Binding Settings.ThreadNum}" Width="200" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
                 <TextBlock Grid.Row="2" Text="{DynamicResource strSearchNum}" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Right" />
                 <TextBlock Grid.Row="2" Grid.Column="1" Text="{DynamicResource strLimit10To50}" FontSize="12" VerticalAlignment="Center" Padding="20,0" HorizontalAlignment="Left" Margin="200,0,0,0" />
