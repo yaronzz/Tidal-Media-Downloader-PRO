@@ -12,19 +12,19 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
 
     - name: Checkout Tidal-Media-Downloader-PRO repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
         path: Tidal-Media-Downloader-PRO
 
     - name: Checkout TidalLib repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: yaronzz/TidalLib
         path: TidalLib
 
     - name: Checkout AIGS repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
         repository: AIGMix/AIGS
         path: AIGS
@@ -54,7 +54,7 @@ jobs:
       working-directory: Tidal-Media-Downloader-PRO\TIDALDL-UI-PRO
 
     - name: Upload tidal-gui artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: tidal-gui
         path: Tidal-Media-Downloader-PRO\TIDALDL-UI-PRO\bin\Release\tidal-gui.exe
