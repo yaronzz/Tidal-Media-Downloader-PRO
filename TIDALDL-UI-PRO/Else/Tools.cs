@@ -127,26 +127,19 @@ namespace TIDALDL_UI.Else
         // "{TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}";
         public static string GetTrackPath(Settings settings, Track track, StreamUrl stream, Album album, Playlist playlist = null)
         {
-            string number = track.TrackNumber.ToString().PadLeft(2, '0');
-            if (playlist != null)
-                number = (playlist.Tracks.IndexOf(track) + 1).ToString().PadLeft(2, '0');
+            int trackNum = playlist != null
+                ? playlist.Tracks.IndexOf(track) + 1
+                : track.TrackNumber;
+
+            int trackCount      = playlist != null ? playlist.Tracks.Count : album.Tracks.Count;
+            int trackNumPadding = Math.Max(trackCount.ToString().Length, 2);
+            string number       = trackNum.ToString().PadLeft(trackNumPadding, '0');
 
             string artist = FormatPath(string.Join(", ", track.Artists.Select(an_artist => an_artist.Name)), settings, false);
 
-            //get explicit
-            string sexplicit = "";
-            if (track.Explicit)
-                sexplicit = "(Explicit)";
-
-            //get version
-            string version = "";
-            if (track.Version.IsNotBlank())
-                version = " (" + track.Version + ")";
-
-            //get title
-            string title = FormatPath(track.Title + version, settings, false);
-
-            //get extension
+            string sexplicit = track.Explicit ? "(Explicit)" : "";
+            string version   = track.Version.IsNotBlank() ? " (" + track.Version + ")" : "";
+            string title     = FormatPath(track.Title + version, settings, false);
             string extension = getExtension(stream.Url);
 
             //base path
@@ -174,6 +167,7 @@ namespace TIDALDL_UI.Else
                 name = name.Replace("{AlbumYear}", album.ReleaseDate == null ? "" : album.ReleaseDate.Substring(0, 4));
                 name = name.Replace("{AlbumTitle}", FormatPath(album.Title, settings));
             }
+
             return $"{basepath}{name}{extension}";
         }
 
