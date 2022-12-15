@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30204.135
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TIDALDL-UI", "TIDALDL-UI.csproj", "{97AA7FF8-61C6-43AE-B53C-DB6C3D991199}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TidalLib", "..\..\TidalLib\TidalLib\TidalLib.csproj", "{61B3A016-AD7E-421B-B632-877E15BFAA90}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AIGS", "..\..\AIGS\AIGS.csproj", "{E0F1B398-B4D4-4536-9135-BE2EB077BBB2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TIDALDL-UI-TESTS", "..\TIDALDL-UI-TESTS\TIDALDL-UI-TESTS.csproj", "{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,18 @@ Global
 		{E0F1B398-B4D4-4536-9135-BE2EB077BBB2}.Release|x64.Build.0 = Release|x64
 		{E0F1B398-B4D4-4536-9135-BE2EB077BBB2}.Release|x86.ActiveCfg = Release|x86
 		{E0F1B398-B4D4-4536-9135-BE2EB077BBB2}.Release|x86.Build.0 = Release|x86
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Debug|x64.Build.0 = Debug|Any CPU
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Debug|x86.Build.0 = Debug|Any CPU
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Release|x64.ActiveCfg = Release|Any CPU
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Release|x64.Build.0 = Release|Any CPU
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Release|x86.ActiveCfg = Release|Any CPU
+		{C1D40CA1-53F4-402F-BE3A-3AE59944DEC6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

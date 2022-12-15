@@ -127,14 +127,6 @@ namespace TIDALDL_UI.Else
         // "{TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}";
         public static string GetTrackPath(Settings settings, Track track, StreamUrl stream, Album album, Playlist playlist = null)
         {
-            int trackNum = playlist != null
-                ? playlist.Tracks.IndexOf(track) + 1
-                : track.TrackNumber;
-
-            int trackCount      = playlist != null ? playlist.Tracks.Count : album.Tracks.Count;
-            int trackNumPadding = Math.Max(trackCount.ToString().Length, 2);
-            string number       = trackNum.ToString().PadLeft(trackNumPadding, '0');
-
             string artist = FormatPath(string.Join(", ", track.Artists.Select(an_artist => an_artist.Name)), settings, false);
 
             string sexplicit = track.Explicit ? "(Explicit)" : "";
@@ -156,10 +148,12 @@ namespace TIDALDL_UI.Else
             string name = settings.TrackFileFormat;
             if (name.IsBlank())
                 name = "{TrackNumber} - {ArtistName} - {TrackTitle}{ExplicitFlag}";
-            name = name.Replace("{TrackNumber}", number);
-            name = name.Replace("{ArtistName}", artist);
-            name = name.Replace("{TrackTitle}", title);
-            name = name.Replace("{ExplicitFlag}", sexplicit);
+
+            name = name
+                .Replace("{TrackNumber}",  GetPaddedTrackNum(track, album, playlist))
+                .Replace("{ArtistName}",   artist)
+                .Replace("{TrackTitle}",   title)
+                .Replace("{ExplicitFlag}", sexplicit);
 
             if (album != null)
             {
@@ -169,6 +163,19 @@ namespace TIDALDL_UI.Else
             }
 
             return $"{basepath}{name}{extension}";
+        }
+
+        public static string GetPaddedTrackNum(Track track, Album album, Playlist playlist)
+        {
+            int trackNum = playlist != null
+                ? playlist.Tracks.IndexOf(track) + 1
+                : track.TrackNumber;
+
+            int trackCount      = playlist != null ? playlist.Tracks.Count : album.Tracks.Count;
+            int trackNumPadding = Math.Max(trackCount.ToString().Length, 2);
+            string number       = trackNum.ToString().PadLeft(trackNumPadding, '0');
+
+            return number;
         }
 
         // number - artist - title(version)(Explicit).flac
