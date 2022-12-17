@@ -34,6 +34,10 @@ namespace TIDALDL_UI_TESTS
             trackNum = Tools.GetPaddedTrackNum(track, album, null);
             Assert.AreEqual("003", trackNum);
 
+            album.Tracks = null; // test case when we download a separate track, not from an album
+            trackNum = Tools.GetPaddedTrackNum(track, album, null);
+            Assert.AreEqual("03", trackNum); // default padding of 2
+
             Playlist playlist = new Playlist { Tracks = new ObservableCollection<Track>() };
             playlist.Tracks.Add(track);
 

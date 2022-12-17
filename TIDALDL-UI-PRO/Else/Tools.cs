@@ -171,8 +171,11 @@ namespace TIDALDL_UI.Else
                 ? playlist.Tracks.IndexOf(track) + 1
                 : track.TrackNumber;
 
-            int trackCount      = playlist != null ? playlist.Tracks.Count : album.Tracks.Count;
-            int trackNumPadding = Math.Max(trackCount.ToString().Length, 2);
+            int? trackCount = playlist != null
+                ? playlist.Tracks.Count
+                : album?.Tracks?.Count;
+
+            int trackNumPadding = Math.Max((trackCount ?? 10).ToString().Length, 2); // if no album and no playlist we'll use fake 10 tracks to make default padding of 2
             string number       = trackNum.ToString().PadLeft(trackNumPadding, '0');
 
             return number;
