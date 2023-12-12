@@ -77,7 +77,7 @@ namespace TIDALDL_UI.Else
                 name = name.Replace("{AlbumID}", album.ID);
                 name = name.Replace("{AlbumYear}", album.ReleaseDate != null ? album.ReleaseDate.Substring(0, 4) : "");
                 name = name.Replace("{AlbumTitle}", FormatPath(album.Title, settings));
-                name = name.Replace("{Flag}", flag);
+                name = name.Replace("{Flag}" + (flag.IsBlank() ? " " : ""), flag);
                 name = name.Trim();
                 return $"{basepath}/{name}/";
             }
