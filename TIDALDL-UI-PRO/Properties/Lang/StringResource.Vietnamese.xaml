@@ -1,0 +1,100 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--Button-->
+    <sys:String x:Key="strOK">Đồng ý</sys:String>
+    <sys:String x:Key="strCancel">Hủy bỏ</sys:String>
+    <sys:String x:Key="strLogout">Đăng xuất</sys:String>
+    <sys:String x:Key="strLogin">Đăng nhập</sys:String>
+    <sys:String x:Key="strSave">Lưu</sys:String>
+    <sys:String x:Key="strFeedback">Phản hồi</sys:String>
+    <sys:String x:Key="strGroup">Nhóm</sys:String>
+    <sys:String x:Key="strDonation">Quyên góp</sys:String>
+    <sys:String x:Key="strWechat">Wechat</sys:String>
+    <sys:String x:Key="strAlipay">Alipay</sys:String>
+    <sys:String x:Key="strUpdate">Cập nhật</sys:String>
+    <sys:String x:Key="strTryGet">Thử lấy</sys:String>
+    
+    <!--Tip-->
+    <sys:String x:Key="strPlaylist">Danh sách phát</sys:String>
+    <sys:String x:Key="strTrackNum">Số thứ tự bài hát</sys:String>
+    <sys:String x:Key="strVERSION">PHIÊN BẢN</sys:String>
+    <sys:String x:Key="strLASTVERSION">PHIÊN BẢN CUỐI</sys:String>
+    <sys:String x:Key="strSETTINGS">CÀI ĐẶT</sys:String>
+    <sys:String x:Key="strUsername">Tên người dùng</sys:String>
+    <sys:String x:Key="strPassword">Mật khẩu</sys:String>
+    <sys:String x:Key="strHost">Máy chủ</sys:String>
+    <sys:String x:Key="strWAIT">Chờ</sys:String>
+    <sys:String x:Key="strSUCCESS">THÀNH CÔNG</sys:String>
+    <sys:String x:Key="strUPDATE">CẬP NHẬT</sys:String>
+    <sys:String x:Key="strERROR">LỖI</sys:String>
+    <sys:String x:Key="strUPLOADLIST">TẢI LÊN DANH SÁCH</sys:String>
+    <sys:String x:Key="strTASKLIST">DANH SÁCH NHIỆM VỤ</sys:String>
+    <sys:String x:Key="strDownload">Tải xuống</sys:String>
+    <sys:String x:Key="strComplete">Hoàn thành</sys:String>
+    <sys:String x:Key="strError">Lỗi</sys:String>
+    <sys:String x:Key="strLOGIN">ĐĂNG NHẬP</sys:String>
+    <sys:String x:Key="strPROXY">PROXY</sys:String>
+    <sys:String x:Key="strReleaseDate">Ngày phát hành</sys:String>
+    <sys:String x:Key="strDescription">Mô tả</sys:String>
+    <sys:String x:Key="strArtistType">Loại nghệ sĩ</sys:String>
+
+    <!--Message-->
+    <sys:String x:Key="strmsgPleaseSearchFirst">Vui lòng tìm kiếm trước!</sys:String>
+    <sys:String x:Key="strmsgGetNewVersionUrl">Lấy đường dẫn phiên bản mới...</sys:String>
+    <sys:String x:Key="strmsgCreatUpdateFolderFailed">Tạo thư mục cập nhật thất bại!</sys:String>
+    <sys:String x:Key="strmsgStartUpdate">Bắt đầu cập nhật...</sys:String>
+    <sys:String x:Key="strmsgDownloadCompleteStartUpdate">Tải xuống hoàn thành, bắt đầu cập nhật...</sys:String>
+
+    <sys:String x:Key="strmsgGetDeviceCodeFailed">Lấy mã thiết bị thất bại!</sys:String>
+    <sys:String x:Key="strmsgUsenamePasswordErr">Tên người dùng hoặc mật khẩu không đúng!</sys:String>
+    <sys:String x:Key="strmsgLoginErr">Lỗi đăng nhập!</sys:String>
+    <sys:String x:Key="strmsgSearchStringIsEmpty">Chuỗi tìm kiếm trống rỗng!</sys:String>
+    <sys:String x:Key="strmsgSearchErr">Lỗi tìm kiếm!</sys:String>
+    <sys:String x:Key="strmsgPleaseSelectOneItem">Vui lòng chọn một mục!</sys:String>
+    <sys:String x:Key="strmsgNothingToDownload">Không có gì để tải xuống!</sys:String>
+    <sys:String x:Key="strmsgGetTrackAlbumInfoFailed">Lấy thông tin album của bài hát thất bại!</sys:String>
+    <sys:String x:Key="strmsgGetArtistAlbumInfoFailed">Lấy thông tin album của nghệ sĩ thất bại!</sys:String>
+    <sys:String x:Key="strmsgRemoveTask">Xóa nhiệm vụ?</sys:String>
+    <sys:String x:Key="strmsgOpenFolderFailed">Mở thư mục thất bại!</sys:String>
+    <sys:String x:Key="strmsgGetAccessTokenSuccess">Lấy mã truy cập thành công!</sys:String>
+    <sys:String x:Key="strmsgRefreshSettingsSuccess">Làm mới cài đặt thành công!</sys:String>
+    <sys:String x:Key="strmsgAccessTokenIsNotValid">Mã truy cập không hợp lệ!</sys:String>
+    <sys:String x:Key="strmsgUserMismatch">Không khớp người dùng! Vui lòng sử dụng mã truy cập của riêng bạn.</sys:String>
+
+    <!--Column-->
+    <sys:String x:Key="strTITLE">TIÊU ĐỀ</sys:String>
+    <sys:String x:Key="strARTISTS">NGHỆ SĨ</sys:String>
+    <sys:String x:Key="strALBUM">ALBUM</sys:String>
+    <sys:String x:Key="strTRACK">BÀI HÁT</sys:String>
+    <sys:String x:Key="strVIDEO">VIDEO</sys:String>
+    <sys:String x:Key="strPLAYLIST">DANH SÁCH PHÁT</sys:String>
+    <sys:String x:Key="strNAME">TÊN</sys:String>
+    <sys:String x:Key="strPOPULARITY">PHỔ BIẾN</sys:String>
+    <sys:String x:Key="strDURATION">THỜI LƯỢNG</sys:String>
+    <sys:String x:Key="strTYPE">LOẠI</sys:String>
+    <sys:String x:Key="strDATE">NGÀY</sys:String>
+    <sys:String x:Key="strTIME">THỜI GIAN</sys:String>
+    
+    <!--Settings-->
+    <sys:String x:Key="strPath">Đường dẫn:</sys:String>
+    <sys:String x:Key="strThreadNum">Số luồng:</sys:String>
+    <sys:String x:Key="strSearchNum">Số lần tìm kiếm:</sys:String>
+    <sys:String x:Key="strAlbumFolderFormat">Định dạng thư mục album:</sys:String>
+    <sys:String x:Key="strTrackFileFormat">Định dạng tệp bài hát:</sys:String>
+    <sys:String x:Key="strVideoFileFormat">Định dạng tệp video:</sys:String>
+    <sys:String x:Key="strChoose">Chọn:</sys:String>
+    <sys:String x:Key="strMaxLength">Độ dài tối đa:</sys:String>
+    <sys:String x:Key="strTrack">Bài hát:</sys:String>
+    <sys:String x:Key="strTheme">Chủ đề:</sys:String>
+    <sys:String x:Key="strLanguage">Ngôn ngữ:</sys:String>
+
+    <sys:String x:Key="strDownloadThreadLimit">Giới hạn 1~20 (Đây là số luồng tải xuống song song. Bạn có thể thử đặt số này thấp hơn số lõi trên CPU của bạn)</sys:String>
+    <sys:String x:Key="strLimit10To50">Giới hạn 10~50</sys:String>
+    <sys:String x:Key="strSearchArtistEP">Tìm kiếm nghệ sĩ-album bao gồm đơn/ep</sys:String>
+    <sys:String x:Key="strDownloadCover">Tải xuống bìa</sys:String>
+    <sys:String x:Key="strLimitFileName">Giới hạn độ dài tên tệp 50~100</sys:String>
+    <sys:String x:Key="strLimitAlbumFolder">Giới hạn độ dài tên thư mục album 50~100</sys:String>
+    <sys:String x:Key="strConvertToM4a">Chuyển đổi mp4 thành m4a</sys:String>
+    <sys:String x:Key="strSkipExist">Bỏ qua tệp đã tồn tại khi tải xuống</sys:String>
+</ResourceDictionary>

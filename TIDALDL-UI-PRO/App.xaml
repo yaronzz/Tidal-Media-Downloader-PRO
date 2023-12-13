@@ -37,6 +37,7 @@
                 <ResourceDictionary Source="Properties/Lang/StringResource.Spanish.xaml" />
                 <ResourceDictionary Source="Properties/Lang/StringResource.Turkish.xaml" />
                 <ResourceDictionary Source="Properties/Lang/StringResource.English.xaml" />		
+                <ResourceDictionary Source="Properties/Lang/StringResource.Vietnamese.xaml" />		
             </ResourceDictionary.MergedDictionaries>
         </s:ApplicationLoader>
     </Application.Resources>
